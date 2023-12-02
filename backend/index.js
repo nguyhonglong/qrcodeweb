@@ -11,7 +11,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const PORT = process.env.PORT || 5555
-const mongoDBURL = process.env.DATABASE_URL
+const mongoDBURL = "mongodb+srv://nguyhonglong2002:3dUw8ja9980dHmxu@cluster0.zokt7pa.mongodb.net/bill?retryWrites=true&w=majority"
 
 const app = express();
 app.use(cors());
