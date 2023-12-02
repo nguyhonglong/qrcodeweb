@@ -44,7 +44,7 @@ function FormBabyAdmin() {
     // console.log("Form Data:", formData);
 
     // Gửi dữ liệu formData lên server
-    await fetch("https://qrcodeweb-api.vercel.app/qrcodeweb/api/bills/", {
+    await fetch("https://qrcodeweb-api.vercel.app/api/bills/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ function FormBabyAdmin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://qrcodeweb-api.vercel.app/qrcodeweb/api/drinks");
+        const response = await axios.get("https://qrcodeweb-api.vercel.app/api/drinks");
         setDrinks(response.data);
       } catch (error) {
         console.error("Error fetching drinks:", error);

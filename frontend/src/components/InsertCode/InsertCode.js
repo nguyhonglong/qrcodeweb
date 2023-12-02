@@ -14,7 +14,7 @@ function InsertCode() {
     if (valueSearchCode !== "") {
       try {
         const response = await axios.get(
-          `https://qrcodeweb-api.vercel.app/qrcodeweb/api/bills/${valueSearchCode}`
+          `https://qrcodeweb-api.vercel.app/api/bills/${valueSearchCode}`
         );
         setBillData(response.data);
         myArray.push(response.data);
