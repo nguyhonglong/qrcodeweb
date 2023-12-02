@@ -41,11 +41,11 @@ function FormBabyAdmin() {
       drinks: drinkData,
     };
 
-    console.log("Form Data:", formData);
+    console.log("Form Data:", JSON.stringify(formData));
 
     // Gửi dữ liệu formData lên server
     await axios
-      .post("https://qrcodeweb-api.vercel.app/api/bills/", { data: formData })
+      .post("https://qrcodeweb-api.vercel.app/api/bills",  formData )
       .then((response) => {
         console.log("Data submitted successfully:", response.data);
         setCodeNew(response.data);
