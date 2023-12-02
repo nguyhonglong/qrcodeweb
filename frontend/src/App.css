@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600;700;800&display=swap');
+
+@font-face {
+  font-family: 'MyRoboto';
+  src: url('./asset/font/Roboto/Roboto-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MyPaytone';
+  src: url('./asset/font/BT-Beau-Sans/BT-BeauSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MyTikTok1';
+  src: url('./asset/font/TikTok-Sans/TikTokText-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MyTikTok2';
+  src: url('./asset/font/TikTok-Sans/TikTokText-Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MyTikTok3';
+  src: url('./asset/font/TikTok-Sans/TikTokText-Regular.otf') format('truetype');
+}
+
+.MyTikTok1 {
+  font-family: 'MyTikTok1';
+}
+
+.MyTikTok2 {
+  font-family: 'MyTikTok2';
+}
+
+.MyTikTok3{
+  font-family: 'MyTikTok3';
+}
+
+.fontRobo {
+  font-family: "MyRoboto";
+}
+
+.fontRobo32 {
+  font-family: "MyRoboto";
+  font-size: 32px;
+}
+
+.fontRobo24 {
+  font-family: "MyRoboto";
+  font-size: 24px;
+}
+
+.fontRobo14 {
+  font-family: "MyRoboto";
+  font-size: 14px;
+}
+
+.fontRobo16 {
+  font-family: "MyRoboto";
+  font-size: 16px;
+}
+
+.fontPaytone {
+  font-family: "MyPaytone";
+}
+
+.fontPaytone32 {
+  font-family: "MyPaytone";
+  font-size: 32px;
+}
+
+.fontPaytone16 {
+  font-family: "MyPaytone";
+  font-size: 16px;
+}
+
+.fontPaytone14 {
+  font-family: "MyPaytone";
+  font-size: 14px;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.mgt40 {
+  margin-top: 40px;
+}
+
+*:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+  display: revert;
+}
+
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(179, 177, 177, 0.623);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(163, 162, 162, 0.74);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 100, 100);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(68, 68, 68, 0.5);
+  border-radius: 10px;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+ display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+ - fix for the content editable attribute will work properly.
+ - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable="false"])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}

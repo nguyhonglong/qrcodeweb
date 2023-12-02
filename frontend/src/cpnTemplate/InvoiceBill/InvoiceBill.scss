@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Redressed&family=Ubuntu:wght@400;700&display=swap");
+:root {
+  --bg-bill: #f7ddc7;
+  --white: #fff;
+  --primary-table: #512d14;
+  --secondary-clr: #5265a7;
+  --gray: #c0bfbf5a;
+}
+
+#invoice {
+  font-size: 12px;
+  max-width: 500px;
+  margin-top: 80px;
+  .imgCoffe {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+  }
+  .infomationBill {
+    background-color: var(--bg-bill);
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+  }
+  .informationHoaDon {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    tr {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  table {
+    width: 100%;
+  }
+  tr th,
+  tr td {
+    padding: 5px;
+  }
+  th {
+    border: 7px solid var(--bg-bill);
+    background-color: var(--primary-table);
+    color: #fff;
+  }
+  th:nth-child(2) {
+    width: 40%;
+  }
+  .InfoDrinkChild:last-child {
+    border-bottom: 2px solid #512d14;
+  }
+  .SumPay {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+  .SumPay tr {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px 0px 0px;
+    padding: 0;
+  }
+  .SumPay tr:nth-child(3) td:nth-child(1) {
+    background-color: var(--primary-table);
+    color: #fff;
+  }
+  .line {
+    width: 20%;
+    border-bottom: 2px solid #512d14;
+  }
+}

@@ -1,0 +1,66 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phoneSmall {
+    @media (max-width: 330px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
+.NavChildAdmin {
+  width: 100%;
+  background-color: #212732;
+  nav {
+    width: 100%;
+    padding: 20px 0 20px 0px;
+    font-size: 22px;
+    z-index: 10;
+    color: var(--black-light-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    background: linear-gradient(
+      45deg,
+      #000,
+      #000000b9,
+      #00000078,
+      #323232,
+    );
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+    p {
+      cursor: pointer;
+      font-weight: 500;
+      color: #707070b7;
+      margin: 0 15px;
+      font-size: 16px;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
+    .i {
+      color: #707070;
+    }
+    span {
+      margin-left: 15px;
+      margin-top: 10px;
+    }
+  }
+  .nav_link:hover .link-name,
+  .nav_link:hover .i {
+    color: #fff;
+  }
+}

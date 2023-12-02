@@ -1,0 +1,72 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phoneSmall {
+    @media (max-width: 330px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
+#FormBabyAdmin {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #181b22;
+  .FormBabyAdmin {
+    width: 45%;
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
+
+  .ant-form-item-label label {
+    color: #f8f8f8;
+  }
+  .printVoucher {
+    margin: 20px 0 0 0px;
+    .bgImg {
+      // width: 40vw;
+      margin: 0 auto;
+      position: relative;
+      .imgVoucher {
+        z-index: 1;
+        position: relative;
+        margin-left: -30px;
+        background-image: url("./Voucher.png");
+        width: 500px;
+        height: 300px;
+        @include respond(tablet) {
+          margin-left: 0;
+          width: 335px;
+          height: 200px;
+        }
+        background-size: cover;
+      }
+      .codeNew {
+        position: absolute;
+        font-size: 10px;
+        top: 186px;
+        left: 256px;
+        z-index: 1000000;
+        color: #fff;
+      }
+    }
+  }
+}

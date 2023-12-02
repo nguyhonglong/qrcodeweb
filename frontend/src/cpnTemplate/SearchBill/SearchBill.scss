@@ -1,0 +1,31 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phoneSmall {
+    @media (max-width: 330px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
+.SearchBill {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 50px;
+  @include respond(phone) {
+    flex-direction: column !important;
+  }
+}
