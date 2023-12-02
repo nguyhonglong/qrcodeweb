@@ -18,7 +18,7 @@ function Login() {
     const password = passwordSignIn.current.value.toString();
     if (email && password) {
       await axios
-        .post("https://github.com/nguyhonglong/qrcodeweb/api/auth/login", {
+        .post("https://qrcodeweb-api.vercel.app/qrcodeweb/api/auth/login", {
           account: email,
           password: password,
         })

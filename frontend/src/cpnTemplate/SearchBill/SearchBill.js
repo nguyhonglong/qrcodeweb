@@ -14,7 +14,7 @@ function SearchBill() {
     const fetchDateData = async () => {
       try {
         const response = await axios.get(
-          `https://github.com/nguyhonglong/qrcodeweb/api/records?startDate=${dateRange[0]?.format(
+          `https://qrcodeweb-api.vercel.app/qrcodeweb/api/records?startDate=${dateRange[0]?.format(
             "YYYY-MM-DD"
           )}&endDate=${dateRange[1]?.format("YYYY-MM-DD")}`
         );

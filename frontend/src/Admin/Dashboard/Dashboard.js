@@ -60,7 +60,7 @@ function Dashboard() {
   React.useEffect(() => {
     const fetchUserData = async () => {
       await axios
-        .get("https://github.com/nguyhonglong/qrcodeweb/api/users")
+        .get("https://qrcodeweb-api.vercel.app/qrcodeweb/api/users")
         .then((response) => {
           // Xử lý dữ liệu khi yêu cầu thành công
           setDataUser(response.data);
@@ -95,7 +95,7 @@ function Dashboard() {
   const handleOk = async () => {
     setConfirmLoading(true);
     await axios
-      .put("https://github.com/nguyhonglong/qrcodeweb/api/auth/update", {
+      .put("https://qrcodeweb-api.vercel.app/qrcodeweb/api/auth/update", {
         account:idEditUser,
         role:typeUser
       })
@@ -144,7 +144,7 @@ function Dashboard() {
     // let sumTotleMony = 0;
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://github.com/nguyhonglong/qrcodeweb/api/bills");
+        const response = await axios.get("https://qrcodeweb-api.vercel.app/qrcodeweb/api/bills");
         setSumBill(response.data);
       } catch (error) {
         console.error("Error fetching drinks:", error);

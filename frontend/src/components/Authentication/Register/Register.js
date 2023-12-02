@@ -22,7 +22,7 @@ function Register() {
     }
     if (email && password && displayName) {
      await axios
-        .post("https://github.com/nguyhonglong/qrcodeweb/api/auth/register", {
+        .post("https://qrcodeweb-api.vercel.app/qrcodeweb/api/auth/register", {
           account: email,
           password: password,
           name: displayName,
