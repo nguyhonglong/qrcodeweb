@@ -14,7 +14,7 @@ function InsertCode() {
     if (valueSearchCode !== "") {
       try {
         const response = await axios.get(
-          `http://localhost:5555/api/bills/${valueSearchCode}`
+          `https://github.com/nguyhonglong/qrcodeweb/api/bills/${valueSearchCode}`
         );
         setBillData(response.data);
         myArray.push(response.data);
