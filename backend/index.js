@@ -49,7 +49,7 @@ app.post('/api/bills', async (req, res) => {
             numCustomer,
             customerName,
             storeName,
-            drinks,
+            drinks
         };
 
         const bill = await Bill.create(newBill);
