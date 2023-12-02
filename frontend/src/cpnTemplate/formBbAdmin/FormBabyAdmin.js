@@ -13,6 +13,7 @@ function FormBabyAdmin() {
   const [successMess, setSuccessMess] = message.useMessage();
   const [codeNew, setCodeNew] = useState([]);
   // Handler khi submit form
+  console.log(user);
   const handleSubmit = async (values) => {
     const id = uuidv4(); // Tạo ID tự động
     // Định dạng ID thành chuỗi kết hợp giữa kí tự và số
@@ -20,7 +21,6 @@ function FormBabyAdmin() {
     const commonDrink = drinks.filter((nameDrink) =>
       selectedDrinks.includes(nameDrink.name)
     );
-    console.log(commonDrink);
     // console.log(selectedDrinks);
     // console.log(drinks);
     const billID = formattedID;
@@ -34,33 +34,28 @@ function FormBabyAdmin() {
       price: drink.price,
     }));
     const formData = {
-      billID,
-      numCustomer,
-      customerName,
-      storeName,
+      billID:billID,
+      numCustomer:numCustomer,
+      customerName:customerName,
+      storeName:storeName,
       drinks: drinkData,
     };
 
-    // console.log("Form Data:", formData);
+    console.log("Form Data:", formData);
 
     // Gửi dữ liệu formData lên server
-    await fetch("https://qrcodeweb-api.vercel.app/api/bills/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Data submitted successfully:", data);
+    await axios
+      .post("https://qrcodeweb-api.vercel.app/api/bills/", { data: formData })
+      .then((response) => {
+        console.log("Data submitted successfully:", response.data);
+        setCodeNew(response.data);
         successMess.open({
           type: "success",
           content: "Thêm hóa đơn thành công",
         });
-        setCodeNew(data);
       })
       .catch((error) => {
+        // Xử lý lỗi khi yêu cầu không thành công
         console.log("Error submitting data:", error);
         successMess.open({
           type: "success",
@@ -79,10 +74,10 @@ function FormBabyAdmin() {
   };
   //   SelectStore
   const onChangeSelectStore = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
   const onSearchStore = (value) => {
-    console.log("search:", value);
+    // console.log("search:", value);
   };
   // chọn đồ uống
 
@@ -98,7 +93,9 @@ function FormBabyAdmin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://qrcodeweb-api.vercel.app/api/drinks");
+        const response = await axios.get(
+          "https://qrcodeweb-api.vercel.app/api/drinks"
+        );
         setDrinks(response.data);
       } catch (error) {
         console.error("Error fetching drinks:", error);

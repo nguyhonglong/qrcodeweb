@@ -11,7 +11,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const PORT = process.env.PORT || 5555
-const mongoDBURL = process.env.DATABASE_URL
+const mongoDBURL = "mongodb+srv://nguyhonglong2002:3dUw8ja9980dHmxu@cluster0.zokt7pa.mongodb.net/bill?retryWrites=true&w=majority"
 
 const app = express();
 app.use(cors());
@@ -29,9 +29,9 @@ app.listen(PORT, () => {
 
 app.post('/api/bills', async (req, res) => {
     try {
-        const { billID, numCustomer, customerName, storeName, drinks, updateAccount } = req.body;
+        const { billID, numCustomer, customerName, storeName, drinks } = req.body;
 
-        if (!billID || !numCustomer || !customerName || !storeName || !updateAccount) {
+        if (!billID || !numCustomer || !customerName || !storeName) {
             return res.status(400).send({
                 message: 'Send all required fields: billID, numCustomer, customerName, storeName'
             });
@@ -50,7 +50,6 @@ app.post('/api/bills', async (req, res) => {
             customerName,
             storeName,
             drinks,
-            updateAccount
         };
 
         const bill = await Bill.create(newBill);
