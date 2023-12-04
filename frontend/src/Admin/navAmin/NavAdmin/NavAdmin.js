@@ -72,7 +72,7 @@ function NavAdmin(props) {
           <li onClick={admin_isModalOpenSignOut}>
             <span>
               <UilSignout className="i" />
-              <span className="link-name">Logout</span>
+              <span className="link-name MyTikTok2">Logout</span>
             </span>
           </li>
           <Modal

@@ -68,25 +68,19 @@ function TableBill(props) {
             </div>
           </div>
           <div className="table-content">
-            {props.billToDate ? (
-              props.billToDate?.map((data) => (
-                <div className="table-row" key={data._id} onClick={() => showModal(data)}>
-                  <div className="table-data">{data.customerName}</div>
-                  <div className="table-data">{data.billID}</div>
-                  <div className="table-data">{formatDate(data.createdAt)}</div>
-                  <div className="table-data">{data.numCustomer}</div>
-                  <div className="table-data">{calculateTotal(data)}</div>
-                </div>
-              ))
-            ) : (
-              <div className="table-row">
-                <div className="table-data">Chưa có thông tin</div>
-                <div className="table-data">Chưa có thông tin</div>
-                <div className="table-data">Chưa có thông tin</div>
-                <div className="table-data">Chưa có thông tin</div>
-                <div className="table-data">Chưa có thông tin</div>
+            {props.billToDate?.map((data) => (
+              <div
+                className="table-row"
+                key={data._id}
+                onClick={() => showModal(data)}
+              >
+                <div className="table-data">{data.customerName}</div>
+                <div className="table-data">{data.billID}</div>
+                <div className="table-data">{formatDate(data.createdAt)}</div>
+                <div className="table-data">{data.numCustomer}</div>
+                <div className="table-data">{calculateTotal(data)}</div>
               </div>
-            )}
+            ))}
           </div>
         </div>
       </div>
@@ -97,7 +91,7 @@ function TableBill(props) {
         onCancel={handleCancel}
         footer={null}
       >
-        <div style={{marginTop:"-60px"}}>
+        <div style={{ marginTop: "-60px" }}>
           <InvoiceBill billData={dataOpen} />
         </div>
       </Modal>

@@ -13,7 +13,6 @@ function FormBabyAdmin() {
   const [successMess, setSuccessMess] = message.useMessage();
   const [codeNew, setCodeNew] = useState([]);
   // Handler khi submit form
-  console.log(user);
   const handleSubmit = async (values) => {
     const id = uuidv4(); // Tạo ID tự động
     // Định dạng ID thành chuỗi kết hợp giữa kí tự và số
@@ -41,11 +40,11 @@ function FormBabyAdmin() {
       drinks: drinkData,
     };
 
-    console.log("Form Data:", formData);
+    console.log("Form Data:", JSON.stringify(formData));
 
     // Gửi dữ liệu formData lên server
     await axios
-      .post("https://qrcodeweb-api.vercel.app/api/bills/", formData)
+      .post("https://qrcodeweb-api.vercel.app/api/bills", formData)
       .then((response) => {
         console.log("Data submitted successfully:", response.data);
         setCodeNew(response.data);
@@ -112,7 +111,6 @@ function FormBabyAdmin() {
     ));
   };
 
-  const [capturedImage, setCapturedImage] = useState(null);
 
   const captureAndSaveImage = () => {
     const element = document.getElementById("myDiv");
@@ -138,17 +136,6 @@ function FormBabyAdmin() {
     });
   };
 
-  {
-    capturedImage && (
-      <div>
-        <img src={capturedImage} alt="Captured Image" />
-        <a href={capturedImage} download="myImage.png">
-          Tải xuống ảnh
-        </a>
-      </div>
-    );
-  }
-
   // Filter `option.label` match the user type `input`
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
@@ -160,14 +147,7 @@ function FormBabyAdmin() {
 
       <div id="FormBabyAdmin">
         <div className="FormBabyAdmin">
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+          <div className="FormBabyAdmin1">
             <h3
               style={{
                 textAlign: "center",
@@ -314,7 +294,7 @@ function FormBabyAdmin() {
           </div>
         </div>
         <div className="printVoucher">
-          <div className="bgImg">
+          <div className="bgImg" id="bgImgPrint">
             <div id="myDiv" className="imgVoucher">
               <div className="codeNew">{codeNew ? codeNew.billID : ""}</div>
             </div>

@@ -25,12 +25,14 @@ $color-form-highlight: #eeeeee;
 
   .container {
     max-width: 1000px;
-    margin-right: auto;
-    margin-left: auto;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    // min-height: 100vh;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .table {
@@ -44,6 +46,10 @@ $color-form-highlight: #eeeeee;
     background: #000;
     padding: ($half-spacing-unit * 1.5) 0;
   }
+  .table-content {
+    max-height: 430px;
+    overflow-y: scroll;
+  }
 
   .table-row {
     cursor: pointer;
@@ -55,7 +61,7 @@ $color-form-highlight: #eeeeee;
       background: $color-form-highlight;
     }
   }
-  .table-row:hover{
+  .table-row:hover {
     background-color: rgb(94, 94, 94);
     color: #f8f8f8;
     font-weight: bold;

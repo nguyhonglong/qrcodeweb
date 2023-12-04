@@ -13,7 +13,7 @@
   --dasboard-color: #3c393f;
   --rim-color: #312e34;
   --black-light-color: #707070; // box dasboad
-  --text-color: #ccc;
+  --text-color: rgb(237, 237, 237);
   --border-color: #e6e5e5;
   --toggle-color: #ddd;
   --box1-color: #4da3ff;
@@ -23,6 +23,7 @@
   --box5-color: #a37b53;
   --title-icon-color: #fff;
   --light-color: #fff;
+  --707070-color: #707070;
 
   /* ====== Transition ====== */
   --tran-05: all 0.5s ease;
@@ -138,12 +139,12 @@ body.dark {
     height: 5px;
     width: 5px;
     border-radius: 50%;
-    background-color: var(--primary-color);
+    background-color: var(--text-color);
   }
   body.dark li span:hover:before {
     background-color: var(--text-color);
   }
-  .menu-items li span .i {
+  .menu-items li span .i,.logout-mode .link-name {
     font-size: 25px;
     margin: 0 8px 0 8px;
     min-width: 30px;
@@ -154,7 +155,7 @@ body.dark {
     color: var(--black-light-color);
     cursor: pointer;
   }
-  .menu-items li span .link-name {
+  .menu-items li span .link-name,.logout-mode .link-name{
     font-size: 18px;
     font-weight: 400;
     color: var(--black-light-color);
@@ -166,8 +167,9 @@ body.dark {
     pointer-events: none;
   }
   .nav-links li span:hover .i,
-  .nav-links li span:hover .link-name {
-    color: var(--primary-color);
+  .nav-links li span:hover .link-name,.logout-mode  span:hover .link-name,.logout-mode li span:hover .i{
+    color: var(--text-color);
+    font-weight: bold;
   }
   body.dark .nav-links li span:hover .i,
   body.dark .nav-links li span:hover .link-name {
@@ -385,6 +387,7 @@ body.dark {
     display: flex;
     flex-direction: column;
     margin: 0 15px;
+
     .changeTypeUser {
       background-color: #ccc;
       position: absolute;

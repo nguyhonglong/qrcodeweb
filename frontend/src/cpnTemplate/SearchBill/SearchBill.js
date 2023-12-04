@@ -27,21 +27,29 @@ function SearchBill() {
   }, [dateRange]);
   return (
     <>
-      <div style={{ backgroundColor: "#181B22", height: "110vh" }}>
+      <div id="SearchBill">
         <div className="SearchBill">
           <p
-            className="textCenter"
+            className="textCenter MyTikTok2"
             style={{ fontSize: "28px", color: "#f8f8f8" }}
           >
             Tra cứu hóa đơn
           </p>
 
           <RangePicker
-            style={{ margin: "0px 0 0 50px", border: "2px solid #000" }}
+            style={{ width: "80%", height: "50px", margin: "20px auto" }}
             onChange={handleDateChange}
           />
         </div>
-        <div>{billToDate ? <TableBill billToDate={billToDate} /> : ""}</div>
+        <div className="table_search_date">
+          <div>
+            {billToDate ? (
+              <TableBill billToDate={billToDate} />
+            ) : (
+              <TableBill billToDate={"Chưa có dữ liệu"} />
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
