@@ -34,10 +34,10 @@ function FormBabyAdmin() {
       price: drink.price,
     }));
     const formData = {
-      billID:billID,
-      numCustomer:numCustomer,
-      customerName:customerName,
-      storeName:storeName,
+      billID: billID,
+      numCustomer: numCustomer,
+      customerName: customerName,
+      storeName: storeName,
       drinks: drinkData,
     };
 
@@ -45,7 +45,7 @@ function FormBabyAdmin() {
 
     // Gửi dữ liệu formData lên server
     await axios
-      .post("https://qrcodeweb-api.vercel.app/api/bills/", { data: formData })
+      .post("https://qrcodeweb-api.vercel.app/api/bills/", formData)
       .then((response) => {
         console.log("Data submitted successfully:", response.data);
         setCodeNew(response.data);
@@ -58,7 +58,7 @@ function FormBabyAdmin() {
         // Xử lý lỗi khi yêu cầu không thành công
         console.log("Error submitting data:", error);
         successMess.open({
-          type: "success",
+          type: "error",
           content: "Thêm hóa đơn thất bại",
         });
       });
