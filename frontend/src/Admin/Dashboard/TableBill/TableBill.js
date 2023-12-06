@@ -15,7 +15,6 @@ function TableBill(props) {
   };
   const calculateTotal = (data) => {
     let total = 0;
-
     // Lặp qua danh sách đồ uống và tính tổng tiền
     data.drinks.forEach((drink) => {
       total += drink.quantity * drink.price;
@@ -35,6 +34,7 @@ function TableBill(props) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <div id="TableBill">
       <div className="container">
@@ -60,11 +60,11 @@ function TableBill(props) {
                 Số người
               </a>
             </div>
-            <div className="header__item">
+            {/* <div className="header__item">
               <a id="total" className="filter__link filter__link--number">
                 Tổng tiền
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="table-content">
             {props.billToDate?.map((data) => (
@@ -77,7 +77,7 @@ function TableBill(props) {
                 <div className="table-data">{data.billID}</div>
                 <div className="table-data">{formatDate(data.createdAt)}</div>
                 <div className="table-data">{data.numCustomer}</div>
-                <div className="table-data">{calculateTotal(data)}</div>
+                {/* <div className="table-data">{calculateTotal(data)}</div> */}
               </div>
             ))}
           </div>

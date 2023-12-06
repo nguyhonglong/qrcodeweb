@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from "react";
 import "./InvoiceBill.scss";
-import axios from 'axios'
+import axios from "axios";
 import imgCoffe from "../../asset/image/invoice.jpg";
 function InvoiceBill(props) {
   // format date
@@ -20,7 +20,7 @@ function InvoiceBill(props) {
   const [sumMonney, setSumMonney] = useState();
   useEffect(() => {
     let sum = 0;
-    props.billData?.drinks?.forEach((element) => {
+    updatedDrinks?.forEach((element) => {
       sum += element.price * element.quantity;
     });
     setSumMonney(sum);
@@ -40,16 +40,24 @@ function InvoiceBill(props) {
     };
     fetchData();
   }, []);
-  // const priceDrinkBill = props.billData?.drinks?.filter(item=>!drinks.name.includes(item.drink))
-// console.log(props.billData.drinks);
-// console.log(priceDrinkBill);
-// api1.forEach(item => {
-//   item.drinks.forEach(drink => {
-//     if (drink.drink.toLowerCase() === nameToCompare) {
-//       price = drink.price;
-//     }
-//   });
-// });
+  const drinkNamesArr1 = props.billData?.drinks?.map((item) => item);
+  const drinkNamesArr2 = drinks?.map((item) => item);
+  const duplicateNames = drinkNamesArr2?.filter((item2) =>
+    drinkNamesArr1.some((item1) => item1.drink === item2.name)
+  );
+  const updatedDrinks = props.billData?.drinks?.map((drink, index) => {
+    const duplicateDrink = duplicateNames.find(
+      (item) => item.name === drink.drink
+    );
+    if (duplicateDrink) {
+      return {
+        ...drink,
+        price: duplicateDrink.price, // Thay đổi giá thành giá từ mảng duplicateNames
+      };
+    }
+    return drink;
+  });
+  console.log(updatedDrinks);
   return (
     <div id="invoice">
       <img className="imgCoffe" src={imgCoffe} alt="logo menu" />
@@ -63,26 +71,31 @@ function InvoiceBill(props) {
       <p className="fontRobo16 absolute totalUser">
         {props.billData.numCustomer}
       </p>
-      <table className="absolute">
-        <tr>
-          <th className=" MyTikTok1 navDrinkChild">ĐỒ UỐNG</th>
-          <th className="MyTikTok1">GIÁ</th>
-          <th className="MyTikTok1">SỐ LƯỢNG</th>
-          <th className=" MyTikTok1 ">TỔNG</th>
-        </tr>
-        {props.billData?.drinks?.map((drink, index) => (
-          <tr className="InfoDrinkChild" key={drink._id}>
-            <td className="MyTikTok3 drinkChild">{drink.drink}</td>
-            <td className="MyTikTok3 priceChild">${drink.price}</td>
-            <td className="MyTikTok3 textCenter quantityChild">
-              {drink.quantity}
-            </td>
-            <td className="MyTikTok3 textCenter totalChild">
-              ${drink.quantity * drink.price}
-            </td>
+      <div className="scrollable-table">
+        <table className="absolute table">
+          <tr>
+            <th className=" MyTikTok1 navDrinkChild">ĐỒ UỐNG</th>
+            <th className="MyTikTok1">GIÁ</th>
+            <th className="MyTikTok1">SỐ LƯỢNG</th>
+            <th className=" MyTikTok1 ">TỔNG</th>
           </tr>
-        ))}
-      </table>
+        
+              {updatedDrinks?.map((drink, index) => (
+                <tr className="InfoDrinkChild" key={drink._id}>
+                  <td className="MyTikTok3 drinkChild">{drink.drink}</td>
+                  <td className="MyTikTok3 priceChild">${drink.price}</td>
+                  <td className="MyTikTok3 textCenter quantityChild">
+                    {drink.quantity}
+                  </td>
+                  <td className="MyTikTok3 textCenter totalChild">
+                    ${drink.quantity * drink.price}
+                  </td>
+                </tr>
+              ))}
+           
+        
+        </table>
+      </div>
       <div className="totalPay absolute">
         <div className="SumPay ">
           <tr>

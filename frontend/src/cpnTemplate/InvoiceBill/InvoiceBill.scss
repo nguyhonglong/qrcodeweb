@@ -44,13 +44,20 @@
     top: 228px;
     font-size: 7px;
   }
-  table {
+  .scrollable-table {
+    overflow: auto;
+    height: 100px;
+  }
+  .absolute.table {
     width: 75%;
     color: #000;
     top: 310px;
     left: 12.5%;
     border-collapse: separate;
     border-spacing: 0 10px;
+    margin-top: 20px;
+
+
     th {
       padding: 3px 0;
       border: solid 1px #000;
@@ -86,7 +93,7 @@
     .navDrinkChild {
       padding-left: 15px;
     }
-    .InfoDrinkChild td{
+    .InfoDrinkChild td {
       border-bottom: 1px solid #000;
     }
     td {
@@ -97,7 +104,7 @@
       text-align: start;
       padding-left: 15px;
     }
-    .priceChild{
+    .priceChild {
       text-align: start;
     }
   }
@@ -113,12 +120,13 @@
       padding: 0;
       font-size: 10px;
     }
-    .SumPay tr td:nth-child(1){
+    .SumPay tr td:nth-child(1) {
       width: 70%;
       font-size: 10px;
       text-align: end;
       margin-right: 15px;
-    }  .SumPay tr td:nth-child(2){
+    }
+    .SumPay tr td:nth-child(2) {
       width: 30%;
       font-size: 10px;
       text-align: start;
