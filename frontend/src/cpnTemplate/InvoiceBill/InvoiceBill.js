@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from "react";
 import "./InvoiceBill.scss";
 import axios from "axios";
+import { Table } from "antd";
 import imgCoffe from "../../asset/image/invoice.jpg";
 function InvoiceBill(props) {
   // format date
@@ -64,36 +65,50 @@ function InvoiceBill(props) {
       <div className="header fontPaytone14 textCenter dateBill absolute">
         {formattedDateTime !== "NaN-NaN-NaN NaN:NaN" ? formattedDateTime : ""}
       </div>
-      <p className="fontRobo16 absolute codeBill">{props.billData.billID}</p>
+      <p className="fontRobo16 absolute  codeBill">{props.billData.billID}</p>
       <p className="fontRobo16 absolute nameUser">
         {props.billData.customerName}
       </p>
-      <p className="fontRobo16 absolute totalUser">
+      <p className="fontRobo16 absolute  totalUser">
         {props.billData.numCustomer}
       </p>
       <div className="scrollable-table">
         <table className="absolute table">
           <tr>
-            <th className=" MyTikTok1 navDrinkChild">ĐỒ UỐNG</th>
-            <th className="MyTikTok1">GIÁ</th>
-            <th className="MyTikTok1">SỐ LƯỢNG</th>
-            <th className=" MyTikTok1 ">TỔNG</th>
+            <td>
+              <div className="border-table">
+                <table cellspacing="0" cellpadding="1" width="100%">
+                  <tr>
+                    <th className=" MyTikTok1 navDrinkChild">ĐỒ UỐNG</th>
+                    <th className="MyTikTok1">GIÁ</th>
+                    <th className="MyTikTok1">SỐ LƯỢNG</th>
+                    <th className=" MyTikTok1 ">TỔNG</th>
+                  </tr>
+                </table>
+              </div>
+            </td>
           </tr>
-        
-              {updatedDrinks?.map((drink, index) => (
-                <tr className="InfoDrinkChild" key={drink._id}>
-                  <td className="MyTikTok3 drinkChild">{drink.drink}</td>
-                  <td className="MyTikTok3 priceChild">${drink.price}</td>
-                  <td className="MyTikTok3 textCenter quantityChild">
-                    {drink.quantity}
-                  </td>
-                  <td className="MyTikTok3 textCenter totalChild">
-                    ${drink.quantity * drink.price}
-                  </td>
-                </tr>
-              ))}
-           
-        
+
+          <tr>
+            <td>
+              <div className="scroll_table">
+                <table cellspacing="0" cellpadding="1" width="100%">
+                  {updatedDrinks?.map((drink, index) => (
+                    <tr className="InfoDrinkChild" key={drink._id}>
+                      <td className="MyTikTok3 drinkChild">{drink.drink}</td>
+                      <td className="MyTikTok3 priceChild">${drink.price}</td>
+                      <td className="MyTikTok3 textCenter quantityChild">
+                        {drink.quantity}
+                      </td>
+                      <td className="MyTikTok3 textCenter totalChild">
+                        ${drink.quantity * drink.price}
+                      </td>
+                    </tr>
+                  ))}
+                </table>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
       <div className="totalPay absolute">

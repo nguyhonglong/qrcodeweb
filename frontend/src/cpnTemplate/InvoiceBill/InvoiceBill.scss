@@ -1,3 +1,25 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phoneSmall {
+    @media (max-width: 330px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
 @import url("https://fonts.googleapis.com/css2?family=Redressed&family=Ubuntu:wght@400;700&display=swap");
 :root {
   --bg-bill: #f7ddc7;
@@ -14,78 +36,116 @@
   .imgCoffe {
     width: 100%;
     border-radius: 12px 12px 0 0;
-    position: relative;
+    position: relative !important;
   }
-  // .infomationBill {
-  //   background-color: var(--bg-bill);
-  //   border-radius: 0 0 12px 12px;
-  //   padding: 20px;
-  // }
   .absolute {
     position: absolute;
+  }
+  .relative{
+    position: relative;
+  }
+  .fixed{
+    position: fixed;
   }
   .absolute.dateBill {
     left: 125px;
     top: 228px;
     font-size: 7px;
+    @include respond(phone){
+      top: 166px;
+    left: 88px;
+    font-size: 5px;
+    }
   }
   .absolute.codeBill {
     left: 151px;
     top: 218px;
     font-size: 7px;
+    @include respond(phone){
+      top: 160px;
+    left: 103px;
+    font-size: 5px;
+    }
   }
-  .absolute.nameUser {
+  .absolute .nameUser {
     left: 258px;
     top: 228px;
     font-size: 7px;
+    @include respond(phone){
+      top: 166px;
+      left: 170px;
+    font-size: 5px;
+    }
   }
   .absolute.totalUser {
     left: 410px;
     top: 228px;
     font-size: 7px;
+    @include respond(phone){
+      top: 166px;
+      left: 265px;
+    font-size: 5px;
+    }
   }
-  .scrollable-table {
-    overflow: auto;
-    height: 100px;
+  .scroll_table {
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    @include respond(phone) {
+      max-height: 75px;
+    }
+  }
+  .InfoDrinkChild {
+    width: 100%;
   }
   .absolute.table {
     width: 75%;
     color: #000;
-    top: 310px;
+    top: 290px;
     left: 12.5%;
     border-collapse: separate;
     border-spacing: 0 10px;
     margin-top: 20px;
-
-
+    background-color: transparent;
+    @include respond(phone) {
+      top: 215px;
+    }
+    .border-table {
+      border: solid 1px #000;
+      border-radius: 30px;
+    }
     th {
       padding: 3px 0;
-      border: solid 1px #000;
-      border-style: solid none;
       color: #000;
       font-weight: bold;
       font-size: 10px;
+      @include respond(phone) {
+        font-size: 8px;
+        line-height: 15px;
+      }
     }
-    th:first-child {
-      border-left-style: solid;
-      border-top-left-radius: 30px;
-      border-bottom-left-radius: 30px;
-    }
-    th:last-child {
-      border-right-style: solid;
-      border-bottom-right-radius: 30px;
-      border-top-right-radius: 30px;
-    }
+    // .border-table th:first-child {
+    //   border-style: solid;
+    //   border-top-left-radius: 30px;
+    //   border-bottom-left-radius: 30px;
+    //   border-radius: 30px;
+    // }
+    // .border-table th:last-child {
+    //   border-right-style: solid;
+    //   border-bottom-right-radius: 30px;
+    //   border-top-right-radius: 30px;
+    // }
     th:nth-child(1) {
       width: 50%;
       text-align: start;
     }
     th:nth-child(2) {
-      width: 10%;
+      width: 12%;
       text-align: start;
     }
     th:nth-child(3) {
-      width: 20%;
+      width: 18%;
     }
     th:nth-child(4) {
       width: 20%;
@@ -99,13 +159,23 @@
     td {
       font-size: 10px;
       font-weight: 500 !important;
+      @include respond(phone) {
+        font-size: 8px;
+        line-height: 15px;
+      }
     }
     .drinkChild {
       text-align: start;
       padding-left: 15px;
+      width: 50%;
     }
     .priceChild {
       text-align: start;
+      padding-left: 0px;
+    }
+    .totalChild {
+      position: relative;
+      left: 12px;
     }
   }
   .totalPay {

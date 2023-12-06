@@ -47,12 +47,12 @@ function TableBill(props) {
             </div>
             <div className="header__item">
               <a id="wins" className="filter__link filter__link--number">
-                MÃ HÓA ĐƠN
+                MÃ ĐƠN
               </a>
             </div>
             <div className="header__item">
               <a id="draws" className="filter__link filter__link--number">
-                Thời gian
+               Ngày
               </a>
             </div>
             <div className="header__item">
@@ -60,11 +60,11 @@ function TableBill(props) {
                 Số người
               </a>
             </div>
-            {/* <div className="header__item">
+            <div className="header__item">
               <a id="total" className="filter__link filter__link--number">
-                Tổng tiền
+                Tổng
               </a>
-            </div> */}
+            </div>
           </div>
           <div className="table-content">
             {props.billToDate?.map((data) => (
@@ -77,7 +77,7 @@ function TableBill(props) {
                 <div className="table-data">{data.billID}</div>
                 <div className="table-data">{formatDate(data.createdAt)}</div>
                 <div className="table-data">{data.numCustomer}</div>
-                {/* <div className="table-data">{calculateTotal(data)}</div> */}
+                <div className="table-data">{calculateTotal(data)}</div>
               </div>
             ))}
           </div>
