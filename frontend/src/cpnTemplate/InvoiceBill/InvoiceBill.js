@@ -62,16 +62,24 @@ function InvoiceBill(props) {
   return (
     <div id="invoice">
       <img className="imgCoffe" src={imgCoffe} alt="logo menu" />
-      <div className="header fontPaytone14 textCenter dateBill absolute">
-        {formattedDateTime !== "NaN-NaN-NaN NaN:NaN" ? formattedDateTime : ""}
-      </div>
-      <p className="fontRobo16 absolute  codeBill">{props.billData.billID}</p>
-      <p className="fontRobo16 absolute nameUser">
-        {props.billData.customerName}
-      </p>
-      <p className="fontRobo16 absolute  totalUser">
-        {props.billData.numCustomer}
-      </p>
+      {/* <div className="inforTable absolute"> */}
+       
+          <p className="fontRobo16 absolute  codeBill">
+            {props.billData.billID}
+          </p>
+          <p className="header fontPaytone14 textCenter dateBill absolute">
+            {formattedDateTime !== "NaN-NaN-NaN NaN:NaN"
+              ? formattedDateTime
+              : ""}
+          </p> 
+        <p className="fontRobo16 absolute nameUser">
+          {props.billData.customerName}
+        </p>
+        <p className="fontRobo16 absolute  totalUser">
+          {props.billData.numCustomer}
+        </p>
+     
+
       <div className="scrollable-table">
         <table className="absolute table">
           <tr>
@@ -94,7 +102,7 @@ function InvoiceBill(props) {
               <div className="scroll_table">
                 <table cellspacing="0" cellpadding="1" width="100%">
                   {updatedDrinks?.map((drink, index) => (
-                    <tr className="InfoDrinkChild" key={drink._id}>
+                    <tr className="InfoDrinkChild" key={index}>
                       <td className="MyTikTok3 drinkChild">{drink.drink}</td>
                       <td className="MyTikTok3 priceChild">${drink.price}</td>
                       <td className="MyTikTok3 textCenter quantityChild">

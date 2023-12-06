@@ -1,11 +1,11 @@
 @mixin respond($breakpoint) {
   @if $breakpoint == phoneSmall {
-    @media (max-width: 330px) {
+    @media (max-width: 400px) {
       @content;
     }
   }
   @if $breakpoint == phone {
-    @media (max-width: 600px) {
+    @media (max-width: 550px) {
       @content;
     }
   }
@@ -36,6 +36,7 @@ $color-form-highlight: #eeeeee;
 
 #TableBill {
   margin-top: -50px;
+  
   h1,
   h2,
   h3,

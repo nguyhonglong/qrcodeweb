@@ -1,11 +1,11 @@
 @mixin respond($breakpoint) {
   @if $breakpoint == phoneSmall {
-    @media (max-width: 330px) {
+    @media (max-width: 400px) {
       @content;
     }
   }
   @if $breakpoint == phone {
-    @media (max-width: 600px) {
+    @media (max-width: 440px) {
       @content;
     }
   }
@@ -35,56 +35,87 @@
   margin-top: 80px;
   .imgCoffe {
     width: 100%;
+    height: 100%;
     border-radius: 12px 12px 0 0;
     position: relative !important;
+    top: 0;
+    left: 0;
+    @include respond(phone) {
+      width: 400px;
+    }
   }
   .absolute {
     position: absolute;
   }
-  .relative{
+  .relative {
     position: relative;
   }
-  .fixed{
+  .fixed {
     position: fixed;
+  }
+  .inforTable {
+    top: 177px;
+    left: 50px;
+    width: 100%;
   }
   .absolute.dateBill {
     left: 125px;
     top: 228px;
     font-size: 7px;
-    @include respond(phone){
-      top: 166px;
-    left: 88px;
-    font-size: 5px;
+    @include respond(phone) {
+      left: 125px;
+      top: 228px;
+      font-size: 5px;
+    }
+    @include respond(phoneSmall) {
+      left: 93px;
+      top: 171px;
+      font-size: 5px;
     }
   }
   .absolute.codeBill {
     left: 151px;
     top: 218px;
     font-size: 7px;
-    @include respond(phone){
+    @include respond(phone) {
+      left: 125px;
+      top: 228px;
+      font-size: 5px;
+    }
+    @include respond(phoneSmall) {
+      left: 105px;
       top: 160px;
-    left: 103px;
-    font-size: 5px;
+      font-size: 5px;
     }
   }
-  .absolute .nameUser {
+  .absolute.nameUser {
     left: 258px;
     top: 228px;
     font-size: 7px;
-    @include respond(phone){
-      top: 166px;
+    @include respond(phone) {
+      left: 125px;
+      top: 228px;
+      font-size: 5px;
+    }
+    @include respond(phoneSmall) {
       left: 170px;
-    font-size: 5px;
+      top: 166px;
+      font-size: 5px;
     }
   }
   .absolute.totalUser {
     left: 410px;
     top: 228px;
     font-size: 7px;
-    @include respond(phone){
-      top: 166px;
+    @include respond(phone) {
+      left: 125px;
+      top: 228px;
+      font-size: 5px;
+    }
+    @include respond(phoneSmall) {
       left: 265px;
-    font-size: 5px;
+      top: 166px;
+      font-size: 5px;
     }
   }
   .scroll_table {
@@ -93,7 +124,7 @@
     overflow-x: hidden;
     width: 100%;
     @include respond(phone) {
-      max-height: 75px;
+      max-height: 65px;
     }
   }
   .InfoDrinkChild {
@@ -109,8 +140,12 @@
     margin-top: 20px;
     background-color: transparent;
     @include respond(phone) {
-      top: 215px;
+      top: 220px;
     }
+    @include respond(phoneSmall) {
+      top: 195px;
+    }
+
     .border-table {
       border: solid 1px #000;
       border-radius: 30px;
@@ -121,21 +156,15 @@
       font-weight: bold;
       font-size: 10px;
       @include respond(phone) {
+   
         font-size: 8px;
-        line-height: 15px;
+      }
+      @include respond(phoneSmall) {
+    
+        font-size: 8px;
       }
     }
-    // .border-table th:first-child {
-    //   border-style: solid;
-    //   border-top-left-radius: 30px;
-    //   border-bottom-left-radius: 30px;
-    //   border-radius: 30px;
-    // }
-    // .border-table th:last-child {
-    //   border-right-style: solid;
-    //   border-bottom-right-radius: 30px;
-    //   border-top-right-radius: 30px;
-    // }
+
     th:nth-child(1) {
       width: 50%;
       text-align: start;
@@ -159,10 +188,6 @@
     td {
       font-size: 10px;
       font-weight: 500 !important;
-      @include respond(phone) {
-        font-size: 8px;
-        line-height: 15px;
-      }
     }
     .drinkChild {
       text-align: start;
@@ -181,6 +206,16 @@
   .totalPay {
     left: 315px;
     top: 487px;
+    @include respond(phone) {
+      left: 201px;
+      top: 375px;
+      font-size: 5px;
+    }
+    @include respond(phoneSmall) {
+      left: 160px;
+      top: 327px;
+      font-size: 5px;
+    }
     .SumPay tr {
       width: 100%;
       display: flex;
@@ -189,6 +224,12 @@
       margin: 0px 20px 0px 0px;
       padding: 0;
       font-size: 10px;
+      @include respond(phone) {
+        font-size: 8px;
+      }
+      @include respond(phoneSmall) {
+        font-size: 8px;
+      }
     }
     .SumPay tr td:nth-child(1) {
       width: 70%;

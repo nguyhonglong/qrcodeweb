@@ -89,6 +89,8 @@ function TableBill(props) {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
+        classNames={'Modal'}
+        style={{display:'flex',justifyContent:'center'}}
       >
         <div style={{ marginTop: "-60px" }}>
           <InvoiceBill billData={dataOpen} />
