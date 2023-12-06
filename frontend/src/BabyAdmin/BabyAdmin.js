@@ -5,10 +5,12 @@ import FormBabyAdmin from "../cpnTemplate/formBbAdmin/FormBabyAdmin";
 import SearchBill from "../cpnTemplate/SearchBill/SearchBill";
 import FormAddVoucher from "./cpnBabyAdmin/FormAddVoucher/FormAddVoucher";
 // import DrinkForm from "./cpnBabyAdmin/ChooseDrink/ChooseDrink";
+import DrinkList from "./cpnBabyAdmin/MenuComponent/MenuComponent";
 function BabyAdmin() {
   return (
     <div id="babyadmin">
       <FormAddVoucher />
+  
     </div>
   );
 }

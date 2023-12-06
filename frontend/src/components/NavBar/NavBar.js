@@ -99,6 +99,12 @@ function NavBar() {
             <p className="link-name MyTikTok2">Search</p>
           </Link>
         </div>
+        <div>
+          <Link to="/menu" style={{ display: "flex" }} className="btn btn-nav">
+            <SearchOutlined className="i" />
+            <p className="link-name MyTikTok2">Menu</p>
+          </Link>
+        </div>
         <div className="logOut" onClick={isModalOpenSignOut}>
           <p className="btn btn-logOut">Sign out</p>
         </div>
