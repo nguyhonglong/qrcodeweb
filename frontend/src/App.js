@@ -10,6 +10,7 @@ import AddVoucher from "./Admin/Dashboard/AddVoucher/AddVoucher";
 import FormSearchBill from "./BabyAdmin/cpnBabyAdmin/FormSearchBill/FormSearchBill";
 import FormAddVoucher from "./BabyAdmin/cpnBabyAdmin/FormAddVoucher/FormAddVoucher";
 import SearchBillAdmin from "./Admin/Dashboard/SearchBill/SearchBill";
+import MenuComponent from "./BabyAdmin/cpnBabyAdmin/MenuComponent/MenuComponent";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/addvoucher" element={<AddVoucher />} />
           <Route path="/searchbilladmin" element={<SearchBillAdmin />} />
+          <Route path="/menu" element={<MenuComponent />} />
         </Routes>
       </ContextProivider>
     </div>

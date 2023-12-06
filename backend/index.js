@@ -163,6 +163,35 @@ app.post('/api/drinks', async (request, response) => {
     }
 })
 
+app.put('/api/drinks/:id', async (request, response) => {
+    try {
+        const { id } = request.params;
+        const { name, price } = request.body;
+
+        if (!name || !price) {
+            return response.status(400).send({
+                message: 'Send all required fields: name, price'
+            });
+        }
+
+        const existingDrink = await Drink.findById(id);
+        if (!existingDrink) {
+            return response.status(404).send({
+                message: 'Drink not found'
+            });
+        }
+
+        existingDrink.name = name;
+        existingDrink.price = price;
+        const updatedDrink = await existingDrink.save();
+
+        return response.status(200).send(updatedDrink);
+    } catch (error) {
+        console.log(error.message);
+        return response.status(500).send({ message: error.message });
+    }
+});
+
 app.get('/api/records', async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
@@ -263,6 +292,8 @@ app.get('/api/users', async (request, response) => {
         console.log(error.message);
     }
 });
+
+
 
 mongoose
     .connect(mongoDBURL)
