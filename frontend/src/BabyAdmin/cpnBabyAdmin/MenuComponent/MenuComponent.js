@@ -13,7 +13,7 @@ const MenuComponent = () => {
   }, []);
 
   const handlePriceChange = (itemId, newPrice) => {
-    fetch(`http://localhost:5555/api/drinks/${itemId}`, {
+    fetch(`http://:localhost:5555/api/drinks/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const MenuComponent = () => {
   };
 
   const handleNameChange = (itemId, newName) => {
-    fetch(`http://localhost/api/menu/${itemId}`, {
+    fetch(`http://localhost:5555/api/drinks/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -46,6 +46,17 @@ const MenuComponent = () => {
             item._id === updatedItem._id ? { ...item, name: updatedItem.name } : item
           )
         );
+      })
+      .catch(error => console.log(error));
+  };
+
+  const handleDeleteItem = (itemId) => {
+    fetch(`http://localhost:5555/api/drinks/${itemId}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(() => {
+        setMenu(prevMenu => prevMenu.filter(item => item._id !== itemId));
       })
       .catch(error => console.log(error));
   };
@@ -69,26 +80,28 @@ const MenuComponent = () => {
 
   return (
     <div>
-      <h1>Sửa menu</h1>
+      <h1>Menu</h1>
       <ul>
         {menu.map(item => (
           <li key={item._id}>
-            <input
-              type="text"
-              value={item.name}
-              onChange={e => handleNameChange(item._id, e.target.value)}
-            />
-            
+            <h3>{item.name}</h3>
+            <p>Price: {item.price}</p>
             <input
               type="number"
               value={item.price}
               onChange={e => handlePriceChange(item._id, e.target.value)}
             />
+            <input
+              type="text"
+              value={item.name}
+              onChange={e => handleNameChange(item._id, e.target.value)}
+            />
+            <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
           </li>
         ))}
       </ul>
       <div>
-        <h3>Thêm mới</h3>
+        <h3>Add New Item</h3>
         <input
           type="text"
           placeholder="Name"
@@ -101,6 +114,7 @@ const MenuComponent = () => {
           value={newItemPrice}
           onChange={e => setNewItemPrice(e.target.value)}
         />
+        
         <button onClick={handleAddItem}>Add</button>
       </div>
     </div>

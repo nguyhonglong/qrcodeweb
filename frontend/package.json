@@ -17,6 +17,7 @@
     "gh-pages": "^6.1.0",
     "html2canvas": "^1.4.1",
     "rc-pinterest-grid": "^0.0.4",
+    "react-datepicker": "^4.24.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",

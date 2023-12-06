@@ -7,6 +7,9 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from './models/userModel.js'
 import dotenv from 'dotenv'
+import bodyParser from 'body-parser'
+
+
 
 dotenv.config();
 
@@ -14,6 +17,7 @@ const PORT = process.env.PORT || 5555
 const mongoDBURL = "mongodb+srv://nguyhonglong2002:3dUw8ja9980dHmxu@cluster0.zokt7pa.mongodb.net/bill?retryWrites=true&w=majority"
 
 const app = express();
+app.use(bodyParser.json());
 app.use(cors());
 
 app.use(express.json());
@@ -163,34 +167,22 @@ app.post('/api/drinks', async (request, response) => {
     }
 })
 
-app.put('/api/drinks/:id', async (request, response) => {
-    try {
-        const { id } = request.params;
-        const { name, price } = request.body;
-
-        if (!name || !price) {
-            return response.status(400).send({
-                message: 'Send all required fields: name, price'
-            });
-        }
-
-        const existingDrink = await Drink.findById(id);
-        if (!existingDrink) {
-            return response.status(404).send({
-                message: 'Drink not found'
-            });
-        }
-
-        existingDrink.name = name;
-        existingDrink.price = price;
-        const updatedDrink = await existingDrink.save();
-
-        return response.status(200).send(updatedDrink);
-    } catch (error) {
-        console.log(error.message);
-        return response.status(500).send({ message: error.message });
+app.put('/api/drinks/:id', (req, res) => {
+    const id = req.params.id; 
+  
+    const updatedDrink = req.body;
+  
+    
+    const drinkIndex = drinks.findIndex(drink => drink._id === id);
+    if (drinkIndex === -1) {
+      return res.status(404).json({ error: 'Drink not found' });
     }
-});
+  
+    
+    drinks[drinkIndex] = { ...drinks[drinkIndex], ...updatedDrink };
+  
+    res.json({ success: true });
+  });
 
 app.get('/api/records', async (req, res) => {
     try {
