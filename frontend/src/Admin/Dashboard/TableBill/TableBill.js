@@ -13,7 +13,6 @@ function TableBill(props) {
 
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
-
   const calculateTotal = (data) => {
     let total = 0;
 
@@ -58,7 +57,7 @@ function TableBill(props) {
             </div>
             <div className="header__item">
               <a id="losses" className="filter__link filter__link--number">
-                Số lượng người
+                Số người
               </a>
             </div>
             <div className="header__item">

@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from "react";
 import "./InvoiceBill.scss";
-import imgCoffe from "../../asset/image/coffe.jpg";
+import axios from 'axios'
+import imgCoffe from "../../asset/image/invoice.jpg";
 function InvoiceBill(props) {
   // format date
   const date = new Date(props.billData.createdAt);
@@ -25,76 +26,77 @@ function InvoiceBill(props) {
     setSumMonney(sum);
   }, [props.billData]);
   let discount = 0;
+  const [drinks, setDrinks] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://qrcodeweb-api.vercel.app/api/drinks"
+        );
+        setDrinks(response.data);
+      } catch (error) {
+        console.error("Error fetching drinks:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  // const priceDrinkBill = props.billData?.drinks?.filter(item=>!drinks.name.includes(item.drink))
+// console.log(props.billData.drinks);
+// console.log(priceDrinkBill);
+// api1.forEach(item => {
+//   item.drinks.forEach(drink => {
+//     if (drink.drink.toLowerCase() === nameToCompare) {
+//       price = drink.price;
+//     }
+//   });
+// });
   return (
     <div id="invoice">
       <img className="imgCoffe" src={imgCoffe} alt="logo menu" />
-      <div className="infomationBill">
-        <div
-          className="header fontRobo32 textCenter"
-          style={{ lineHeight: "50px", color: "#512D14" }}
-        >
-          Hóa đơn
-        </div>
-        <div
-          className="header fontPaytone14 textCenter"
-          style={{ marginBottom: "15px" }}
-        >
-          Ngày: {formattedDateTime !=='NaN-NaN-NaN NaN:NaN'? formattedDateTime :''}
-        </div>
-        <div className="informationHoaDon">
+      <div className="header fontPaytone14 textCenter dateBill absolute">
+        {formattedDateTime !== "NaN-NaN-NaN NaN:NaN" ? formattedDateTime : ""}
+      </div>
+      <p className="fontRobo16 absolute codeBill">{props.billData.billID}</p>
+      <p className="fontRobo16 absolute nameUser">
+        {props.billData.customerName}
+      </p>
+      <p className="fontRobo16 absolute totalUser">
+        {props.billData.numCustomer}
+      </p>
+      <table className="absolute">
+        <tr>
+          <th className=" MyTikTok1 navDrinkChild">ĐỒ UỐNG</th>
+          <th className="MyTikTok1">GIÁ</th>
+          <th className="MyTikTok1">SỐ LƯỢNG</th>
+          <th className=" MyTikTok1 ">TỔNG</th>
+        </tr>
+        {props.billData?.drinks?.map((drink, index) => (
+          <tr className="InfoDrinkChild" key={drink._id}>
+            <td className="MyTikTok3 drinkChild">{drink.drink}</td>
+            <td className="MyTikTok3 priceChild">${drink.price}</td>
+            <td className="MyTikTok3 textCenter quantityChild">
+              {drink.quantity}
+            </td>
+            <td className="MyTikTok3 textCenter totalChild">
+              ${drink.quantity * drink.price}
+            </td>
+          </tr>
+        ))}
+      </table>
+      <div className="totalPay absolute">
+        <div className="SumPay ">
           <tr>
-            <td className="fontRobo16">MÃ HÓA ĐƠN:</td>
-            <td className="fontRobo16">{props.billData.billID}</td>
+            <td className="MyTikTok1">PHỤ PHÍ</td>
+            <td className="MyTikTok3 textCenter">${sumMonney}</td>
           </tr>
           <tr>
-            <td className="fontRobo16">TÊN KHÁCH HÀNG</td>
-            <td className="fontRobo16">{props.billData.customerName}</td>
+            <td className="MyTikTok1">GIẢM GIÁ</td>
+            <td className="MyTikTok3 textCenter">-${discount}</td>
           </tr>
           <tr>
-            <td className="fontRobo16">SỐ LƯỢNG NGƯỜI</td>
-            <td className="fontRobo16">{props.billData.numCustomer}</td>
+            <td className="MyTikTok1">TỔNG TIỀN</td>
+            <td className="MyTikTok1 textCenter">${sumMonney - discount}</td>
           </tr>
-          <div
-            className="line"
-            style={{ marginLeft: "5px", marginTop: "5px" }}
-          ></div>
-        </div>
-        <table>
-          <tr>
-            <th className="fontPaytone14 ">STT</th>
-            <th className="fontPaytone14 ">Đồ uống</th>
-            <th className="fontPaytone14 parallelogram">Số lượng</th>
-            <th className="fontPaytone14 parallelogram">Giá</th>
-            <th className="fontPaytone14 ">Tổng</th>
-          </tr>
-          {props.billData?.drinks?.map((drink, index) => (
-            <tr className="InfoDrinkChild" key={index}>
-              <td className="fontRobo14 textCenter">{index + 1}</td>
-              <td className="fontRobo14 textCenter">{drink.drink}</td>
-              <td className="fontRobo14 textCenter">{drink.quantity}</td>
-              <td className="fontRobo14 textCenter">{drink.price}</td>
-              <td className="fontRobo14 textCenter">
-                {drink.quantity * drink.price}
-              </td>
-            </tr>
-          ))}
-        </table>
-        <div className="SumPay">
-          <tr>
-            <td className="fontPaytone16">Tổng tiền</td>
-            <td className="fontRobo14 textCenter">{sumMonney}</td>
-          </tr>
-          <tr>
-            <td className="fontPaytone16">Giảm giá</td>
-            <td className="fontRobo14 textCenter">{discount}</td>
-          </tr>
-          <tr>
-            <td className="fontPaytone16">Tổng cộng</td>
-            <td className="fontRobo14 textCenter">{sumMonney - discount}</td>
-          </tr>
-        </div>
-        <div className="fontPaytone16 textCenter mgt40">
-          Cảm ơn quý khách đã sử dụng dịch vụ
         </div>
       </div>
     </div>

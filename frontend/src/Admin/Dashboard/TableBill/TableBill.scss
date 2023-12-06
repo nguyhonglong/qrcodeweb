@@ -1,3 +1,25 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == phoneSmall {
+    @media (max-width: 330px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
 
 $base-spacing-unit: 24px;
@@ -24,8 +46,7 @@ $color-form-highlight: #eeeeee;
   }
 
   .container {
-    max-width: 1000px;
-
+    max-width: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,6 +96,10 @@ $color-form-highlight: #eeeeee;
 
   .header__item {
     text-transform: uppercase;
+    font-size: 16px;
+    @include respond(phone){
+      font-size: 8px;
+    }
   }
 
   .filter__link {

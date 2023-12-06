@@ -14,59 +14,114 @@
   .imgCoffe {
     width: 100%;
     border-radius: 12px 12px 0 0;
+    position: relative;
   }
-  .infomationBill {
-    background-color: var(--bg-bill);
-    border-radius: 0 0 12px 12px;
-    padding: 20px;
+  // .infomationBill {
+  //   background-color: var(--bg-bill);
+  //   border-radius: 0 0 12px 12px;
+  //   padding: 20px;
+  // }
+  .absolute {
+    position: absolute;
   }
-  .informationHoaDon {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    tr {
-      display: flex;
-      justify-content: space-between;
-    }
+  .absolute.dateBill {
+    left: 125px;
+    top: 228px;
+    font-size: 7px;
+  }
+  .absolute.codeBill {
+    left: 151px;
+    top: 218px;
+    font-size: 7px;
+  }
+  .absolute.nameUser {
+    left: 258px;
+    top: 228px;
+    font-size: 7px;
+  }
+  .absolute.totalUser {
+    left: 410px;
+    top: 228px;
+    font-size: 7px;
   }
   table {
-    width: 100%;
+    width: 75%;
+    color: #000;
+    top: 310px;
+    left: 12.5%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    th {
+      padding: 3px 0;
+      border: solid 1px #000;
+      border-style: solid none;
+      color: #000;
+      font-weight: bold;
+      font-size: 10px;
+    }
+    th:first-child {
+      border-left-style: solid;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+    }
+    th:last-child {
+      border-right-style: solid;
+      border-bottom-right-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+    th:nth-child(1) {
+      width: 50%;
+      text-align: start;
+    }
+    th:nth-child(2) {
+      width: 10%;
+      text-align: start;
+    }
+    th:nth-child(3) {
+      width: 20%;
+    }
+    th:nth-child(4) {
+      width: 20%;
+    }
+    .navDrinkChild {
+      padding-left: 15px;
+    }
+    .InfoDrinkChild td{
+      border-bottom: 1px solid #000;
+    }
+    td {
+      font-size: 10px;
+      font-weight: 500 !important;
+    }
+    .drinkChild {
+      text-align: start;
+      padding-left: 15px;
+    }
+    .priceChild{
+      text-align: start;
+    }
   }
-  tr th,
-  tr td {
-    padding: 5px;
-  }
-  th {
-    border: 7px solid var(--bg-bill);
-    background-color: var(--primary-table);
-    color: #fff;
-  }
-  th:nth-child(2) {
-    width: 40%;
-  }
-  .InfoDrinkChild:last-child {
-    border-bottom: 2px solid #512d14;
-  }
-  .SumPay {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-  }
-  .SumPay tr {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 20px 0px 0px;
-    padding: 0;
-  }
-  .SumPay tr:nth-child(3) td:nth-child(1) {
-    background-color: var(--primary-table);
-    color: #fff;
-  }
-  .line {
-    width: 20%;
-    border-bottom: 2px solid #512d14;
+  .totalPay {
+    left: 315px;
+    top: 487px;
+    .SumPay tr {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0px 20px 0px 0px;
+      padding: 0;
+      font-size: 10px;
+    }
+    .SumPay tr td:nth-child(1){
+      width: 70%;
+      font-size: 10px;
+      text-align: end;
+      margin-right: 15px;
+    }  .SumPay tr td:nth-child(2){
+      width: 30%;
+      font-size: 10px;
+      text-align: start;
+    }
   }
 }

@@ -7,6 +7,7 @@ const { RangePicker } = DatePicker;
 function SearchBill() {
   const [dateRange, setDateRange] = useState([]);
   const [billToDate, setBillToDate] = useState([]);
+  console.log(billToDate);
   const handleDateChange = (dates) => {
     setDateRange(dates);
   };
