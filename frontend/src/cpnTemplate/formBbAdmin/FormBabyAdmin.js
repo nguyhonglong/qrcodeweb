@@ -233,21 +233,9 @@ function FormBabyAdmin() {
                   filterOption={filterOption}
                   options={[
                     {
-                      value: "Hà Nội",
-                      label: "Hà Nội",
-                    },
-                    {
-                      value: "Đà Nẵng",
-                      label: "Đà Nẵng",
-                    },
-                    {
-                      value: "Hồ Chí Minh",
-                      label: "Hồ Chí Minh",
-                    },
-                    {
-                      value: "Hải Phòng",
-                      label: "Hải Phòng",
-                    },
+                      value: "Đỉnh Gió Coffee",
+                      label: "Đỉnh Gió Coffee",
+                    }
                   ]}
                 />
               </Form.Item>

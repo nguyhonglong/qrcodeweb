@@ -58,7 +58,6 @@ function InvoiceBill(props) {
     }
     return drink;
   });
-  console.log(updatedDrinks);
   return (
     <div id="invoice">
       <img className="imgCoffe" src={imgCoffe} alt="logo menu" />

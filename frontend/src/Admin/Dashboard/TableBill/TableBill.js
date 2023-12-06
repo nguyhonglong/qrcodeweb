@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TableBill.scss";
+import axios from "axios";
 import { Modal } from "antd";
 import InvoiceBill from "../../../cpnTemplate/InvoiceBill/InvoiceBill";
 function TableBill(props) {
@@ -35,6 +36,36 @@ function TableBill(props) {
     setIsModalOpen(false);
   };
 
+  const [drinkPrices, setDrinkPrices] = useState({});
+  useEffect(() => {
+    fetchDrinkPrices();
+  }, []);
+
+  const fetchDrinkPrices = async () => {
+    try {
+      const response = await axios.get("http://localhost:5555/api/drinks");
+      const drinks = response.data;
+      const prices = {};
+
+      for (const drink of drinks) {
+        prices[drink.name] = drink.price;
+      }
+
+      setDrinkPrices(prices);
+    } catch (error) {
+      console.error("Error fetching drink prices:", error);
+    }
+  };
+
+  const calculateTotalValue = (drinks) => {
+    let total = 0;
+    for (const drink of drinks) {
+      const price = drinkPrices[drink.drink];
+      total += drink.quantity * price;
+    }
+    return total;
+  };
+
   return (
     <div id="TableBill">
       <div className="container">
@@ -52,7 +83,7 @@ function TableBill(props) {
             </div>
             <div className="header__item">
               <a id="draws" className="filter__link filter__link--number">
-               Ngày
+                Ngày
               </a>
             </div>
             <div className="header__item">
@@ -77,7 +108,9 @@ function TableBill(props) {
                 <div className="table-data">{data.billID}</div>
                 <div className="table-data">{formatDate(data.createdAt)}</div>
                 <div className="table-data">{data.numCustomer}</div>
-                <div className="table-data">{calculateTotal(data)}</div>
+                <div className="table-data">
+                  {calculateTotalValue(data.drinks)}
+                </div>
               </div>
             ))}
           </div>
@@ -89,8 +122,8 @@ function TableBill(props) {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-        classNames={'Modal'}
-        style={{display:'flex',justifyContent:'center'}}
+        className="myModal"
+        style={{ display: "flex", justifyContent: "center" }}
       >
         <div style={{ marginTop: "-60px" }}>
           <InvoiceBill billData={dataOpen} />
