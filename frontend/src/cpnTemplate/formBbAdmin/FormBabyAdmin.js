@@ -235,6 +235,9 @@ function FormBabyAdmin() {
                     {
                       value: "Đỉnh Gió Coffee",
                       label: "Đỉnh Gió Coffee",
+                    }, {
+                      value: "Cloud Forest",
+                      label: "Cloud Forest",
                     }
                   ]}
                 />
