@@ -7,13 +7,8 @@ import {
   UilTachometerFastAlt,
   UilClockThree,
 } from "@iconscout/react-unicons";
-import {
-  SolutionOutlined,
-  UserOutlined,
-  CheckOutlined,
-} from "@ant-design/icons";
+import { SolutionOutlined, UserOutlined } from "@ant-design/icons";
 import { Modal, Tooltip } from "antd";
-import TimeAgo from "react-timeago";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../Context/userContext";
 import NavAdmin from "../navAmin/NavAdmin/NavAdmin";
@@ -23,7 +18,6 @@ function Dashboard() {
   const [addClass, setAddClass] = useState("open");
   const [isModalOpenSignOuts_admin, setIsModalOpenSignOut_admin] =
     useState(false);
-  const [checkDelete, setCheckDelete] = useState(false);
 
   const [dataUser, setDataUser] = useState([]);
 
@@ -80,7 +74,7 @@ function Dashboard() {
       // Ví dụ: Hủy các kết nối, huỷ bỏ các tác vụ không cần thiết, vv.
     };
   }, []);
-  console.log(dataUser);
+  // console.log(dataUser);
   //ModalEditUser
   const [error, setError] = message.useMessage();
   const [open, setOpen] = useState(false);
@@ -92,12 +86,13 @@ function Dashboard() {
     setOpen(true);
     setIdEditUser(data);
   };
+  console.log(idEditUser);
   const handleOk = async () => {
     setConfirmLoading(true);
     await axios
       .put("https://qrcodeweb-api.vercel.app/api/auth/update", {
-        account:idEditUser,
-        role:typeUser
+        account: idEditUser,
+        role: typeUser,
       })
       .then((response) => {
         // roles: typeUser;
@@ -125,14 +120,6 @@ function Dashboard() {
     setOpen(false);
     setConfirmLoading(false);
     setTypeUser("user");
-    // setChangePasswordUser("");
-    // if (checkDelete) {
-    //   const userValue = auth.currentUser;
-    //   userValue.delete().then(() => {
-    //     deleteDoc(doc(db, "user", idEditUser));
-    //   });
-    //   await deleteDoc(doc(db, "user", idEditUser));
-    // }
     window.location.reload();
   };
   const handleCancel = () => {
@@ -144,7 +131,9 @@ function Dashboard() {
     // let sumTotleMony = 0;
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://qrcodeweb-api.vercel.app/api/bills");
+        const response = await axios.get(
+          "https://qrcodeweb-api.vercel.app/api/bills"
+        );
         setSumBill(response.data);
       } catch (error) {
         console.error("Error fetching drinks:", error);
@@ -152,6 +141,19 @@ function Dashboard() {
     };
     fetchData();
   }, [idEditUser]);
+
+  const DeleteAccount = async () => {
+    try {
+      await axios
+        .delete(`https://qrcodeweb-api.vercel.app/api/users/${idEditUser}`)
+        .then((item) => {
+          setOpen(false);
+          window.location.reload();
+        });
+    } catch (error) {
+      console.error("Error fetching drinks:", error);
+    }
+  };
   return (
     <>
       {setError}
@@ -294,7 +296,7 @@ function Dashboard() {
           <div>
             <div>
               <button
-                onClick={() => setCheckDelete(!checkDelete)}
+                onClick={() => DeleteAccount()}
                 style={{
                   backgroundColor: "#C7372F",
                   color: "#fff",
@@ -307,17 +309,6 @@ function Dashboard() {
               >
                 Xóa tài khoản
               </button>
-              {checkDelete ? (
-                <CheckOutlined
-                  style={{
-                    color: "red",
-                    fontWeight: "bold",
-                    marginLeft: "12px",
-                  }}
-                />
-              ) : (
-                ""
-              )}
             </div>
           </div>
         </Modal>

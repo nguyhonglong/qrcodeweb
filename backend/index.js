@@ -292,7 +292,6 @@ app.post('/api/auth/register', async (req, res) => {
             name,
             role
         });
-
         await newUser.save();
 
         res.status(201).json({ message: 'Tài khoản đã được tạo thành công' });
