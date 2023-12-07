@@ -43,7 +43,7 @@ function TableBill(props) {
 
   const fetchDrinkPrices = async () => {
     try {
-      const response = await axios.get("http://localhost:5555/api/drinks");
+      const response = await axios.get("https://qrcodeweb-api.vercel.app/api/drinks");
       const drinks = response.data;
       const prices = {};
 
