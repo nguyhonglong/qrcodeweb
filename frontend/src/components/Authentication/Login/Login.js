@@ -61,8 +61,7 @@ function Login() {
         <div className="title_container">
           <p className="title">Đăng nhập</p>
           <span className="subtitle">
-            Get started with our website, just create an account and enjoy the
-            experience.
+          Trải nghiệm khám phá huyền thoại Tà Xùa cùng Tà Xùa Tour - Hành trình khám phá vùng đất kỳ bí và đậm chất văn hóa!
           </span>
         </div>
         <div className="input_container">

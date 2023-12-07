@@ -76,13 +76,13 @@ function NavAdmin(props) {
             </span>
           </li>
           <Modal
-            title="Sign out"
+            title="Đăng xuất"
             open={isModalOpenSignOuts_admin}
             onCancel={admin_handleCancelSignOut}
             onOk={admin_handleOkSignOut}
             closable={false}
           >
-            <p>Are you sure you want to sign out?</p>
+            <p>Bạn có muốn đăng xuất không?</p>
           </Modal>
         </ul>
       </div>

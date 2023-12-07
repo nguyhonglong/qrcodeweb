@@ -109,7 +109,7 @@ function NavBar() {
           <p className="btn btn-logOut">Đăng xuất</p>
         </div>
         <Modal
-          title="Sign out"
+          title="Đăng xuất"
           open={isModalOpenSignOuts}
           onCancel={handleCancelSignOut}
           onOk={handleOkSignOut}
