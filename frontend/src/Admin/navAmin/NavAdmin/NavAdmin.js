@@ -35,7 +35,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                  Dahsboard
+                 Trang chủ
                 </p>
               </Link>
             </span>
@@ -48,7 +48,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                  Tạo Voucher
+                 Tạo Hóa Đơn
                 </p>
               </Link>
             </span>
@@ -61,7 +61,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                  Search Hóa Đơn
+                 Tìm Kiếm
                 </p>
               </Link>
             </span>
