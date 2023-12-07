@@ -276,7 +276,7 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 app.post('/api/auth/register', async (req, res) => {
-    const { account, password, name } = req.body;
+    const { account, password, name, role } = req.body;
 
     try {
         const existingUser = await User.findOne({ account });
@@ -289,7 +289,8 @@ app.post('/api/auth/register', async (req, res) => {
         const newUser = new User({
             account,
             password: hashedPassword,
-            name
+            name,
+            role
         });
 
         await newUser.save();
@@ -336,6 +337,22 @@ app.get('/api/users', async (request, response) => {
     }
 });
 
+app.delete('/api/users/:account', async (req, res) => {
+    const account = req.params.account;
+
+    try {
+        const user = await User.findOneAndDelete({ account });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Không tìm thấy người dùng' });
+        }
+
+        res.status(200).json({ message: 'Người dùng đã được xóa thành công' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Đã xảy ra lỗi' });
+    }
+});
 
 
 mongoose
