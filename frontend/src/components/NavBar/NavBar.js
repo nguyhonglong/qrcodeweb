@@ -33,7 +33,7 @@ function NavBar() {
       label: (
           <Link to="/formsearchbill" style={{ display: "flex", justifyContent:'center',alignItems:'center' }}>
             <SearchOutlined className="i" style={{margin:'0 10px'}}/>
-            <p className="link-name MyTikTok2">Search</p>
+            <p className="link-name MyTikTok2">Tìm kiếm</p>
           </Link>
       ),
       key: "1",
@@ -71,7 +71,7 @@ function NavBar() {
             </Dropdown>
           </div>
           <div className="logOut_phone" onClick={isModalOpenSignOut}>
-            <p className="btn btn-logOut">Sign out</p>
+            <p className="btn btn-logOut">Đăng xuất</p>
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@ function NavBar() {
             className="btn btn-nav"
           >
             <ShoppingOutlined className="i" />
-            <p className="link-name MyTikTok2">Voucher</p>
+            <p className="link-name MyTikTok2">Mã giảm giá</p>
           </Link>
         </div>
         <div>
@@ -96,7 +96,7 @@ function NavBar() {
             className="btn btn-nav"
           >
             <SearchOutlined className="i" />
-            <p className="link-name MyTikTok2">Search</p>
+            <p className="link-name MyTikTok2">Tìm kiếm hóa đơn</p>
           </Link>
         </div>
         <div>
@@ -106,7 +106,7 @@ function NavBar() {
           </Link>
         </div>
         <div className="logOut" onClick={isModalOpenSignOut}>
-          <p className="btn btn-logOut">Sign out</p>
+          <p className="btn btn-logOut">Đăng xuất</p>
         </div>
         <Modal
           title="Sign out"
@@ -115,7 +115,7 @@ function NavBar() {
           onOk={handleOkSignOut}
           closable={false}
         >
-          <p>Are you sure you want to sign out?</p>
+          <p>Bạn có muốn đăng xuất không?</p>
         </Modal>
       </div>
     </div>

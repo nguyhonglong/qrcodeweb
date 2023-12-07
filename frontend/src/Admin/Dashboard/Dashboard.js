@@ -176,7 +176,7 @@ function Dashboard() {
             <div className="overview">
               <div className="title">
                 <UilTachometerFastAlt className="i" />
-                <span className="text MyTikTok2">Dashboard</span>
+                <span className="text MyTikTok2">Tổng quan</span>
               </div>
 
               <div className="boxes">
@@ -204,12 +204,12 @@ function Dashboard() {
             <div className="activity">
               <div className="title" style={{ margin: "30px 0 30px 25px" }}>
                 <UilClockThree className="i" />
-                <span className="text MyTikTok2">Recent Activity</span>
+                <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <div className="activity-data">
                   <div>
-                    <span className="data-title MyTikTok2">Name</span>
+                    <span className="data-title MyTikTok2">Tên người dùng</span>
                     <div className="data names MyTikTok2">
                       {dataUser.map((data) => (
                         <span
@@ -244,7 +244,7 @@ function Dashboard() {
                   </div>
 
                   <div>
-                    <span className="data-title">Type</span>
+                    <span className="data-title">Loại</span>
                     <div className="data type">
                       {dataUser.map((data) => (
                         <span
