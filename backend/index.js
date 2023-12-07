@@ -128,6 +128,34 @@ app.put('/api/bills/:id', async (request, response) => {
     }
 });
 
+app.patch('/api/drinks/:id', async (req, res) => {
+    try {
+      const drink = await Drink.findById(req.params.id);
+      if (req.body.name) {
+        drink.name = req.body.name;
+      }
+      if (req.body.price) {
+        drink.price = req.body.price;
+      }
+      const updatedDrink = await drink.save();
+      res.json(updatedDrink);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  });
+
+app.get('/api/drinks/:id', async (req, res) => {
+    try {
+      const drink = await Drink.findById(req.params.id);
+      if (!drink) {
+        return res.status(404).json({ message: 'Drink not found' });
+      }
+      res.json(drink);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+
 app.get('/api/drinks', async (request, response) => {
     try {
         const drinks = await Drink.find({});
@@ -166,6 +194,29 @@ app.post('/api/drinks', async (request, response) => {
         return response.status(500).send({ message: error.message });
     }
 })
+
+app.delete('/api/drinks/:id', async (request, response) => {
+    try {
+        const drinkId = request.params.id;
+
+        const existingDrink = await Drink.findById(drinkId);
+        if (!existingDrink) {
+            return response.status(404).send({
+                message: 'Drink not found.'
+            });
+        }
+
+        await Drink.findByIdAndDelete(drinkId);
+        
+        return response.status(200).send({
+            message: 'Drink deleted successfully.'
+        });
+    } catch (error) {
+        console.log(error.message);
+        return response.status(500).send({ message: error.message });
+    }
+});
+
 
 app.put('/api/drinks/:id', (req, res) => {
     const id = req.params.id; 
