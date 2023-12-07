@@ -103,12 +103,12 @@ function InvoiceBill(props) {
                   {updatedDrinks?.map((drink, index) => (
                     <tr className="InfoDrinkChild" key={index}>
                       <td className="MyTikTok3 drinkChild">{drink.drink}</td>
-                      <td className="MyTikTok3 priceChild">${drink.price}</td>
+                      <td className="MyTikTok3 priceChild">{drink.price}.000VNĐ </td>
                       <td className="MyTikTok3 textCenter quantityChild">
                         {drink.quantity}
                       </td>
                       <td className="MyTikTok3 textCenter totalChild">
-                        ${drink.quantity * drink.price}
+                        {drink.quantity * drink.price}.000VNĐ 
                       </td>
                     </tr>
                   ))}
@@ -122,15 +122,15 @@ function InvoiceBill(props) {
         <div className="SumPay ">
           <tr>
             <td className="MyTikTok1">PHỤ PHÍ</td>
-            <td className="MyTikTok3 textCenter">${sumMonney}</td>
+            <td className="MyTikTok3 textCenter">{sumMonney}.000VNĐ </td>
           </tr>
           <tr>
             <td className="MyTikTok1">GIẢM GIÁ</td>
-            <td className="MyTikTok3 textCenter">-${discount}</td>
+            <td className="MyTikTok3 textCenter">-{discount}VNĐ</td>
           </tr>
           <tr>
             <td className="MyTikTok1">TỔNG TIỀN</td>
-            <td className="MyTikTok1 textCenter">${sumMonney - discount}</td>
+            <td className="MyTikTok1 textCenter">{sumMonney - discount}.000VNĐ </td>
           </tr>
         </div>
       </div>

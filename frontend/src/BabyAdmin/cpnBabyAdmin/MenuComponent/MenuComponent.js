@@ -236,7 +236,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import  NavBar from '../../../components/NavBar/NavBar' 
 function DrinkComponent() {
   const [drinks, setDrinks] = useState([]);
   const [formData, setFormData] = useState({ name: '', price: '' });
@@ -296,6 +296,7 @@ function DrinkComponent() {
 
   return (
     <div>
+        <NavBar/>
       <h2>Drinks</h2>
       <ul>
         {drinks.map((drink) => (

@@ -109,7 +109,7 @@ function TableBill(props) {
                 <div className="table-data">{formatDate(data.createdAt)}</div>
                 <div className="table-data">{data.numCustomer}</div>
                 <div className="table-data">
-                  {calculateTotalValue(data.drinks)}
+                  {calculateTotalValue(data.drinks)}.000VNĐ 
                 </div>
               </div>
             ))}
@@ -126,7 +126,7 @@ function TableBill(props) {
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div style={{ marginTop: "-60px" }}>
-          <InvoiceBill billData={dataOpen} />
+          <InvoiceBill billData={dataOpen}/>
         </div>
       </Modal>
     </div>
