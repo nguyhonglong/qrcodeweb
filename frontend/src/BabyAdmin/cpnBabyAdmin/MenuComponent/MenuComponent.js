@@ -293,6 +293,7 @@ function DrinkComponent() {
     setSelectedDrinkId(id);
     setFormData({ name, price });
   };
+  
 
   return (
     <div>
