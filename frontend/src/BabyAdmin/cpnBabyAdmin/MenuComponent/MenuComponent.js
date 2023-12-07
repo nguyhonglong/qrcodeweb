@@ -142,6 +142,7 @@ function DrinkComponent() {
   const [drinks, setDrinks] = useState([]);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [selectedDrinkId, setSelectedDrinkId] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -167,10 +168,17 @@ function DrinkComponent() {
     }
   };
 
-  const updateDrink = async (id, newName, newPrice) => {
+  const updateDrink = async () => {
     try {
-      await axios.patch(`https://qrcodeweb-api.vercel.app/api/drinks/${id}`, { name: newName, price: newPrice }); // Thay đổi URL phù hợp
+      if (!selectedDrinkId) {
+        return;
+      }
+
+      await axios.patch(`https://qrcodeweb-api.vercel.app/api/drinks/${selectedDrinkId}`, { name, price }); // Thay đổi URL phù hợp
       fetchData();
+      setName('');
+      setPrice('');
+      setSelectedDrinkId(null);
     } catch (error) {
       console.error('Error updating drink: ', error);
     }
@@ -185,6 +193,12 @@ function DrinkComponent() {
     }
   };
 
+  const selectDrink = (id, name, price) => {
+    setSelectedDrinkId(id);
+    setName(name);
+    setPrice(price);
+  };
+
   return (
     <div>
       <h2>Drinks</h2>
@@ -192,7 +206,7 @@ function DrinkComponent() {
         {drinks.map((drink) => (
           <li key={drink._id}>
             {drink.name} - {drink.price}
-            <button onClick={() => updateDrink(drink._id, 'New Name', 100)}>Update</button>
+            <button onClick={() => selectDrink(drink._id, drink.name, drink.price)}>Edit</button>
             <button onClick={() => deleteDrink(drink._id)}>Delete</button>
           </li>
         ))}
@@ -209,9 +223,14 @@ function DrinkComponent() {
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       />
-      <button onClick={addDrink}>Add Drink</button>
+      {selectedDrinkId ? (
+        <button onClick={updateDrink}>Update</button>
+      ) : (
+        <button onClick={addDrink}>Add Drink</button>
+      )}
     </div>
   );
 }
 
 export default DrinkComponent;
+
