@@ -21,7 +21,7 @@ function NavAdmin(props) {
     <nav className={addClass === "open" ? "open" : "close"}>
       <div className="logo-name">
         <span className="logo_name MyTikTok1" style={{ fontSize: "28px" }}>
-          Admin page
+          Trang quản lý
         </span>
       </div>
 
@@ -35,7 +35,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                 Trang chủ
+               Bảng Điều Hành
                 </p>
               </Link>
             </span>
@@ -48,7 +48,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                 Tạo Hóa Đơn
+                  Tạo phiếu giảm giá
                 </p>
               </Link>
             </span>
@@ -61,7 +61,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                 Tìm Kiếm
+                  Tìm kiếm hóa đơn
                 </p>
               </Link>
             </span>
@@ -72,17 +72,17 @@ function NavAdmin(props) {
           <li onClick={admin_isModalOpenSignOut}>
             <span>
               <UilSignout className="i" />
-              <span className="link-name MyTikTok2">Logout</span>
+              <span className="link-name MyTikTok2">Đăng xuất</span>
             </span>
           </li>
           <Modal
-            title="Sign out"
+            title="Đăng xuất"
             open={isModalOpenSignOuts_admin}
             onCancel={admin_handleCancelSignOut}
             onOk={admin_handleOkSignOut}
             closable={false}
           >
-            <p>Are you sure you want to sign out?</p>
+            <p>Bạn có muốn đăng xuất không?</p>
           </Modal>
         </ul>
       </div>

@@ -13,7 +13,9 @@ function NavChildAdmin() {
         <div className="nav_link">
           <Link to="/admin" style={{ display: "flex", lineHeight: "40px" }}>
             <HomeOutlined className="i" />
-            <p className="link-name MyTikTok2">Trang chủ</p>
+            <p className="link-name MyTikTok2">
+              Bảng điều hành
+            </p>
           </Link>
         </div>
         <div className="nav_link">
@@ -22,7 +24,7 @@ function NavChildAdmin() {
             style={{ display: "flex", lineHeight: "40px" }}
           >
             <ShoppingOutlined className="i" />
-            <p className="link-name MyTikTok2">Tạo Hóa Đơn</p>
+            <p className="link-name MyTikTok2">Phiếu giảm giá</p>
           </Link>
         </div>
         <div className="nav_link">
@@ -31,7 +33,7 @@ function NavChildAdmin() {
             style={{ display: "flex", lineHeight: "40px" }}
           >
             <SearchOutlined className="i" />
-            <p className="link-name MyTikTok2">Tìm Kiếm</p>
+            <p className="link-name MyTikTok2"> Tìm kiếm hóa đơn</p>
           </Link>
         </div>
       </nav>
