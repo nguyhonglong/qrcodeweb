@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate ,useLocation, Re} from "react-router-dom";
+import React, { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // import { v4 as uuidv4 } from 'uuid';
 const UserContext = createContext({});
@@ -11,6 +11,7 @@ export const ContextProivider = ({ children }) => {
   //signInWithEmailPassword
   const signInWithEmailPassword = (datalogin) => {
     // setIsAuthen(false);
+    localStorage.setItem("datalogin", datalogin.token);
     setUser(datalogin);
     switch (datalogin.user.role) {
       case "admin":
@@ -28,13 +29,6 @@ export const ContextProivider = ({ children }) => {
     }
   };
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // const location = useLocation();
-  // if (!isLoggedIn) {
-  //   navigate("/login");
-  //   return null;
-  // }
   const contextValue = {
     user,
     signInWithEmailPassword,

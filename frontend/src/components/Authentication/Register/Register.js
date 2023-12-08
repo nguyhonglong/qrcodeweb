@@ -109,19 +109,6 @@ function Register() {
                         />
                       </div>
                     </div>
-                    <div className="col-2">
-                      <div className="input-group">
-                        <label className="label">
-                          Password confirm{" "}
-                          <span style={{ color: "#F3453F" }}>*</span>
-                        </label>
-                        <input
-                          className="input--style-4"
-                          type="text"
-                          name="password"
-                        />
-                      </div>
-                    </div>
                   </div>
                   <div className="p-t-15">
                     <button className="register_btn" type="submit">

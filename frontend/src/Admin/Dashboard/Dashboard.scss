@@ -6,7 +6,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.fs14 {
+  font-size: 14px !important;
+}
 :root {
   /* ===== Colors ===== */
   --primary-color: #0e4bf1;
@@ -18,7 +20,7 @@
   --rim-color: #f8f8f8;
   --black-light-color: #707070;
   --black-light-color-box: #707070; // box dasboad
-  --text-color:#000;
+  --text-color: #000;
   --border-color: #e6e5e5;
   --toggle-color: #ddd;
   --box1-color: #4da3ff;
@@ -72,7 +74,7 @@
     transition: var(--tran-05);
   }
 
-  nav.close~.dashboard {
+  nav.close ~ .dashboard {
     left: 73px;
     width: calc(100% - 73px);
   }
@@ -96,7 +98,7 @@
     cursor: pointer;
   }
 
-  nav.close~.dashboard .top {
+  nav.close ~ .dashboard .top {
     left: 73px;
     width: calc(100% - 73px);
   }
@@ -158,21 +160,21 @@
 
   .dash-content .title .i {
     position: relative;
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
     // background-color: var(--primary-color);
     border-radius: 6px;
-    color:  var(--text-color);
+    color: var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 20px;
   }
 
   .dash-content .title .text {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     color: var(--text-color);
     margin-left: 10px;
@@ -185,7 +187,14 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-
+  .boxes .number {
+    font-size: 22px !important;
+    font-weight: bold;
+  }
+  .boxes .fs14 {
+    font-weight: bold;
+    margin: 5px;
+  }
   .dash-content .boxes .box {
     display: flex;
     flex-direction: column;
@@ -246,26 +255,19 @@
     display: flex;
     justify-content: center;
     max-height: 210px;
-    overflow:auto;
-    table{
+    overflow: auto;
+    table {
       width: 85%;
-      thead tr th{
-        color:#120b07; 
-        font-size: 22px !important;
-        font-weight: 500;
-        text-align: start;
+      thead tr th {
+        color: #120b07;
+        font-size: 20px !important;
+        font-weight: 600;
+        text-align: start;  
         width: 40%;
         margin: 20px;
       }
-
-      // tbody tr{
-      //   margin-top: 5px !important;
-      // }
-      // tbody tr:first-child{
-      //   margin-top: 15px !important;
-      // }
-      tbody tr:hover td{
-        color:#000;
+      tbody tr:hover td {
+        color: #000;
       }
 
       tbody tr td {
@@ -312,22 +314,22 @@
       pointer-events: auto;
     }
 
-    nav~.dashboard {
+    nav ~ .dashboard {
       left: 73px;
       width: calc(100% - 73px);
     }
 
-    nav.close~.dashboard {
+    nav.close ~ .dashboard {
       left: 250px;
       width: calc(100% - 250px);
     }
 
-    nav~.dashboard .top {
+    nav ~ .dashboard .top {
       left: 73px;
       width: calc(100% - 73px);
     }
 
-    nav.close~.dashboard .top {
+    nav.close ~ .dashboard .top {
       left: 250px;
       width: calc(100% - 250px);
     }
@@ -341,7 +343,6 @@
     .dash-content .boxes .box {
       width: calc(100% / 2 - 15px);
       margin-top: 15px;
-    
     }
   }
 
@@ -400,22 +401,22 @@
       pointer-events: none;
     }
 
-    nav~.dashboard {
+    nav ~ .dashboard {
       left: 0;
       width: 100%;
     }
 
-    nav.close~.dashboard {
+    nav.close ~ .dashboard {
       left: 73px;
       width: calc(100% - 73px);
     }
 
-    nav~.dashboard .top {
+    nav ~ .dashboard .top {
       left: 0;
       width: 100%;
     }
 
-    nav.close~.dashboard .top {
+    nav.close ~ .dashboard .top {
       left: 0;
       width: 100%;
     }

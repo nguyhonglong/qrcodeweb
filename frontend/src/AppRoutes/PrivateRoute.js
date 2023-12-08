@@ -5,8 +5,11 @@ import { Button, Result } from "antd";
 import Login from "../components/Authentication/Login/Login";
 const PrivateRoute = (props) => {
   const { user } = useUserContext();
+  
   console.log(user);
-  if (user && !user.token) {
+  const retrievedValue = localStorage.getItem('datalogin');
+  if (!retrievedValue) {
+    
     return (
       <>
         <Result
@@ -25,9 +28,6 @@ const PrivateRoute = (props) => {
   }
   return (
     <>
-      {/* <Routes>
-        <Route path={props.path} element={props.children} />
-      </Routes> */}
       {props.children}
     </>
   );

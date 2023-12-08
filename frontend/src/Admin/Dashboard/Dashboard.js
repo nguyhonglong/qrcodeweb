@@ -35,6 +35,7 @@ function Dashboard() {
     setIsModalOpenSignOut_admin(true);
   };
   const admin_handleOkSignOut = () => {
+    localStorage.removeItem('datalogin');
     navigateSignout("/login");
   };
   const admin_handleCancelSignOut = () => {
@@ -185,17 +186,12 @@ function Dashboard() {
                     style={{ fontSize: "35px" }}
                     className="i"
                   />
-                  <span className="text MyTikTok2">Số hóa đơn</span>
+                  <span className="text MyTikTok2 fs14">Số hóa đơn</span>
                   <span className="number">{sumBill.length}</span>
                 </div>
-                {/* <div className="box box2">
-                <PayCircleOutlined style={{ fontSize: "35px" }} className="i" />
-                <span className="text">Tổng thu nhập</span>
-                <span className="number">0</span>
-              </div> */}
                 <div className="box box_50 ">
                   <UserOutlined style={{ fontSize: "35px" }} className="i" />
-                  <span className="text MyTikTok2">Số người dùng</span>
+                  <span className="text MyTikTok2 fs14">Số người dùng</span>
                   <span className="number">{dataUser.length}</span>
                 </div>
               </div>
@@ -206,62 +202,6 @@ function Dashboard() {
                 <UilClockThree className="i" />
                 <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
-              {/* <div style={{ display: "flex", justifyContent: "center" }}>
-                <div className="activity-data">
-                  <div>
-                    <span className="data-title MyTikTok2">Tên người dùng</span>
-                    <div className="data names MyTikTok2">
-                      {dataUser.map((data) => (
-                        <span
-                          key={data.id}
-                          style={{ cursor: "pointer" }}
-                          className="data-list"
-                          onClick={() => {
-                            showModalEditUser(data.account);
-                          }}
-                        >
-                          <Tooltip title={data.name}>{data.name}</Tooltip>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="data-title">Email</span>
-                    <div className="data email MyTikTok2">
-                      {dataUser.map((data) => (
-                        <span
-                          key={data.id}
-                          style={{ cursor: "pointer" }}
-                          className="data-list"
-                          onClick={() => {
-                            showModalEditUser(data.account);
-                          }}
-                        >
-                          <Tooltip title={data.account}>{data.account}</Tooltip>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="data-title">Loại</span>
-                    <div className="data type">
-                      {dataUser.map((data) => (
-                        <span
-                          key={data.id}
-                          className="data-list"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            showModalEditUser(data.account);
-                          }}
-                        >
-                          {data.role}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div> */}
               <div className="management-panel-user">
                 <table>
                   <thead>

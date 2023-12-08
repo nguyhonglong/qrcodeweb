@@ -47,6 +47,7 @@ function NavBar() {
   };
   const handleOkSignOut = () => {
     localStorage.removeItem("myArrayData");
+    localStorage.removeItem('datalogin');
     navigateSignout("/login");
   };
   const handleCancelSignOut = () => {
@@ -74,9 +75,9 @@ function NavBar() {
         </div>
       </div>
       <div id="top">
-        <div className="logo">
-          {/* <h4>Name: {user.displayName}</h4> */}
-        </div>
+        {/* <div className="logo">
+          <h4>Name: {user.displayName}</h4>
+        </div> */}
         <div>
           <Link
             to="/formaddvoucher"

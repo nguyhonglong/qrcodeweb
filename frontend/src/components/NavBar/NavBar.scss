@@ -57,7 +57,7 @@ img {
 }
 .btn-nav:hover {
   background-color: #fff;
- 
+
   color: var(--color-btn);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -107,6 +107,7 @@ img {
   .togleMenuPhone {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100vw;
 
     .warpper_MenuOutlined_icon {
@@ -122,8 +123,10 @@ img {
 
       .btn-logOut {
         margin: 0px;
+        margin-top:10px ;
         user-select: none;
         color: #fff;
+        background-color: #2562c4;
       }
 
       .btn {
@@ -144,8 +147,11 @@ img {
 }
 
 #top {
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  padding: 10px 0;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 10px 50px;
+  display: flex;
+  justify-content: center;
   @include respond(phone) {
     display: none;
   }
@@ -188,14 +194,15 @@ img {
   color: #fff;
 
   background-color: var(--color-btn);
-  margin-right: 50px;
+  // margin-right: 50px;
 }
 
 #top .logOut .btn-logOut:hover {
   background-color: #fff;
   color: var(--color-btn);
   font-weight: bold;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 /* ========================== Create Post ====================== */
