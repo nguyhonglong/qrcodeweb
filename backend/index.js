@@ -18,7 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: 'https://coffee.taxuatour.com',
         credentials: true,
     })
 );
