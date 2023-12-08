@@ -42,7 +42,7 @@
       height: max-content;
       padding: 25px;
       border-radius: 30px;
-      background-color: var(--707070-color);
+      background-color: white;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
         rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
         rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -50,7 +50,7 @@
   }
 
   .ant-form-item-label label {
-    color: #f8f8f8;
+    color: black;
   }
   .printVoucher {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -61,7 +61,7 @@
     height: max-content;
     padding: 15px 30px;
     border-radius: 30px;
-    background-color: var(--707070-color);
+    background-color: white;
     .bgImg {
       // width: 40vw;
       margin: 0 auto;
@@ -73,6 +73,7 @@
         width: 520px;
         height: calc(500px / 1.97206704);
         margin: 30px auto;
+        border-radius:5px ;
         @include respond(tablet) {
           margin-left: 0;
           width: 335px;

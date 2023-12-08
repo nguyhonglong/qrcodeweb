@@ -69,7 +69,7 @@ function Login() {
             Email
           </label>
           <input
-            placeholder="name@mail.com"
+            placeholder="Email"
             title="Email"
             name="input-name"
             type="text"

@@ -148,14 +148,7 @@ function FormBabyAdmin() {
       <div id="FormBabyAdmin">
         <div className="FormBabyAdmin">
           <div className="FormBabyAdmin1">
-            <h3
-              style={{
-                textAlign: "center",
-                margin: "20px",
-                fontSize: "28px",
-                color: "#f8f8f8",
-              }}
-            >
+            <h3>
               Nhập hóa đơn
             </h3>
             <Form
@@ -244,7 +237,7 @@ function FormBabyAdmin() {
               </Form.Item>
               {/* đồ uống */}
               <Form.Item
-                label="Select Drinks"
+                label="Chọn đồ uống"
                 name="drinks"
                 rules={[
                   {
@@ -255,7 +248,7 @@ function FormBabyAdmin() {
               >
                 <Select
                   mode="multiple"
-                  placeholder="Select drinks"
+                  placeholder="Chọn đồ uống"
                   onChange={handleDrinkChange}
                   value={selectedDrinks}
                 >
@@ -277,7 +270,7 @@ function FormBabyAdmin() {
               <Form.Item>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <Button type="primary" htmlType="submit">
-                    Submit
+                    Thêm hóa đơn
                   </Button>
                 </div>
               </Form.Item>
