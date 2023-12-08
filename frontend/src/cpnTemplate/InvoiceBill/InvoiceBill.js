@@ -97,7 +97,7 @@ function InvoiceBill(props) {
           <tr>
             <td>
               <div className="border-table">
-                <table cellspacing="0" cellpadding="1" width="100%">
+                <table cellspacing="0" cellPadding="1" width="100%">
                   <tr>
                     <th className=" MyTikTok1 navDrinkChild">ĐỒ UỐNG</th>
                     <th className="MyTikTok1">GIÁ</th>
@@ -112,7 +112,7 @@ function InvoiceBill(props) {
           <tr>
             <td>
               <div className="scroll_table">
-                <table cellspacing="0" cellpadding="1" width="100%">
+                <table cellspacing="0" cellPadding="1" width="100%">
                   {updatedDrinks?.map((drink, index) => (
                     <tr className="InfoDrinkChild" key={index}>
                       <td className="MyTikTok3 drinkChild"><p>{drink.drink}</p></td>

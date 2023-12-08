@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./TableBill.scss";
 import axios from "axios";
-import { Modal } from "antd";
+import { Modal, Popconfirm, Button } from "antd";
+import { DeleteFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import InvoiceBill from "../../../cpnTemplate/InvoiceBill/InvoiceBill";
+
 function TableBill(props) {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -14,26 +16,55 @@ function TableBill(props) {
 
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
-  const calculateTotal = (data) => {
-    let total = 0;
-    // Lặp qua danh sách đồ uống và tính tổng tiền
-    data.drinks.forEach((drink) => {
-      total += drink.quantity * drink.price;
-    });
-    return total;
-  };
+  // const calculateTotal = (data) => {
+  //   let total = 0;
+  //   // Lặp qua danh sách đồ uống và tính tổng tiền
+  //   data.drinks.forEach((drink) => {
+  //     total += drink.quantity * drink.price;
+  //   });
+  //   return total;
+  // };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState([]);
   const showModal = (data) => {
     setIsModalOpen(true);
     setDataOpen(data);
+    setTotalSumInv(calculateTotalValue(data.drinks));
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const [isModalOpenDeleTeBill, setIsModalOpenDeleTeBill] = useState(false);
+  const [dataDeleTeBill, setdataDeleTeBill] = useState(false);
+  const handleCancelDeleteBill = () => {
+    setIsModalOpenDeleTeBill(false);
+  };
+  const showDeleteBill = (data) => {
+    setIsModalOpenDeleTeBill(true);
+    setdataDeleTeBill(data);
+  };
+  // Handle DeleTe Bill
+  const HandleDeleTeBill = async () => {
+    console.log(dataDeleTeBill.billID);
+    try {
+      await axios
+        .delete(
+          `https://qrcodeweb-api.vercel.app/api/findAndDeleteOneBills/${dataDeleTeBill.billID}`
+        )
+        .then(() => {
+          setIsModalOpenDeleTeBill(false);
+        })
+        .catch((err) => {
+          console.log("delete:", err);
+        });
+    } catch (error) {
+      console.error("Error deleting drink: ", error);
+    }
   };
 
   const [drinkPrices, setDrinkPrices] = useState({});
@@ -43,7 +74,9 @@ function TableBill(props) {
 
   const fetchDrinkPrices = async () => {
     try {
-      const response = await axios.get("https://qrcodeweb-api.vercel.app/api/drinks");
+      const response = await axios.get(
+        "https://qrcodeweb-api.vercel.app/api/drinks"
+      );
       const drinks = response.data;
       const prices = {};
 
@@ -65,7 +98,7 @@ function TableBill(props) {
     }
     return total;
   };
-const [totalSumInv,setTotalSumInv] = useState('');
+  const [totalSumInv, setTotalSumInv] = useState("");
   return (
     <div id="TableBill">
       <div className="container">
@@ -96,23 +129,72 @@ const [totalSumInv,setTotalSumInv] = useState('');
                 Tổng
               </a>
             </div>
+            <div className="header__item header__item-delete">
+              <a id="total" className="filter__link filter__link--number">
+                Xóa
+              </a>
+            </div>
           </div>
           <div className="table-content">
             {props.billToDate?.map((data) => (
-              <div
-                className="table-row"
-                key={data._id}
-                onClick={() =>{
-                  showModal(data)
-                  setTotalSumInv(calculateTotalValue(data.drinks))
-                } }
-              >
-                <div className="table-data">{data.customerName}</div>
-                <div className="table-data">{data.billID}</div>
-                <div className="table-data">{formatDate(data.createdAt)}</div>
-                <div className="table-data">{data.numCustomer}</div>
-                <div className="table-data">
-                  {calculateTotalValue(data.drinks)}.000VNĐ 
+              <div className="table-row" key={data._id}>
+                <div
+                  className="table-data"
+                  onClick={() => {
+                    showModal(data);
+                  }}
+                >
+                  {data.customerName}
+                </div>
+                <div
+                  className="table-data"
+                  onClick={() => {
+                    showModal(data);
+                  }}
+                >
+                  {data.billID}
+                </div>
+                <div
+                  className="table-data"
+                  onClick={() => {
+                    showModal(data);
+                  }}
+                >
+                  {formatDate(data.createdAt)}
+                </div>
+                <div
+                  className="table-data"
+                  onClick={() => {
+                    showModal(data);
+                  }}
+                >
+                  {data.numCustomer}
+                </div>
+                <div
+                  className="table-data"
+                  onClick={() => {
+                    showModal(data);
+                  }}
+                >
+                  {calculateTotalValue(data.drinks)}.000VNĐ
+                </div>
+                <div
+                  className="table-data table-data-delete"
+                  onClick={() => {
+                    showDeleteBill(data);
+                  }}
+                >
+                  {/* <Popconfirm
+                    title="Xóa Hóa Đơn"
+                    description="Bạn có chắc xóa hóa đơn này?"
+                    icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+                    onConfirm={HandleDeleTeBill(data)}
+                    // onCancel={handleCancelDeleteBill}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                  </Popconfirm> */}
+                  <DeleteFilled className="DeleteTwoTone" />
                 </div>
               </div>
             ))}
@@ -122,15 +204,24 @@ const [totalSumInv,setTotalSumInv] = useState('');
       <Modal
         title="Chi tiết hóa đơn"
         open={isModalOpen}
-        onOk={handleOk}
+        // onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
         className="myModal"
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div style={{ marginTop: "-60px" }}>
-          <InvoiceBill billData={dataOpen} totalSumInv={totalSumInv}/>
+          <InvoiceBill billData={dataOpen} totalSumInv={totalSumInv} />
         </div>
+      </Modal>
+      <Modal
+        title="Xóa Hóa Đơn"
+        open={isModalOpenDeleTeBill}
+        onOk={HandleDeleTeBill}
+        onCancel={handleCancelDeleteBill}
+        className="myModal_deleteBill"
+      >
+        <p>Bạn có chắc chắn muốn xóa?</p>
       </Modal>
     </div>
   );

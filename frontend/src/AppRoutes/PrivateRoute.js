@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import { useUserContext } from "../Context/userContext";
+import React, {  } from "react";
+import { Link, } from "react-router-dom";
+// import { useUserContext } from "../Context/userContext";
 import { Button, Result } from "antd";
-import Login from "../components/Authentication/Login/Login";
+// import Login from "../components/Authentication/Login/Login";
 const PrivateRoute = (props) => {
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
   
-  console.log(user);
   const retrievedValue = localStorage.getItem('datalogin');
   if (!retrievedValue) {
     
