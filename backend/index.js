@@ -281,7 +281,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, 'your_secret_key');
 
-        res.json({ user, token });
+        res.json({ user: { _id: user._id, role: user.role }, token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Đã xảy ra lỗi' });
