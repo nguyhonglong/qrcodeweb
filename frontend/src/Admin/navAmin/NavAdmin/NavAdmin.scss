@@ -306,9 +306,9 @@ body.dark {
     position: relative;
     height: 35px;
     width: 35px;
-    background-color: var(--primary-color);
+    // background-color: var(--primary-color);
     border-radius: 6px;
-    color: var(--title-icon-color);
+    color:  var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -413,6 +413,9 @@ body.dark {
   }
   .data-list :hover {
     color: #0b3cc1;
+  }
+  .data.type{
+    margin-top: 15px;
   }
   @media (max-width: 1000px) {
     nav {

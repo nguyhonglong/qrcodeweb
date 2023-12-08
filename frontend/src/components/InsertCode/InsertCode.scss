@@ -21,10 +21,11 @@
     }
   }
 }
-
+:root {
+  --color-bg-user:#f8f8f8;
+  --color-btn: #2562c4;
+}
 #InsertCode {
-  $green: #7ceaa4;
-  $purple: #3b3d54;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -32,7 +33,7 @@
   height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: #181b22;
+  background-color: var(--color-bg-user);
 
   @include respond(phoneSmall) {
     display: flex;
@@ -43,7 +44,7 @@
   }
 
   .form_container {
-    background-color: #212732;
+    background-color: var(--color-bg-user);
     margin-top: 100px;
     width: fit-content;
     height: fit-content;
@@ -52,8 +53,7 @@
     justify-content: center;
     gap: 15px;
     padding: 50px 40px 20px 40px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
-      rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 11px;
     font-family: "Inter", sans-serif;
     width: 400px;
@@ -63,7 +63,7 @@
   }
 
   ::placeholder {
-    color: #cccccc;
+    color: #ccc;
   }
 
   .logo_container {
@@ -93,7 +93,8 @@
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #f8f8f8;
+    // color: #b7b5b5
+    color: #000;
   }
 
   .subtitle {
@@ -101,7 +102,8 @@
     max-width: 100%;
     text-align: center;
     line-height: 1.1rem;
-    color: #8b8e98;
+    // color:#ccc;
+    color: #000;
   }
 
   .input_container {

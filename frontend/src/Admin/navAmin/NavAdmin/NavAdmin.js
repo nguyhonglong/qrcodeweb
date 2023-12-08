@@ -35,7 +35,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-                  Bảng điều hành
+               Bảng Điều Hành
                 </p>
               </Link>
             </span>

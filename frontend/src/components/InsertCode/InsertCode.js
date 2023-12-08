@@ -23,7 +23,7 @@ function InsertCode() {
 
         if (retrievedArrayJSON) {
           const retrievedArray = JSON.parse(retrievedArrayJSON);
-          setBillData(retrievedArray.reverse());
+          setBillData(retrievedArray);
         } else {
           console.log("Không có mảng được lưu");
         }

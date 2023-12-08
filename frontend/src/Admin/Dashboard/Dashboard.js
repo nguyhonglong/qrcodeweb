@@ -58,7 +58,7 @@ function Dashboard() {
         .then((response) => {
           // Xử lý dữ liệu khi yêu cầu thành công
           setDataUser(response.data);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((error) => {
           // Xử lý lỗi khi yêu cầu không thành công
@@ -74,7 +74,6 @@ function Dashboard() {
       // Ví dụ: Hủy các kết nối, huỷ bỏ các tác vụ không cần thiết, vv.
     };
   }, []);
-  // console.log(dataUser);
   //ModalEditUser
   const [error, setError] = message.useMessage();
   const [open, setOpen] = useState(false);
@@ -86,7 +85,6 @@ function Dashboard() {
     setOpen(true);
     setIdEditUser(data);
   };
-  console.log(idEditUser);
   const handleOk = async () => {
     setConfirmLoading(true);
     await axios
@@ -208,7 +206,7 @@ function Dashboard() {
                 <UilClockThree className="i" />
                 <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              {/* <div style={{ display: "flex", justifyContent: "center" }}>
                 <div className="activity-data">
                   <div>
                     <span className="data-title MyTikTok2">Tên người dùng</span>
@@ -263,6 +261,34 @@ function Dashboard() {
                     </div>
                   </div>
                 </div>
+              </div> */}
+              <div className="management-panel-user">
+                <table>
+                  <thead>
+                    <tr>
+                      <th >Name</th>
+                      <th>Email</th>
+                      <th>Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <br></br>
+                    {dataUser.map((data) => (
+                      <tr
+                        key={data.id}
+                        onClick={() => showModalEditUser(data.account)}
+                      >
+                        <td className="MyTikTok2" style={{ cursor: "pointer"}}>
+                          <Tooltip title={data.name}>{data.name}</Tooltip>
+                        </td>
+                        <td className="MyTikTok2" style={{ cursor: "pointer"}}>
+                          <Tooltip title={data.account}>{data.account}</Tooltip>
+                        </td>
+                        <td className="MyTikTok2" style={{ cursor: "pointer" }}>{data.role}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
