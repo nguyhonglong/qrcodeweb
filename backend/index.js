@@ -64,6 +64,10 @@ app.post('/api/bills', async (req, res) => {
     }
 });
 
+
+
+
+
 app.get('/api/bills', async (request, response) => {
     try {
         const bills = await Bill.find({});
@@ -89,6 +93,51 @@ app.get('/api/bills/:id', async (request, response) => {
         response.status(500).send({ messege: error.message })
     }
 });
+
+app.delete('/api/deleteAllSameBills/:orderID', async (req, res) => {
+    try {
+        const { orderID } = req.params;
+
+        // Xóa tất cả các hóa đơn có mã đơn hàng tương ứng
+        const deleteResult = await Bill.deleteMany({ orderID });
+
+        if (deleteResult.deletedCount === 0) {
+            return res.status(404).send({
+                message: 'No bills with the specified orderID were found.'
+            });
+        }
+
+        return res.status(200).send({
+            message: 'The bills have been deleted successfully.'
+        });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ message: error.message });
+    }
+});
+
+app.delete('/api/findAndDeleteOneBills/:orderID', async (req, res) => {
+    try {
+        const { orderID } = req.params;
+
+        // Xóa một hóa đơn có mã đơn hàng tương ứng
+        const deleteResult = await Bill.deleteOne({ orderID });
+
+        if (deleteResult.deletedCount === 0) {
+            return res.status(404).send({
+                message: 'No bill with the specified orderID was found.'
+            });
+        }
+
+        return res.status(200).send({
+            message: 'The bill has been deleted successfully.'
+        });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ message: error.message });
+    }
+});
+
 
 app.put('/api/bills/:id', async (request, response) => {
     try {
