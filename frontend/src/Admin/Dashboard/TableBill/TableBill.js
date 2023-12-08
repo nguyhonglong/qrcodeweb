@@ -65,7 +65,7 @@ function TableBill(props) {
     }
     return total;
   };
-
+const [totalSumInv,setTotalSumInv] = useState('');
   return (
     <div id="TableBill">
       <div className="container">
@@ -102,7 +102,10 @@ function TableBill(props) {
               <div
                 className="table-row"
                 key={data._id}
-                onClick={() => showModal(data)}
+                onClick={() =>{
+                  showModal(data)
+                  setTotalSumInv(calculateTotalValue(data.drinks))
+                } }
               >
                 <div className="table-data">{data.customerName}</div>
                 <div className="table-data">{data.billID}</div>
@@ -126,7 +129,7 @@ function TableBill(props) {
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div style={{ marginTop: "-60px" }}>
-          <InvoiceBill billData={dataOpen}/>
+          <InvoiceBill billData={dataOpen} totalSumInv={totalSumInv}/>
         </div>
       </Modal>
     </div>

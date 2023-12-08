@@ -18,14 +18,27 @@ function InvoiceBill(props) {
     .padStart(2, "0")} ${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}`;
-  const [sumMonney, setSumMonney] = useState();
-  useEffect(() => {
-    let sum = 0;
+  // const [sumMonney, setSumMonney] = useState();
+  // useEffect(() => {
+  //   let sum = 0;
+  //   updatedDrinks?.forEach((element) => {
+  //     sum += element.price * element.quantity;
+  //   });
+  //   setSumMonney(sum);
+  // }, [props.billData]);
+
+
+  const [SumDrinks,setSumDrinks] =useState();
+    useEffect(() => {
+    let sumDrink = 0;
     updatedDrinks?.forEach((element) => {
-      sum += element.price * element.quantity;
+      sumDrink += element.quantity;
     });
-    setSumMonney(sum);
+    setSumDrinks(sumDrink);
   }, [props.billData]);
+
+
+
   let discount = 0;
   const [drinks, setDrinks] = useState([]);
   useEffect(() => {
@@ -58,6 +71,7 @@ function InvoiceBill(props) {
     }
     return drink;
   });
+  console.log(SumDrinks);
   return (
     <div id="invoice">
       <img className="imgCoffe" src={imgCoffe} alt="logo menu" />
@@ -75,7 +89,7 @@ function InvoiceBill(props) {
           {props.billData.customerName}
         </p>
         <p className="fontRobo16 absolute  totalUser">
-          {props.billData.numCustomer}
+          {SumDrinks}
         </p>
      
 
@@ -102,7 +116,7 @@ function InvoiceBill(props) {
                 <table cellspacing="0" cellpadding="1" width="100%">
                   {updatedDrinks?.map((drink, index) => (
                     <tr className="InfoDrinkChild" key={index}>
-                      <td className="MyTikTok3 drinkChild">{drink.drink}</td>
+                      <td className="MyTikTok3 drinkChild"><p>{drink.drink}</p></td>
                       <td className="MyTikTok3 priceChild">{drink.price}.000VNĐ </td>
                       <td className="MyTikTok3 textCenter quantityChild">
                         {drink.quantity}
@@ -122,7 +136,7 @@ function InvoiceBill(props) {
         <div className="SumPay ">
           <tr>
             <td className="MyTikTok1">PHỤ PHÍ</td>
-            <td className="MyTikTok3 textCenter">{sumMonney}.000VNĐ </td>
+            <td className="MyTikTok3 textCenter">{props.totalSumInv}.000VNĐ </td>
           </tr>
           <tr>
             <td className="MyTikTok1">GIẢM GIÁ</td>
@@ -130,7 +144,7 @@ function InvoiceBill(props) {
           </tr>
           <tr>
             <td className="MyTikTok1">TỔNG TIỀN</td>
-            <td className="MyTikTok1 textCenter">{sumMonney - discount}.000VNĐ </td>
+            <td className="MyTikTok1 textCenter">{props.totalSumInv - discount}.000VNĐ </td>
           </tr>
         </div>
       </div>

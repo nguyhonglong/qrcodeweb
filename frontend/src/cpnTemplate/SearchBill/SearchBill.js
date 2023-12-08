@@ -26,8 +26,6 @@ function SearchBill() {
     fetchDateData();
   }, [dateRange]);
 
-
-
   
   return (
     <>
