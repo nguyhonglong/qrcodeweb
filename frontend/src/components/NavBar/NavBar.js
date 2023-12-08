@@ -1,6 +1,5 @@
 import React, { useState, memo } from "react";
 import "./NavBar.scss";
-import { auth } from "../../Firebase/Config";
 import { Modal } from "antd";
 import {
   MenuOutlined,
@@ -48,7 +47,6 @@ function NavBar() {
   };
   const handleOkSignOut = () => {
     localStorage.removeItem("myArrayData");
-    auth.signOut();
     navigateSignout("/login");
   };
   const handleCancelSignOut = () => {

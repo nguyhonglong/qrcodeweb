@@ -11,28 +11,13 @@ import FormSearchBill from "./BabyAdmin/cpnBabyAdmin/FormSearchBill/FormSearchBi
 import FormAddVoucher from "./BabyAdmin/cpnBabyAdmin/FormAddVoucher/FormAddVoucher";
 import SearchBillAdmin from "./Admin/Dashboard/SearchBill/SearchBill";
 import MenuComponent from "./BabyAdmin/cpnBabyAdmin/MenuComponent/MenuComponent";
+import AppRoutes from "./AppRoutes/AppRoutes";
 
 function App() {
   return (
     <div className="App">
       <ContextProivider>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/user" element={<PageHome />} />
-          <Route path="/" element={<Login />} />
-          {/* PrivateRoute  */}
-        
-          {/* BabyAdmin */}
-          <Route path="/babyadmin" element={<BabyAdmin />} />
-          <Route path="/formsearchbill" element={<FormSearchBill />} />
-          <Route path="/formaddvoucher" element={<FormAddVoucher />} />
-          {/* Admin */}
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/addvoucher" element={<AddVoucher />} />
-          <Route path="/searchbilladmin" element={<SearchBillAdmin />} />
-          <Route path="/menu" element={<MenuComponent />} />
-        </Routes>
+        <AppRoutes />
       </ContextProivider>
     </div>
   );
