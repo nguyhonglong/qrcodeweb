@@ -16,7 +16,12 @@ const mongoDBURL = "mongodb+srv://nguyhonglong2002:3dUw8ja9980dHmxu@cluster0.zok
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        credentials: true,
+    })
+);
 
 app.use(express.json());
 
@@ -128,31 +133,31 @@ app.put('/api/bills/:id', async (request, response) => {
 
 app.patch('/api/drinks/:id', async (req, res) => {
     try {
-      const drink = await Drink.findById(req.params.id);
-      if (req.body.name) {
-        drink.name = req.body.name;
-      }
-      if (req.body.price) {
-        drink.price = req.body.price;
-      }
-      const updatedDrink = await drink.save();
-      res.json(updatedDrink);
+        const drink = await Drink.findById(req.params.id);
+        if (req.body.name) {
+            drink.name = req.body.name;
+        }
+        if (req.body.price) {
+            drink.price = req.body.price;
+        }
+        const updatedDrink = await drink.save();
+        res.json(updatedDrink);
     } catch (err) {
-      res.status(400).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
-  });
+});
 
 app.get('/api/drinks/:id', async (req, res) => {
     try {
-      const drink = await Drink.findById(req.params.id);
-      if (!drink) {
-        return res.status(404).json({ message: 'Drink not found' });
-      }
-      res.json(drink);
+        const drink = await Drink.findById(req.params.id);
+        if (!drink) {
+            return res.status(404).json({ message: 'Drink not found' });
+        }
+        res.json(drink);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+        res.status(500).json({ message: err.message });
     }
-  });
+});
 
 app.get('/api/drinks', async (request, response) => {
     try {
@@ -205,7 +210,7 @@ app.delete('/api/drinks/:id', async (request, response) => {
         }
 
         await Drink.findByIdAndDelete(drinkId);
-        
+
         return response.status(200).send({
             message: 'Drink deleted successfully.'
         });
@@ -217,21 +222,21 @@ app.delete('/api/drinks/:id', async (request, response) => {
 
 
 app.put('/api/drinks/:id', (req, res) => {
-    const id = req.params.id; 
-  
+    const id = req.params.id;
+
     const updatedDrink = req.body;
-  
-    
+
+
     const drinkIndex = drinks.findIndex(drink => drink._id === id);
     if (drinkIndex === -1) {
-      return res.status(404).json({ error: 'Drink not found' });
+        return res.status(404).json({ error: 'Drink not found' });
     }
-  
-    
+
+
     drinks[drinkIndex] = { ...drinks[drinkIndex], ...updatedDrink };
-  
+
     res.json({ success: true });
-  });
+});
 
 app.get('/api/records', async (req, res) => {
     try {
@@ -253,6 +258,16 @@ app.get('/api/records', async (req, res) => {
     }
 });
 
+app.get('/api/user/role', (req, res) => {
+    if (req.user) {
+        // Lấy thông tin người dùng từ cơ sở dữ liệu hoặc cache
+        const userRole = getUserRoleFromDatabase(req.user.id);
+        res.json({ role: userRole });
+    } else {
+        res.status(401).json({ error: 'Người dùng chưa xác thực' });
+    }
+});
+
 const secretKey = JWT_SECRET_KEY;
 
 app.post('/api/auth/login', async (req, res) => {
@@ -266,7 +281,7 @@ app.post('/api/auth/login', async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, 'your_secret_key');
 
-        res.json({ user, token });
+        res.json({ user: { _id: user._id, role: user.role }, token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Đã xảy ra lỗi' });
@@ -309,7 +324,7 @@ app.put('/api/auth/update', async (req, res) => {
         }
         if (
             !req.body.account ||
-            !req.body.role 
+            !req.body.role
         ) {
             return res.status(400).send({
                 message: 'Send all required fields: account, role'
