@@ -19,7 +19,7 @@ function Login() {
     if (email && password) {
       await axios
         .post("https://qrcodeweb-api.vercel.app/api/auth/login", {
-          //30072002
+          
           account: email,
           password: password,
         })
@@ -61,7 +61,7 @@ function Login() {
         <div className="title_container">
           <p className="title">Đăng nhập</p>
           <span className="subtitle">
-          Trải nghiệm khám phá huyền thoại Tà Xùa cùng Tà Xùa Tour - Hành trình khám phá vùng đất kỳ bí và đậm chất văn hóa!
+          Tà Xùa Tour mang đến cho du khách những trải nghiệm du lịch khác biệt và đáng nhớ, khám phá không chỉ về vẻ đẹp tự nhiên tuyệt vời mà còn về sự giao thoa đa dạng, gắn liền với bản sắc văn hóa Tà Xùa.
           </span>
         </div>
         <div className="input_container">

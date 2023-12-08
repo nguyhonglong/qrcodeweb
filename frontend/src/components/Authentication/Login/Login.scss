@@ -3,21 +3,18 @@
   $green: #7ceaa4;
   $purple: #3b3d54;
 // background-color: #181B22;
-background: white;
+background: rgb(230, 228, 228);
   display: grid;
   place-items: center;
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
-  
-    
-
 
   .form_container {
     position: absolute;
     z-index: 10000000;
-    width: fit-content;
+    width: 600px;
     height: fit-content;
     display: flex;
     flex-direction: column;

@@ -54,7 +54,7 @@ function TableBill(props) {
     try {
       await axios
         .delete(
-          `https://qrcodeweb-api.vercel.app/api/findAndDeleteOneBills/${dataDeleTeBill.billID}`
+          `https://qrcodeweb-api.vercel.app/api/deleteBill/${dataDeleTeBill.billID}`
         )
         .then(() => {
           setIsModalOpenDeleTeBill(false);

@@ -10,7 +10,6 @@ function BabyAdmin() {
   return (
     <div id="babyadmin">
       <FormAddVoucher />
-  
     </div>
   );
 }
