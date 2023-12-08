@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { message } from "antd";
+import { message, Table } from "antd";
 import axios from "axios";
 import "./Dashboard.scss";
 import {
@@ -35,7 +35,7 @@ function Dashboard() {
     setIsModalOpenSignOut_admin(true);
   };
   const admin_handleOkSignOut = () => {
-    localStorage.removeItem('datalogin');
+    localStorage.removeItem("datalogin");
     navigateSignout("/login");
   };
   const admin_handleCancelSignOut = () => {
@@ -153,6 +153,42 @@ function Dashboard() {
       console.error("Error fetching drinks:", error);
     }
   };
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Email",
+      dataIndex: "account",
+      key: "account",
+    },
+    {
+      title: "Type",
+      dataIndex: "role",
+      key: "role",
+    },
+    {
+      title: "Action",
+      dataIndex: "",
+      key: "x",
+      render: () => <a>Edit</a>,
+    },
+  ];
+  const tableProps = {
+    columns,
+    dataSource: dataUser,
+    scroll: {
+      y: 240, // Đặt chiều cao là 240px
+    },
+    onRow: (record) => ({
+      onClick: () => {
+        showModalEditUser(record.account);
+      },
+    }),
+  };
+  console.log(dataUser);
   return (
     <>
       {setError}
@@ -202,7 +238,7 @@ function Dashboard() {
                 <UilClockThree className="i" />
                 <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
-              <div className="management-panel-user">
+              {/* <div className="management-panel-user">
                 <table>
                   <thead>
                     <tr>
@@ -229,7 +265,8 @@ function Dashboard() {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </div> */}
+               <Table {...tableProps} />;
             </div>
           </div>
         </section>
