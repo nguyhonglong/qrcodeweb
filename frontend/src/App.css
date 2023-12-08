@@ -25,6 +25,10 @@
   src: url('./asset/font/TikTok-Sans/TikTokText-Regular.otf') format('truetype');
 }
 
+/* #root{
+  font-family: "Inter,Helvetica,sans-serif";
+} */
+
 .MyTikTok1 {
   font-family: 'MyTikTok1';
 }

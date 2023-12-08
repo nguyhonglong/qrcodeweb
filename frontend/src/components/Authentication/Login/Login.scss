@@ -3,7 +3,7 @@
   $green: #7ceaa4;
   $purple: #3b3d54;
 // background-color: #181B22;
-background: linear-gradient(to right, #19212E, #181B22);
+background: white;
   display: grid;
   place-items: center;
   height: 100vh;
@@ -25,10 +25,10 @@ background: linear-gradient(to right, #19212E, #181B22);
     justify-content: center;
     gap: 15px;
     padding: 50px 40px 20px 40px;
-    background-color: #202632;
+    background-color: white;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border-radius: 11px;
-    font-family: "Inter", sans-serif;
+    font-family: Inter,Helvetica,sans-serif;
   }
 
   .logo_container {
@@ -58,7 +58,7 @@ background: linear-gradient(to right, #19212E, #181B22);
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #f8f8f8;
+    color: black;
   }
 
   .subtitle {
@@ -109,17 +109,15 @@ background: linear-gradient(to right, #19212E, #181B22);
     border-radius: 7px;
     outline: none;
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border: 2px solid transparent;
-    box-shadow: 0px 0px 0px 2px #242424;
-    color: #e8e8e89b;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;    
     background-color: transparent;
   }
 
   .input_field:focus {
     box-shadow: 0px 0px 0px 2px #242424;
     background-color: transparent;
-    color: #e8e8e8;
+    color: black;
     border: 2px solid #e8e8e8;
   }
   .separator {

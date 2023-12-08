@@ -1,32 +1,11 @@
-#MenuComponent{
-    h1{
-        text-align: center;
-    }
-    .flex{
-        display: flex;
-        align-items: center;
-    }
-    .flex p{
-        margin-left: 15px;
-        font-weight: bold;
-    }
-    .flexCenter{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .EditDrink{
-            margin-top: 20px;
-            max-height: 300px;
-            width: max-content;
-            overflow-y: scroll;
-            overflow-x:hidden;
-        }
-    }
-    .boder{
-        border-bottom: 1px solid #ccc;
-        margin-top: 10px;
-    }
-.addNewItem{
-    margin-left: 30px;
+button {
+    background-color: #00FFFF;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
 }
-}
+
+
+
+  

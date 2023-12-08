@@ -1,5 +1,6 @@
 /* ===== Google Font Import - Poppins ===== */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,300;1,500;1,600;1,700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -37,13 +38,16 @@
 
 #AdMin {
   height: auto;
+
   /* === Custom Scroll Bar CSS === */
   ::-webkit-scrollbar {
     width: 5px;
   }
+
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
+
   ::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 12px;
@@ -67,10 +71,12 @@
     padding: 10px 14px;
     transition: var(--tran-05);
   }
-  nav.close ~ .dashboard {
+
+  nav.close~.dashboard {
     left: 73px;
     width: calc(100% - 73px);
   }
+
   .dashboard .top {
     position: fixed;
     top: 0;
@@ -84,19 +90,23 @@
     transition: var(--tran-05);
     z-index: 10;
   }
+
   .dashboard .top .UilBars {
     margin-left: 10px;
     cursor: pointer;
   }
-  nav.close ~ .dashboard .top {
+
+  nav.close~.dashboard .top {
     left: 73px;
     width: calc(100% - 73px);
   }
+
   .dashboard .top .sidebar-toggle {
     font-size: 26px;
     color: var(--text-color);
     cursor: pointer;
   }
+
   .dashboard .top .search-box {
     position: relative;
     height: 45px;
@@ -104,6 +114,7 @@
     width: 100%;
     margin: 0 30px;
   }
+
   .top .search-box input {
     position: absolute;
     border: 1px solid var(--border-color);
@@ -117,6 +128,7 @@
     font-weight: 400;
     outline: none;
   }
+
   .top .search-box .i {
     position: absolute;
     left: 15px;
@@ -127,6 +139,7 @@
     color: var(--black-light-color);
     cursor: pointer;
   }
+
   .top img {
     width: 40px;
     border-radius: 50%;
@@ -142,6 +155,7 @@
     align-items: center;
     margin: 20px 0 30px 25px;
   }
+
   .dash-content .title .i {
     position: relative;
     height: 35px;
@@ -156,6 +170,7 @@
     cursor: pointer;
     margin-top: 25px;
   }
+
   .dash-content .title .text {
     font-size: 24px;
     font-weight: 500;
@@ -163,12 +178,14 @@
     margin-left: 10px;
     margin-top: 25px;
   }
+
   .dash-content .boxes {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
   .dash-content .boxes .box {
     display: flex;
     flex-direction: column;
@@ -179,42 +196,52 @@
     background-color: var(--box1-color);
     transition: var(--tran-05);
   }
+
   .dash-content .boxes .box_50 {
     width: calc(50% - 50px);
     background-color: var(--black-light-color-box);
     margin: 0 25px;
   }
+
   .boxes .box .i {
     width: 35px;
     height: 100%;
     color: var(--text-color);
   }
+
   .boxes .box .text {
     white-space: nowrap;
     font-size: 18px;
     font-weight: 500;
     color: var(--text-color);
   }
+
   .boxes .box .number {
     font-size: 40px;
     font-weight: 500;
     color: var(--text-color);
   }
+
   .boxes .box.box2 {
     background-color: var(--box2-color);
   }
+
   .boxes .box.box3 {
     background-color: var(--box3-color);
   }
+
   .boxes .box.box4 {
     background-color: var(--box4-color);
   }
+
   .boxes .box.box5 {
     background-color: var(--box5-color);
   }
   .management-panel-user table tbody tr {
-    margin-top: 20px !important; /* Điều chỉnh margin-top tùy ý */
+    margin-top: 20px !important;
+    /* Điều chỉnh margin-top tùy ý */
   }
+
   .management-panel-user {
     display: flex;
     justify-content: center;
@@ -230,6 +257,7 @@
         width: 40%;
         margin: 20px;
       }
+
       // tbody tr{
       //   margin-top: 5px !important;
       // }
@@ -239,7 +267,8 @@
       tbody tr:hover td{
         color:#000;
       }
-      tbody tr td{
+
+      tbody tr td {
         font-size: 20px !important;
         font-weight: 400;
         margin-top: 20px;
@@ -252,46 +281,57 @@
       }
     }
   }
+
   @media (max-width: 1000px) {
     nav {
       width: 73px;
     }
+
     nav.close {
       width: 250px;
     }
+
     nav .logo_name {
       opacity: 0;
       pointer-events: none;
       display: none;
     }
+
     nav.close .logo_name {
       opacity: 1;
       pointer-events: auto;
     }
+
     nav li span .link-name {
       opacity: 0;
       pointer-events: none;
     }
+
     nav.close li span .link-name {
       opacity: 1;
       pointer-events: auto;
     }
-    nav ~ .dashboard {
+
+    nav~.dashboard {
       left: 73px;
       width: calc(100% - 73px);
     }
-    nav.close ~ .dashboard {
+
+    nav.close~.dashboard {
       left: 250px;
       width: calc(100% - 250px);
     }
-    nav ~ .dashboard .top {
+
+    nav~.dashboard .top {
       left: 73px;
       width: calc(100% - 73px);
     }
-    nav.close ~ .dashboard .top {
+
+    nav.close~.dashboard .top {
       left: 250px;
       width: calc(100% - 250px);
     }
+
     .activity .activity-data {
       // overflow-x: scroll;
     }
@@ -304,82 +344,101 @@
     
     }
   }
+
   @media (max-width: 560px) {
     .dash-content .boxes .box {
       width: 100%;
     }
+
     .dashboard .top .UilBars {
       width: 50px;
       height: 50px;
       margin-left: 10px;
     }
+
     .menu-items li span .i {
       min-width: 30px;
       height: 100%;
     }
+
     .img_Avta {
       width: 30px;
       height: 30px;
     }
+
     .dashboard .top .search-box {
       margin: 0 10px 0 12px;
     }
   }
+
   @media (max-width: 400px) {
     nav {
       width: 0px;
     }
+
     nav.close {
       width: 73px;
     }
+
     nav .logo_name {
       opacity: 0;
       pointer-events: none;
     }
+
     nav.close .logo_name {
       opacity: 0;
       pointer-events: none;
     }
+
     nav li span .link-name {
       opacity: 0;
       pointer-events: none;
     }
+
     nav.close li span .link-name {
       opacity: 0;
       pointer-events: none;
     }
-    nav ~ .dashboard {
+
+    nav~.dashboard {
       left: 0;
       width: 100%;
     }
-    nav.close ~ .dashboard {
+
+    nav.close~.dashboard {
       left: 73px;
       width: calc(100% - 73px);
     }
-    nav ~ .dashboard .top {
+
+    nav~.dashboard .top {
       left: 0;
       width: 100%;
     }
-    nav.close ~ .dashboard .top {
+
+    nav.close~.dashboard .top {
       left: 0;
       width: 100%;
     }
+
     .dashboard .top .UilBars {
       width: 50px;
       height: 50px;
       margin-left: 10px;
     }
+
     .menu-items li span .i {
       min-width: 30x;
       height: 100%;
       font-size: 24px;
     }
+
     .img_Avta {
       width: 30px;
       height: 30px;
       object-fit: cover;
       border-radius: 50%;
     }
+
     .dashboard .top .search-box {
       margin: 0 10px 0 12px;
     }

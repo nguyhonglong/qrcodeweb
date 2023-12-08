@@ -9,8 +9,6 @@ import { User } from './models/userModel.js'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 
-
-
 dotenv.config();
 
 const PORT = process.env.PORT || 5555
