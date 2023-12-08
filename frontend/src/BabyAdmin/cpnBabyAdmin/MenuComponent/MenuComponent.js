@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import  NavBar from '../../../components/NavBar/NavBar' 
+import NavBar from '../../../components/NavBar/NavBar'
+import "./MenuComponent.scss"
 function DrinkComponent() {
   const [drinks, setDrinks] = useState([]);
   const [formData, setFormData] = useState({ name: '', price: '' });
@@ -57,48 +58,51 @@ function DrinkComponent() {
     setSelectedDrinkId(id);
     setFormData({ name, price });
   };
-  
+
 
   return (
     <div>
-        <NavBar/>
-      <h2>Drinks</h2>
-      <ul>
-        {drinks.map((drink) => (
-          <li key={drink._id}>
-            {drink.name} - {drink.price}
-            <button onClick={() => selectDrink(drink._id, drink.name, drink.price)}>Edit</button>
-            <button onClick={() => deleteDrink(drink._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        if (selectedDrinkId) {
-          updateDrink();
-        } else {
-          addDrink();
-        }
-      }}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={formData.price}
-          onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-        />
-        {selectedDrinkId ? (
-          <button type="submit">Update</button>
-        ) : (
-          <button type="submit">Add Drink</button>
-        )}
-      </form>
+      <NavBar />
+      <div className='drinks'>
+        <h2>Quản lý đồ uống</h2>
+        <ul>
+          {drinks.map((drink) => (
+            <li key={drink._id}>
+              {drink.name} - {drink.price}
+              <button onClick={() => selectDrink(drink._id, drink.name, drink.price)}>Edit</button>
+              <button onClick={() => deleteDrink(drink._id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (selectedDrinkId) {
+            updateDrink();
+          } else {
+            addDrink();
+          }
+        }}>
+          <input
+            type="text"
+            placeholder="Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Price"
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+          />
+          {selectedDrinkId ? (
+            <button type="submit">Update</button>
+          ) : (
+            <button type="submit">Add Drink</button>
+          )}
+        </form>
+      </div>
     </div>
+
   );
 }
 
