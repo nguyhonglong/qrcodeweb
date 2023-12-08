@@ -17,10 +17,7 @@ const mongoDBURL = "mongodb+srv://nguyhonglong2002:3dUw8ja9980dHmxu@cluster0.zok
 const app = express();
 app.use(bodyParser.json());
 app.use(
-    cors({
-        origin: 'https://coffee.taxuatour.com',
-        credentials: true,
-    })
+    cors({})
 );
 
 app.use(express.json());
