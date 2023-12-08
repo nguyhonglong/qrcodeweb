@@ -6,18 +6,35 @@
   box-sizing: border-box;
 }
 
-body.dark {
-  --primary-color: #3a3b3c;
-  --panel-color: #242526;
-  --text-color: rgb(237, 237, 237);
-  --black-light-color: #ccc;
-  --border-color: #4d4c4c;
-  --toggle-color: #fff;
-  --box1-color: #3a3b3c;
-  --box2-color: #3a3b3c;
-  --box3-color: #3a3b3c;
-  --title-icon-color: #ccc;
+:root {
+  /* ===== Colors ===== */
+  --primary-color: #0e4bf1;
+  // --panel-color: #3c393f;
+  --panel-color: #fff;
+  // --dasboard-color: #3c393f;
+  --dasboard-color: #fff;
+  // --rim-color: #312e34;
+  --rim-color: #f8f8f8;
+  --black-light-color: #707070;
+  --black-light-color-box: #707070; // box dasboad
+  --text-color:#000;
+  --border-color: #e6e5e5;
+  --toggle-color: #ddd;
+  --box1-color: #4da3ff;
+  --box2-color: #ffe6ac;
+  --box3-color: #e7d1fc;
+  --box4-color: #71bc68;
+  --box5-color: #a37b53;
+  --title-icon-color: #fff;
+  --light-color: #fff;
+  --707070-color: #707070;
+
+  /* ====== Transition ====== */
+  --tran-05: all 0.5s ease;
+  --tran-03: all 0.3s ease;
+  --tran-03: all 0.2s ease;
 }
+
 #AdMin {
   height: auto;
   /* === Custom Scroll Bar CSS === */
@@ -36,153 +53,9 @@ body.dark {
   ::-webkit-scrollbar-thumb:hover {
     background: #0b3cc1;
   }
-
   body.dark::-webkit-scrollbar-thumb:hover,
   body.dark .activity-data::-webkit-scrollbar-thumb:hover {
     background: #d7dbdf;
-  }
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background-color: var(--panel-color);
-    // border-right: 1px solid var(--border-color);
-    transition: var(--tran-03);
-  }
-  nav.close {
-    width: 73px;
-  }
-  nav .logo-name {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  nav .logo-image {
-    display: flex;
-    justify-content: center;
-    min-width: 45px;
-  }
-  nav .logo-image img,
-  .img_Avta {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  nav .logo-name .logo_name {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-color);
-    transition: var(--tran-05);
-  }
-  nav.close .logo_name {
-    opacity: 0;
-    pointer-events: none;
-  }
-  nav .menu-items {
-    margin-top: 40px;
-    height: calc(100% - 90px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .menu-items li {
-    list-style: none;
-  }
-  .menu-items li span {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    text-decoration: none;
-    position: relative;
-  }
-  .nav-links li span:hover:before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-  }
-  body.dark li span:hover:before {
-    background-color: var(--text-color);
-  }
-  .menu-items li span .i {
-    font-size: 25px;
-    margin: 0 8px 0 8px;
-    min-width: 30px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--black-light-color);
-    cursor: pointer;
-  }
-  .menu-items li span .link-name {
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--black-light-color);
-    transition: var(--tran-05);
-    cursor: pointer;
-  }
-  nav.close li span .link-name {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .nav-links li span:hover .i,
-  .nav-links li span:hover .link-name {
-    color: var(--primary-color);
-  }
-  body.dark .nav-links li span:hover .i,
-  body.dark .nav-links li span:hover .link-name {
-    color: var(--text-color);
-  }
-  .menu-items .logout-mode {
-    padding-top: 10px;
-    border-top: 1px solid var(--border-color);
-  }
-  .menu-items .mode {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-  }
-  .menu-items .mode-toggle {
-    position: absolute;
-    right: 14px;
-    height: 50px;
-    min-width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  .mode-toggle .switch {
-    position: relative;
-    display: inline-block;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-  }
-  .switch:before {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 15px;
-    width: 15px;
-    background-color: var(--panel-color);
-    border-radius: 50%;
-    transition: var(--tran-03);
-  }
-  body.dark .switch:before {
-    left: 20px;
   }
 
   .dashboard {
@@ -258,10 +131,16 @@ body.dark {
     width: 40px;
     border-radius: 50%;
   }
+  .dashboard .dash-content {
+    background-color: var(--dasboard-color);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 12px;
+    padding-bottom: 25px;
+  }
   .dash-content .title {
     display: flex;
     align-items: center;
-    margin: 60px 0 30px 0;
+    margin: 20px 0 30px 25px;
   }
   .dash-content .title .i {
     position: relative;
@@ -269,19 +148,20 @@ body.dark {
     width: 35px;
     // background-color: var(--primary-color);
     border-radius: 6px;
-    color: var(--text-color);
+    color:  var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     cursor: pointer;
+    margin-top: 25px;
   }
   .dash-content .title .text {
     font-size: 24px;
     font-weight: 500;
-    // color: var(--text-color);
     color: var(--text-color);
     margin-left: 10px;
+    margin-top: 25px;
   }
   .dash-content .boxes {
     display: flex;
@@ -300,8 +180,8 @@ body.dark {
     transition: var(--tran-05);
   }
   .dash-content .boxes .box_50 {
-    width: calc(50% - 150px);
-    background-color: var(--black-light-color);
+    width: calc(50% - 50px);
+    background-color: var(--black-light-color-box);
     margin: 0 25px;
   }
   .boxes .box .i {
@@ -332,59 +212,19 @@ body.dark {
   .boxes .box.box5 {
     background-color: var(--box5-color);
   }
-  // //activity
-  // .dash-content .activity .activity-data {
-  //   display: flex;
-  //   max-height: 500px;
-  //   width: 100%;
-  //   overflow-y: scroll;
-  // }
-  // .activity-data .data {
-  //   display: flex;
-  //   flex-direction: column;
-  //   margin: 0 15px;
-  //   .changeTypeUser {
-  //     background-color: #0e4bf1;
-  //     position: absolute;
-  //   }
-  // }
-  // .activity-data .data-title {
-  //   font-size: 20px;
-  //   font-weight: 500;
-  //   color: var(--text-color);
-  // }
-
-  // .activity-data .data .data-list {
-  //   font-size: 18px;
-  //   font-weight: 400;
-  //   margin-top: 20px;
-  //   margin-left: -12px;
-  //   color: var(--text-color);
-  //   width: 25vw;
-  //   overflow: hidden;
-  //   text-overflow: ellipsis;
-  //   white-space: nowrap;
-  // }
-  // .data-list :hover {
-  //   color: #0b3cc1;
-  // }
-  // .data.type{
-  //   margin-top: 15px;
-  // }
   .management-panel-user table tbody tr {
     margin-top: 20px !important; /* Điều chỉnh margin-top tùy ý */
   }
   .management-panel-user {
     display: flex;
     justify-content: center;
-    max-height: 300px;
+    max-height: 210px;
     overflow:auto;
-    padding-bottom: 25px;
     table{
       width: 85%;
       thead tr th{
-        color:#EDEDED; 
-        font-size: 24px !important;
+        color:#120b07; 
+        font-size: 22px !important;
         font-weight: 500;
         text-align: start;
         width: 40%;
@@ -397,13 +237,13 @@ body.dark {
       //   margin-top: 15px !important;
       // }
       tbody tr:hover td{
-        color:#EDEDED;
+        color:#000;
       }
       tbody tr td{
         font-size: 20px !important;
         font-weight: 400;
         margin-top: 20px;
-        color: var( --707070-color);
+        color: #78767c;
         margin: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -453,7 +293,7 @@ body.dark {
       width: calc(100% - 250px);
     }
     .activity .activity-data {
-      overflow-x: scroll;
+      // overflow-x: scroll;
     }
   }
 
@@ -461,6 +301,7 @@ body.dark {
     .dash-content .boxes .box {
       width: calc(100% / 2 - 15px);
       margin-top: 15px;
+    
     }
   }
   @media (max-width: 560px) {

@@ -20,7 +20,7 @@ function NavAdmin(props) {
   return (
     <nav className={addClass === "open" ? "open" : "close"}>
       <div className="logo-name">
-        <span className="logo_name MyTikTok1" style={{ fontSize: "28px" }}>
+        <span className="logo_name MyTikTok1" style={{ fontSize: "26px" }}>
           Trang quản lý
         </span>
       </div>

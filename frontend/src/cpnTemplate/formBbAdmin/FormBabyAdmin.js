@@ -265,7 +265,7 @@ function FormBabyAdmin() {
 
               {selectedDrinks.map((drink) => (
                 <Form.Item
-                  labelCol={{ span: 10 }}
+                  labelCol={{ span: 12 }}
                   key={drink}
                   label={`Số lượng ${drink}: `}
                   name={`quantity_${drink}`}

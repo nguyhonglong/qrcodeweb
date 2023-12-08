@@ -9,11 +9,15 @@
 :root {
   /* ===== Colors ===== */
   --primary-color: #0e4bf1;
-  --panel-color: #3c393f;
-  --dasboard-color: #3c393f;
-  --rim-color: #312e34;
-  --black-light-color: #707070; // box dasboad
-  --text-color: rgb(237, 237, 237);
+  // --panel-color: #3c393f;
+  --panel-color: #fff;
+  // --dasboard-color: #3c393f;
+  --dasboard-color: #fff;
+  // --rim-color: #312e34;
+  --rim-color: #f8f8f8;
+  --black-light-color: #707070;
+  --black-light-color-box: #d6d9ed; // box dasboad
+  --text-color: #000;
   --border-color: #e6e5e5;
   --toggle-color: #ddd;
   --box1-color: #4da3ff;
@@ -45,6 +49,7 @@ body.dark {
 }
 #AdMin {
   height: auto;
+  background-color: var(--rim-color);
   /* === Custom Scroll Bar CSS === */
   ::-webkit-scrollbar {
     width: 5px;
@@ -83,14 +88,14 @@ body.dark {
   }
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
+    height: calc(100%);
+    width: 230px;
     padding: 10px 14px;
     background-color: var(--panel-color);
+    background-color: var(--black-light-color-box);
     // border-right: 1px solid var(--border-color);
     transition: var(--tran-03);
+    border-radius: 20px;
   }
   nav.close {
     width: 73px;
@@ -98,6 +103,7 @@ body.dark {
   nav .logo-name {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   nav .logo-name .logo_name {
     font-size: 18px;
@@ -144,21 +150,23 @@ body.dark {
   body.dark li span:hover:before {
     background-color: var(--text-color);
   }
-  .menu-items li span .i,.logout-mode .link-name {
-    font-size: 25px;
-    margin: 0 8px 0 8px;
+  .menu-items li span .i,
+  .logout-mode .link-name {
+    font-size: 22px;
+    margin: 5px 8px 0 8px;
     min-width: 30px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--black-light-color);
+    color: #000;
     cursor: pointer;
   }
-  .menu-items li span .link-name,.logout-mode .link-name{
-    font-size: 18px;
+  .menu-items li span .link-name,
+  .logout-mode .link-name {
+    font-size: 16px;
     font-weight: 400;
-    color: var(--black-light-color);
+    color: #000;
     transition: var(--tran-05);
     cursor: pointer;
   }
@@ -167,7 +175,9 @@ body.dark {
     pointer-events: none;
   }
   .nav-links li span:hover .i,
-  .nav-links li span:hover .link-name,.logout-mode  span:hover .link-name,.logout-mode li span:hover .i{
+  .nav-links li span:hover .link-name,
+  .logout-mode span:hover .link-name,
+  .logout-mode li span:hover .i {
     color: var(--text-color);
     font-weight: bold;
   }
@@ -178,6 +188,7 @@ body.dark {
   .menu-items .logout-mode {
     padding-top: 10px;
     border-top: 1px solid var(--border-color);
+    font-size: 22px;
   }
   .menu-items .mode {
     display: flex;
@@ -222,16 +233,17 @@ body.dark {
     position: relative;
     left: 250px;
     background-color: var(--rim-color);
-    min-height: 100vh;
+    // min-height: 100vh;
     width: calc(100% - 250px);
     transition: var(--tran-05);
-    padding: 80px 30px 0 30px;
+    padding: 10px 30px 30px 30px;
   }
   nav.close ~ .dashboard {
     left: 73px;
     width: calc(100% - 73px);
   }
   .dashboard .top {
+    display: none !important;
     position: fixed;
     top: 0;
     left: 250px;
@@ -292,88 +304,6 @@ body.dark {
     border-radius: 50%;
   }
 
-  .dashboard .dash-content {
-    background-color: var(--dasboard-color);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 12px;
-  }
-  .dash-content .title {
-    display: flex;
-    align-items: center;
-    margin: 60px 0 30px 25px;
-  }
-  .dash-content .title .i {
-    position: relative;
-    height: 35px;
-    width: 35px;
-    // background-color: var(--primary-color);
-    border-radius: 6px;
-    color:  var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    margin-top: 25px;
-  }
-  .dash-content .title .text {
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--text-color);
-    margin-left: 10px;
-    margin-top: 25px;
-  }
-  .dash-content .boxes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .dash-content .boxes .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 12px;
-    width: calc(100% / 3 - 15px);
-    padding: 15px 20px;
-    background-color: var(--box1-color);
-    transition: var(--tran-05);
-  }
-  .dash-content .boxes .box_50 {
-    width: calc(50% - 50px);
-    margin: 0 25px;
-    background-color: var(--black-light-color);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  }
-  .boxes .box .i {
-    width: 35px;
-    height: 100%;
-    color: var(--text-color);
-  }
-  .boxes .box .text {
-    white-space: nowrap;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--text-color);
-  }
-  .boxes .box .number {
-    font-size: 40px;
-    font-weight: 500;
-    color: var(--text-color);
-  }
-  .boxes .box.box2 {
-    background-color: var(--box2-color);
-  }
-  .boxes .box.box3 {
-    background-color: var(--box3-color);
-  }
-  .boxes .box.box4 {
-    background-color: var(--box4-color);
-  }
-  .boxes .box.box5 {
-    background-color: var(--box5-color);
-  }
   //activity
   .dash-content .activity .activity-data {
     display: flex;
@@ -411,10 +341,7 @@ body.dark {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .data-list :hover {
-    color: #0b3cc1;
-  }
-  .data.type{
+  .data.type {
     margin-top: 15px;
   }
   @media (max-width: 1000px) {

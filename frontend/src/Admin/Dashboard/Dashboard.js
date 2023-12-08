@@ -202,7 +202,7 @@ function Dashboard() {
             </div>
 
             <div className="activity">
-              <div className="title" style={{ margin: "30px 0 30px 25px" }}>
+              <div className="title" style={{ margin: "30px 0 10px 25px" }}>
                 <UilClockThree className="i" />
                 <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
