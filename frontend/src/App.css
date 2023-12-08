@@ -25,11 +25,11 @@
   src: url('./asset/font/TikTok-Sans/TikTokText-Regular.otf') format('truetype');
 }
 
-#root{
+/* #root{
   font-family: "Inter,Helvetica,sans-serif";
-}
+} */
 
-/* .MyTikTok1 {
+.MyTikTok1 {
   font-family: 'MyTikTok1';
 }
 
@@ -90,7 +90,7 @@
 
 .mgt40 {
   margin-top: 40px;
-} */
+}
 
 *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
   display: revert;

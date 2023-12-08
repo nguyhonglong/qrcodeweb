@@ -10,8 +10,8 @@
   /* ===== Colors ===== */
   --primary-color: #0e4bf1;
   --panel-color: #3c393f;
-  --dasboard-color: #3c393f;
-  --rim-color: #312e34;
+  --dasboard-color: #ffffff;
+  --rim-color: #ffffff;
   --black-light-color: #707070; // box dasboad
   --text-color: rgb(237, 237, 237);
   --border-color: #e6e5e5;
@@ -40,7 +40,7 @@ body.dark {
   --toggle-color: #fff;
   --box1-color: #3a3b3c;
   --box2-color: #3a3b3c;
-  --box3-color: #3a3b3c;
+  --box3-color: #16232f;
   --title-icon-color: #ccc;
 }
 #AdMin {
@@ -88,7 +88,7 @@ body.dark {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background-color: var(--panel-color);
+    background-color: #F1F1F2;
     // border-right: 1px solid var(--border-color);
     transition: var(--tran-03);
   }
@@ -102,7 +102,7 @@ body.dark {
   nav .logo-name .logo_name {
     font-size: 18px;
     font-weight: 600;
-    color: var(--text-color);
+    color: black;
     margin-left: -12px;
     transition: var(--tran-05);
   }
@@ -168,7 +168,7 @@ body.dark {
   }
   .nav-links li span:hover .i,
   .nav-links li span:hover .link-name,.logout-mode  span:hover .link-name,.logout-mode li span:hover .i{
-    color: var(--text-color);
+    color: black;
     font-weight: bold;
   }
   body.dark .nav-links li span:hover .i,
@@ -240,9 +240,10 @@ body.dark {
     justify-content: space-between;
     align-items: center;
     padding: 10px 14px;
-    background-color: var(--panel-color);
+    background-color: white;
     transition: var(--tran-05);
     z-index: 10;
+    border: 1px solid #F1F1F2;
   }
   .dashboard .top .UilBars {
     margin-left: 10px;
@@ -319,7 +320,7 @@ body.dark {
   .dash-content .title .text {
     font-size: 24px;
     font-weight: 500;
-    color: var(--text-color);
+    color: black;
     margin-left: 10px;
     margin-top: 25px;
   }
@@ -342,7 +343,7 @@ body.dark {
   .dash-content .boxes .box_50 {
     width: calc(50% - 50px);
     margin: 0 25px;
-    background-color: var(--black-light-color);
+    background-color: #1765ad;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   }
