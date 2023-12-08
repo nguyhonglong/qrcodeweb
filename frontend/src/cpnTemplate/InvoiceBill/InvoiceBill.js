@@ -71,7 +71,6 @@ function InvoiceBill(props) {
     }
     return drink;
   });
-  console.log(SumDrinks);
   return (
     <div id="invoice">
       <img className="imgCoffe" src={imgCoffe} alt="logo menu" />

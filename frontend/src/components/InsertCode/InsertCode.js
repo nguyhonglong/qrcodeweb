@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./InsertCode.scss";
 // import InvoiceBill from "../Share/InvoiceBill/InvoiceBill";
 import { message } from "antd";
@@ -16,23 +16,45 @@ function InsertCode() {
         const response = await axios.get(
           `https://qrcodeweb-api.vercel.app/api/bills/${valueSearchCode}`
         );
-        setBillData(response.data);
-        myArray.push(response.data);
-        localStorage.setItem("myArrayData", JSON.stringify(myArray));
-        const retrievedArrayJSON = localStorage.getItem("myArrayData");
-
-        if (retrievedArrayJSON) {
+        // setBillData(response.data);
+        if (myArray.length === 0) {
+          myArray.push(response.data);
+          localStorage.setItem("myArrayData", JSON.stringify(myArray));
+          const retrievedArrayJSON = localStorage.getItem("myArrayData");
           const retrievedArray = JSON.parse(retrievedArrayJSON);
           setBillData(retrievedArray);
+          successMess.open({
+            type: "success",
+            content: "Tra cứu hóa đơn thành công",
+          });
+          setValueSearchCode("");
         } else {
-          console.log("Không có mảng được lưu");
+          const retrievedArrayJSON = localStorage.getItem("myArrayData");
+          const retrievedArray = JSON.parse(retrievedArrayJSON);
+          const isElementExists = retrievedArray.some(
+            (item) => item.billID === valueSearchCode
+          );
+          if (!isElementExists) {
+            myArray.push(response.data);
+            localStorage.setItem("myArrayData", JSON.stringify(myArray));
+            const retrievedArrayJSON = localStorage.getItem("myArrayData");
+            const retrievedArray = JSON.parse(retrievedArrayJSON);
+            setBillData(retrievedArray);
+            // message
+            successMess.open({
+              type: "success",
+              content: "Tra cứu hóa đơn thành công",
+            });
+            setValueSearchCode("");
+          } else {
+            console.log("Mã bạn nhập đã được tìm kiếm");
+            successMess.open({
+              type: "error",
+              content: "Mã tra cứu đã tồn tại",
+            });
+            setValueSearchCode("");
+          }
         }
-        // message
-        successMess.open({
-          type: "success",
-          content: "Tra cứu hóa đơn thành công",
-        });
-        setValueSearchCode("");
       } catch (error) {
         console.error("Error fetching drinks:", error);
         successMess.open({
@@ -60,6 +82,20 @@ function InsertCode() {
       content: "Xóa hóa đơn thành công",
     });
   };
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      // Thêm thông điệp xác nhận trước khi người dùng rời khỏi trang
+      e.preventDefault();
+      e.returnValue = '';
+      localStorage.removeItem("myArrayData");
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>
@@ -85,7 +121,7 @@ function InsertCode() {
               onChange={(e) => setValueSearchCode(e.target.value)}
             />
           </div>
-          <div style={{display:'flex', alignItems:'center'}}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <button className="sign-in_btn" onClick={handleSearchCode}>
               <span>Tra cứu</span>
             </button>
