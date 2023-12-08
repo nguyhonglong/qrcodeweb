@@ -48,10 +48,8 @@ $color-form-highlight: #eeeeee;
 
   .container {
     max-width: 1200px;
-    min-width: 540px;
-    @include respond(phone) {
-      min-width: unset;
-    }
+    min-width: 700px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,22 +57,35 @@ $color-form-highlight: #eeeeee;
     margin-top: 150px;
     margin-left: auto;
     margin-right: auto;
+    @include respond(tablet) {
+      min-width: unset;
+      margin-top: 80px;
+    }
+    @include respond(phone) {
+      min-width: unset;
+      margin-top: 50px;
+    }
   }
 
   .table {
     width: 100%;
-    border: 1px solid $color-form-highlight;
+    // border: 1px solid $color-form-highlight;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 12px;
   }
 
   .table-header {
     display: flex;
     width: 100%;
-    background: #000;
+    background: #f8f8f8;
     padding: ($half-spacing-unit * 1.5) 0;
+    border-radius:12px 12px 0 0;
+    // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   }
   .table-content {
-    max-height: 430px;
-    overflow-y: scroll;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 0 0 12px 12px;
   }
 
   .table-row {
@@ -82,17 +93,19 @@ $color-form-highlight: #eeeeee;
     display: flex;
     width: 100%;
     padding: ($half-spacing-unit * 1.5) 0;
-    background-color: #ccc;
-    &:nth-of-type(odd) {
-      background: $color-form-highlight;
-    }
+    // background-color: #ccc;
+    background: $color-form-highlight;
+    font-family: 'MyTikTok3';
   }
   .table-row:hover {
-    background-color: rgb(94, 94, 94);
-    color: #f8f8f8;
+    background-color: #ccc;
+    color: #000;
     font-weight: bold;
+    
   }
-
+  .table-row:last-child{
+    border-radius: 0 0 12px 12px;
+  }
   .table-data,
   .header__item {
     flex: 1 1 20%;
@@ -108,7 +121,8 @@ $color-form-highlight: #eeeeee;
   }
 
   .filter__link {
-    color: white;
+    color: #000;
+    font-family: "MyTikTok2";
     text-decoration: none;
     position: relative;
     display: inline-block;
@@ -116,7 +130,8 @@ $color-form-highlight: #eeeeee;
     padding-right: $base-spacing-unit;
     @include respond(phone) {
       font-size: 7px;
-    }   @include respond(phoneSmall) {
+    }
+    @include respond(phoneSmall) {
       font-size: 6px;
     }
     &::after {
@@ -144,7 +159,8 @@ $color-form-highlight: #eeeeee;
 .ant-modal-content {
   @include respond(phone) {
     width: 380px;
-  } @include respond(phoneSmall) {
+  }
+  @include respond(phoneSmall) {
     width: 300px;
   }
 }
