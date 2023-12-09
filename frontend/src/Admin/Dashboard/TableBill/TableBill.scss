@@ -81,6 +81,9 @@ $color-form-highlight: #eeeeee;
     padding: ($half-spacing-unit * 1.5) 0;
     border-radius: 12px 12px 0 0;
     // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    @include respond(phone){
+      margin-top: 70px;
+    }
   }
   .table-content {
     max-height: 400px;

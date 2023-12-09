@@ -32,7 +32,9 @@
     display: flex;
     justify-content: flex-start;
     background-color: var(--rim-color);
-
+    @include respond(phone) {
+      justify-content: space-around;
+    }
     // background: linear-gradient(
     //   45deg,
     //   #000,
@@ -49,9 +51,16 @@
       letter-spacing: 1px;
       position: relative;
       display: inline-block;
+      @include respond(phone) {
+        font-size: 11px;
+        color: #1677ff;
+      }
     }
     .i {
       color: black;
+      @include respond(phone) {
+        display: none;
+      }
     }
     span {
       margin-left: 15px;

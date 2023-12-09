@@ -414,13 +414,16 @@ body.dark {
       width: 30px;
       height: 30px;
     }
+    .menu-items li{
+      margin-top: 20px;
+    }
     .dashboard .top .search-box {
       margin: 0 10px 0 12px;
     }
   }
   @media (max-width: 400px) {
     nav {
-      width: 0px;
+      width: 73px;
     }
     nav.close {
       width: 73px;
@@ -442,7 +445,7 @@ body.dark {
       pointer-events: none;
     }
     nav ~ .dashboard {
-      left: 0;
+      // left: 0;
       width: 100%;
     }
     nav.close ~ .dashboard {

@@ -4,8 +4,9 @@ import axios from "axios";
 import { Modal, Popconfirm, Button } from "antd";
 import { DeleteFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import InvoiceBill from "../../../cpnTemplate/InvoiceBill/InvoiceBill";
-
+import { message } from "antd";
 function TableBill(props) {
+  const [successMess, setSuccessMess] = message.useMessage();
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -48,6 +49,11 @@ function TableBill(props) {
     setIsModalOpenDeleTeBill(true);
     setdataDeleTeBill(data);
   };
+  const [billToDateData, setBillToDateData]= useState([])
+  useEffect(()=>{
+    setBillToDateData(props.billToDate)
+    
+  },[props.billToDate])
   // Handle DeleTe Bill
   const HandleDeleTeBill = async () => {
     console.log(dataDeleTeBill.billID);
@@ -56,11 +62,21 @@ function TableBill(props) {
         .delete(
           `https://qrcodeweb-api.vercel.app/api/deleteBill/${dataDeleTeBill.billID}`
         )
-        .then(() => {
+        .then((data) => {
+          console.log(data);
+          setBillToDateData(props.billToDate)
           setIsModalOpenDeleTeBill(false);
+          successMess.open({
+            type: "success",
+            content: "Xóa hóa đơn thành công",
+          });
         })
         .catch((err) => {
           console.log("delete:", err);
+          successMess.open({
+            type: "error",
+            content: "Xóa hóa đơn thất bại",
+          });
         });
     } catch (error) {
       console.error("Error deleting drink: ", error);
@@ -100,130 +116,123 @@ function TableBill(props) {
   };
   const [totalSumInv, setTotalSumInv] = useState("");
   return (
-    <div id="TableBill">
-      <div className="container">
-        <div className="table">
-          <div className="table-header">
-            <div className="header__item">
-              <a id="name" className="filter__link">
-                Tên
-              </a>
-            </div>
-            <div className="header__item">
-              <a id="wins" className="filter__link filter__link--number">
-                MÃ ĐƠN
-              </a>
-            </div>
-            <div className="header__item">
-              <a id="draws" className="filter__link filter__link--number">
-                Ngày
-              </a>
-            </div>
-            <div className="header__item">
-              <a id="losses" className="filter__link filter__link--number">
-                Số người
-              </a>
-            </div>
-            <div className="header__item">
-              <a id="total" className="filter__link filter__link--number">
-                Tổng
-              </a>
-            </div>
-            <div className="header__item header__item-delete">
-              <a id="total" className="filter__link filter__link--number">
-                Xóa
-              </a>
-            </div>
-          </div>
-          <div className="table-content">
-            {props.billToDate?.map((data) => (
-              <div className="table-row" key={data._id}>
-                <div
-                  className="table-data"
-                  onClick={() => {
-                    showModal(data);
-                  }}
-                >
-                  {data.customerName}
-                </div>
-                <div
-                  className="table-data"
-                  onClick={() => {
-                    showModal(data);
-                  }}
-                >
-                  {data.billID}
-                </div>
-                <div
-                  className="table-data"
-                  onClick={() => {
-                    showModal(data);
-                  }}
-                >
-                  {formatDate(data.createdAt)}
-                </div>
-                <div
-                  className="table-data"
-                  onClick={() => {
-                    showModal(data);
-                  }}
-                >
-                  {data.numCustomer}
-                </div>
-                <div
-                  className="table-data"
-                  onClick={() => {
-                    showModal(data);
-                  }}
-                >
-                  {calculateTotalValue(data.drinks)}.000VNĐ
-                </div>
-                <div
-                  className="table-data table-data-delete"
-                  onClick={() => {
-                    showDeleteBill(data);
-                  }}
-                >
-                  {/* <Popconfirm
-                    title="Xóa Hóa Đơn"
-                    description="Bạn có chắc xóa hóa đơn này?"
-                    icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-                    onConfirm={HandleDeleTeBill(data)}
-                    // onCancel={handleCancelDeleteBill}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                  </Popconfirm> */}
-                  <DeleteFilled className="DeleteTwoTone" />
-                </div>
+    <>
+      {setSuccessMess}
+      <div id="TableBill">
+        <div className="container">
+          <div className="table">
+            <div className="table-header">
+              <div className="header__item">
+                <a id="name" className="filter__link">
+                  Tên
+                </a>
               </div>
-            ))}
+              <div className="header__item">
+                <a id="wins" className="filter__link filter__link--number">
+                  MÃ ĐƠN
+                </a>
+              </div>
+              <div className="header__item">
+                <a id="draws" className="filter__link filter__link--number">
+                  Ngày
+                </a>
+              </div>
+              <div className="header__item">
+                <a id="losses" className="filter__link filter__link--number">
+                  Số người
+                </a>
+              </div>
+              <div className="header__item">
+                <a id="total" className="filter__link filter__link--number">
+                  Tổng
+                </a>
+              </div>
+              <div className="header__item header__item-delete">
+                <a id="total" className="filter__link filter__link--number">
+                  Xóa
+                </a>
+              </div>
+            </div>
+            <div className="table-content">
+            {billToDateData?.map((data) => (
+                <div className="table-row" key={data._id}>
+                  <div
+                    className="table-data"
+                    onClick={() => {
+                      showModal(data);
+                    }}
+                  >
+                    {data.customerName}
+                  </div>
+                  <div
+                    className="table-data"
+                    onClick={() => {
+                      showModal(data);
+                    }}
+                  >
+                    {data.billID}
+                  </div>
+                  <div
+                    className="table-data"
+                    onClick={() => {
+                      showModal(data);
+                    }}
+                  >
+                    {formatDate(data.createdAt)}
+                  </div>
+                  <div
+                    className="table-data"
+                    onClick={() => {
+                      showModal(data);
+                    }}
+                  >
+                    {data.numCustomer}
+                  </div>
+                  <div
+                    className="table-data"
+                    onClick={() => {
+                      showModal(data);
+                    }}
+                  >
+                    {calculateTotalValue(data.drinks)}.000VNĐ
+                  </div>
+                  <div
+                    className="table-data table-data-delete"
+                    onClick={() => {
+                      showDeleteBill(data);
+                    }}
+                  >
+                    <DeleteFilled className="DeleteTwoTone" />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+        <Modal
+          title="Chi tiết hóa đơn"
+          open={isModalOpen}
+          // onOk={handleOk}
+          onCancel={handleCancel}
+          footer={null}
+          className="myModal"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <div style={{ marginTop: "-60px" }}>
+            <InvoiceBill billData={dataOpen} totalSumInv={totalSumInv} />
+          </div>
+        </Modal>
+        <Modal
+          title="Xóa Hóa Đơn"
+          open={isModalOpenDeleTeBill}
+          onOk={HandleDeleTeBill}
+          onCancel={handleCancelDeleteBill}
+          className="myModal_deleteBill"
+        >
+          <p>Bạn có chắc chắn muốn xóa?</p>
+        </Modal>
       </div>
-      <Modal
-        title="Chi tiết hóa đơn"
-        open={isModalOpen}
-        // onOk={handleOk}
-        onCancel={handleCancel}
-        footer={null}
-        className="myModal"
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        <div style={{ marginTop: "-60px" }}>
-          <InvoiceBill billData={dataOpen} totalSumInv={totalSumInv} />
-        </div>
-      </Modal>
-      <Modal
-        title="Xóa Hóa Đơn"
-        open={isModalOpenDeleTeBill}
-        onOk={HandleDeleTeBill}
-        onCancel={handleCancelDeleteBill}
-        className="myModal_deleteBill"
-      >
-        <p>Bạn có chắc chắn muốn xóa?</p>
-      </Modal>
-    </div>
+    </>
   );
 }
 
