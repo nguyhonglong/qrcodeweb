@@ -49,6 +49,7 @@ function NavBar() {
     localStorage.removeItem("myArrayData");
     localStorage.removeItem('datalogin');
     localStorage.removeItem('dataAcount');
+    localStorage.removeItem("dataRoleAcount");
     navigateSignout("/login");
   };
   const handleCancelSignOut = () => {

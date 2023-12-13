@@ -13,6 +13,7 @@ function InsertCode() {
   let myArray = JSON.parse(localStorage.getItem("myArrayData")) || [];
   const handleSearchCode = async () => {
     if (valueSearchCode !== "") {
+      console.log(valueSearchCode);
       try {
         const response = await axios.get(
           `https://qrcodeweb-api.vercel.app/api/bills/${valueSearchCode}`
@@ -73,7 +74,6 @@ function InsertCode() {
   const handleClearData = () => {
     // Xóa mảng khỏi localStorage
     localStorage.removeItem("myArrayData");
-
     // Xóa mảng trong state
     setBillData([]);
 
@@ -83,21 +83,7 @@ function InsertCode() {
       content: "Xóa hóa đơn thành công",
     });
   };
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      // Thêm thông điệp xác nhận trước khi người dùng rời khỏi trang
-      e.preventDefault();
-      e.returnValue = "";
-      localStorage.removeItem("myArrayData");
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
+  
   return (
     <>
       {setSuccessMess}

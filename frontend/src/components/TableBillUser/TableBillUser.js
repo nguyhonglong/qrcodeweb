@@ -48,51 +48,11 @@ function TableBillUser(props) {
   };
   const showBill = (data) => {
     setIsModalOpenBill(true);
-    setdataBill(data);
   };
   const [billToDateData, setBillToDateData] = useState([]);
   useEffect(() => {
     setBillToDateData(props.billToDate);
   }, [props.billToDate]);
-  // Handle  Bill
-  //   const HandleBill = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       await axios
-  //         .(
-  //           `https://qrcodeweb-api.vercel.app/api/Bill/${dataBill.billID}`
-  //         )
-  //         .then(async () => {
-  //           try {
-  //             const response = await axios.get(
-  //               `https://qrcodeweb-api.vercel.app/api/records?startDate=${props.dateRange[0]?.format(
-  //                 "YYYY-MM-DD"
-  //               )}&endDate=${props.dateRange[1]?.format("YYYY-MM-DD")}`
-  //             );
-  //             setBillToDateData(response.data);
-  //           } catch (error) {
-  //             console.error("Error fetching drinks:", error);
-  //           }
-  //           setIsLoading(false);
-  //           setIsModalOpenBill(false);
-  //           successMess.open({
-  //             type: "success",
-  //             content: "Xóa hóa đơn thành công",
-  //           });
-  //         })
-  //         .catch((err) => {
-  //           console.log(":", err);
-  //           successMess.open({
-  //             type: "error",
-  //             content: "Xóa hóa đơn thất bại",
-  //           });
-  //         });
-  //     } catch (error) {
-  //       console.error("Error deleting drink: ", error);
-  //     }
-  //     setIsLoading(false);
-  //   };
-
   const [drinkPrices, setDrinkPrices] = useState({});
   useEffect(() => {
     fetchDrinkPrices();
@@ -126,16 +86,63 @@ function TableBillUser(props) {
   };
   const [totalSumInv, setTotalSumInv] = useState("");
 
+  const HandleUseBill = async () => {
+    // console.log(dataBill[0]._id);
+    // console.log(dataBill[0].billID);
+    const newData = {
+      billID: dataBill[0].billID,
+      numCustomer: dataBill[0].numCustomer,
+      customerName: dataBill[0].customerName,
+      storeName: dataBill[0].storeName,
+      drinks: dataBill[0].drinks,
+      updateAccount: dataBill[0].createdUser,
+      isUsed: true,
+    };
+    await axios
+      .put(
+        `https://qrcodeweb-api.vercel.app/api/bills/${dataBill[0].billID}`,
+        newData
+      )
+      .then(async () => {
+        const myArrayData = localStorage.getItem("myArrayData");
+        const retrievedArray = JSON.parse(myArrayData);
 
-  const HandleUseBill = (data)=>{
+        const filteredData = retrievedArray.filter(
+          (item) => item.billID === dataBill[0].billID
+        );
+        if (filteredData.length > 0) {
+          filteredData[0].isUsed = true;
+        }
 
-  }
+        localStorage.setItem("myArrayData", JSON.stringify(retrievedArray));
+
+        const updatedArrayData = localStorage.getItem("myArrayData");
+        const updatedArray = JSON.parse(updatedArrayData);
+        setBillToDateData(updatedArray)
+        console.log(updatedArray);
+        // setBillData(retrievedArray);
+        // const response = await axios.get(
+        //   `https://qrcodeweb-api.vercel.app/api/bills`
+        // );
+        // setBillToDateData(response.data)
+        successMess.open({
+          type: "success",
+          content: "Sử dụng hóa đơn thành công",
+        });
+      })
+      .catch((err) => {
+        successMess.open({
+          type: "error",
+          content: "Sử dụng hóa đơn thất bại",
+        });
+      });
+  };
   const columns = [
     {
       className: "center-align-table",
       title: "NGƯỜI TẠO",
-      dataIndex: "customerName",
-      key: "customerName",
+      dataIndex: "createdUser",
+      key: "createdUser",
       width: 150,
       ellipsis: true,
       fixed: "left",
@@ -183,7 +190,7 @@ function TableBillUser(props) {
     {
       title: "TỔNG",
       dataIndex: "drinks",
-      key: "drinks",
+      key: "_id",
       ellipsis: true,
       align: "center",
       width: 130,
@@ -191,27 +198,37 @@ function TableBillUser(props) {
     },
     {
       title: "SD",
-      key: "operation",
+      dataIndex: "isUsed",
+      key: "isUsed",
       align: "center",
       fixed: "right",
       width: 120,
       render: (_, record) => (
-        <div
-          onClick={(e) => {
-            e.stopPropagation(); // Ngăn sự lan truyền của sự kiện click
-            showBill(record); // Hiển thị xóa hóa đơn cho bản ghi cụ thể
-          }}
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <Button type="primary" size="small">
-            Sử Dụng
-          </Button>
+        <div>
+          {record === true ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button type="primary" size="small" danger>
+                Đã Dùng
+              </Button>
+            </div>
+          ) : (
+            <div
+              onClick={(e) => {
+                e.stopPropagation(); // Ngăn sự lan truyền của sự kiện click
+                showBill(record);
+                setdataBill(data);
+              }}
+            >
+              <Button type="primary" size="small">
+                Sử Dụng
+              </Button>
+            </div>
+          )}
         </div>
       ),
     },
   ];
   const data = billToDateData;
-  // console.log(data);
   const rowProps = (record) => {
     return {
       onClick: () => {
@@ -229,7 +246,7 @@ function TableBillUser(props) {
               x: 1000,
               y: 350,
             }}
-            responsive="stack" 
+            responsive="stack"
             columns={columns}
             dataSource={data}
             onRow={(record) => ({

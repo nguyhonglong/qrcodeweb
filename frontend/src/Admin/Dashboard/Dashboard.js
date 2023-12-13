@@ -37,6 +37,7 @@ function Dashboard() {
   const admin_handleOkSignOut = () => {
     localStorage.removeItem("datalogin");
     localStorage.removeItem("dataAcount");
+    localStorage.removeItem("dataRoleAcount");
     navigateSignout("/login");
   };
   const admin_handleCancelSignOut = () => {

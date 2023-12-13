@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState, memo, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useUserContext } from "../../Context/userContext";
-import { Button, Form, Input, Select, InputNumber, message } from "antd";
+import { Button, Form, Input, Select, InputNumber, message, Spin } from "antd";
 import html2canvas from "html2canvas";
 
 const { Option } = Select;
@@ -12,8 +12,11 @@ function FormBabyAdmin() {
   const [form] = Form.useForm();
   const [successMess, setSuccessMess] = message.useMessage();
   const [codeNew, setCodeNew] = useState([]);
+  const [nameCreateBill, setNameCreateBill] = useState("");
+  const [loading, setLoading] = useState(false);
   // Handler khi submit form
   const handleSubmit = async (values) => {
+    setLoading(true);
     const id = uuidv4(); // Tạo ID tự động
     // Định dạng ID thành chuỗi kết hợp giữa kí tự và số
     const formattedID = "TXT" + id.substring(0, 6).toUpperCase(); // Lấy 8 kí tự đầu và chuyển thành chữ hoa
@@ -32,35 +35,50 @@ function FormBabyAdmin() {
       quantity: values[`quantity_${drink.name}`],
       price: drink.price,
     }));
-    const formData = {
-      billID: billID,
-      numCustomer: numCustomer,
-      customerName: customerName,
-      storeName: storeName,
-      drinks: drinkData,
-    };
 
-    console.log("Form Data:", JSON.stringify(formData));
-
-    // Gửi dữ liệu formData lên server
+    const dataIdAcount = localStorage.getItem("dataAcount");
     await axios
-      .post("https://qrcodeweb-api.vercel.app/api/bills", formData)
-      .then((response) => {
-        console.log("Data submitted successfully:", response.data);
-        setCodeNew(response.data);
-        successMess.open({
-          type: "success",
-          content: "Thêm hóa đơn thành công",
-        });
-      })
-      .catch((error) => {
-        // Xử lý lỗi khi yêu cầu không thành công
-        console.log("Error submitting data:", error);
-        successMess.open({
-          type: "error",
-          content: "Thêm hóa đơn thất bại",
-        });
+      .get("https://qrcodeweb-api.vercel.app/api/users")
+      .then(async (response) => {
+        console.log(response.data);
+        const data = response.data;
+        const foundItem = data.find((item) => item._id === dataIdAcount);
+        const names = foundItem ? foundItem.name : "";
+        const formData = {
+          billID: billID,
+          numCustomer: numCustomer,
+          customerName: customerName,
+          storeName: storeName,
+          drinks: drinkData,
+          createdUser: names,
+          createdUserId: dataIdAcount,
+        };
+
+        console.log("Form Data:", JSON.stringify(formData));
+
+        // Gửi dữ liệu formData lên server
+        await axios
+          .post("https://qrcodeweb-api.vercel.app/api/bills", formData)
+          .then((response) => {
+            // console.log("Data submitted successfully:", response.data);
+            setCodeNew(response.data);
+            successMess.open({
+              type: "success",
+              content: "Thêm hóa đơn thành công",
+            });
+          })
+          .catch((error) => {
+            // Xử lý lỗi khi yêu cầu không thành công
+            console.log("Error submitting data:", error);
+            console.log(formData);
+            successMess.open({
+              type: "error",
+              content: "Thêm hóa đơn thất bại",
+            });
+          });
       });
+
+    setLoading(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -111,7 +129,6 @@ function FormBabyAdmin() {
     ));
   };
 
-
   const captureAndSaveImage = () => {
     const element = document.getElementById("myDiv");
     html2canvas(element).then(function (canvas) {
@@ -148,9 +165,7 @@ function FormBabyAdmin() {
       <div id="FormBabyAdmin">
         <div className="FormBabyAdmin">
           <div className="FormBabyAdmin1">
-            <h3>
-              Nhập hóa đơn
-            </h3>
+            <h3>Nhập hóa đơn</h3>
             <Form
               name="formAdd"
               labelCol={{
@@ -228,10 +243,11 @@ function FormBabyAdmin() {
                     {
                       value: "Đỉnh Gió Coffee",
                       label: "Đỉnh Gió Coffee",
-                    }, {
+                    },
+                    {
                       value: "Cloud Forest",
                       label: "Cloud Forest",
-                    }
+                    },
                   ]}
                 />
               </Form.Item>
@@ -274,6 +290,13 @@ function FormBabyAdmin() {
                   </Button>
                 </div>
               </Form.Item>
+              {loading ? (
+                <Spin tip="Loading">
+                  <div className="content" />
+                </Spin>
+              ) : (
+                ""
+              )}
             </Form>
           </div>
         </div>

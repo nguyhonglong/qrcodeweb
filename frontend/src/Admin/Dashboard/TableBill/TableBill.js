@@ -52,7 +52,23 @@ function TableBill(props) {
   };
   const [billToDateData, setBillToDateData] = useState([]);
   useEffect(() => {
-    setBillToDateData(props.billToDate);
+    const fetchData = async () => {
+      try {
+        const dataIdAcount = localStorage.getItem("dataAcount");
+        const dataRoleAcount = localStorage.getItem("dataRoleAcount");
+        if (dataRoleAcount === "admin") {
+          setBillToDateData(props.billToDate);
+        } else {
+          const foundItem = await props.billToDate.filter(
+            (item) => item.createdUserId === dataIdAcount
+          );
+          setBillToDateData(foundItem);
+        }
+      } catch (error) {
+        console.error("Error fetching :", error);
+      }
+    };
+    fetchData();
   }, [props.billToDate]);
   // Handle DeleTe Bill
   const HandleDeleTeBill = async () => {
@@ -69,7 +85,17 @@ function TableBill(props) {
                 "YYYY-MM-DD"
               )}&endDate=${props.dateRange[1]?.format("YYYY-MM-DD")}`
             );
-            setBillToDateData(response.data);
+            const dataIdAcount = localStorage.getItem("dataAcount");
+            const dataRoleAcount = localStorage.getItem("dataRoleAcount");
+            if (dataRoleAcount === "admin") {
+              setBillToDateData(response.data);
+            } else {
+              const dataBillDate = response.data;
+              const foundItem = dataBillDate.filter(
+                (item) => item.createdUserId === dataIdAcount
+              );
+              setBillToDateData(foundItem);
+            }
           } catch (error) {
             console.error("Error fetching drinks:", error);
           }
@@ -128,10 +154,10 @@ function TableBill(props) {
 
   const columns = [
     {
-      className: 'center-align-table',
+      className: "center-align-table",
       title: "NGƯỜI TẠO",
-      dataIndex: "customerName",
-      key: "customerName",
+      dataIndex: "createdUser",
+      key: "createdUser",
       width: 150,
       ellipsis: true,
       fixed: "left",
@@ -152,7 +178,7 @@ function TableBill(props) {
       align: "center",
     },
     {
-      className: 'center-align-table',
+      className: "center-align-table",
       title: "TÊN",
       dataIndex: "customerName",
       key: "customerName",
@@ -317,12 +343,12 @@ function TableBill(props) {
             </div>
           </div> */}
           <Table
-          style={{marginTop:'50px'}}
+            style={{ marginTop: "50px" }}
             scroll={{
               x: 1000,
               y: 400,
             }}
-            responsive="stack" 
+            responsive="stack"
             columns={columns}
             dataSource={data}
             onRow={(record) => ({
