@@ -203,6 +203,18 @@
         font-size: 7px;
       }
     }
+    .InfoDrinkChild p {
+      white-space: nowrap; /* Ngăn chặn văn bản từ việc xuống dòng */
+      overflow: hidden; /* Ẩn văn bản vượt quá phần tử cha */
+      text-overflow: ellipsis; /* Hiển thị ba chấm khi văn bản bị cắt */
+    }
+    .priceChild,
+    .quantityChild,
+    .totalChild {
+      white-space: nowrap; /* Ngăn chặn văn bản từ việc xuống dòng */
+      overflow: hidden; /* Ẩn văn bản vượt quá phần tử cha */
+      text-overflow: ellipsis; /* Hiển thị ba chấm khi văn bản bị cắt */
+    }
     .drinkChild {
       text-align: start;
       padding-left: 15px;

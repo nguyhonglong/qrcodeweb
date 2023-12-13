@@ -9,7 +9,7 @@ function PageHome() {
       <NavBar />
       <div
         style={{
-         height:'100vh',
+         height:'120vh',
         }}
       >
         <InsertCode />
