@@ -36,6 +36,7 @@ function Dashboard() {
   };
   const admin_handleOkSignOut = () => {
     localStorage.removeItem("datalogin");
+    localStorage.removeItem("dataAcount");
     navigateSignout("/login");
   };
   const admin_handleCancelSignOut = () => {
@@ -173,7 +174,7 @@ function Dashboard() {
       title: "Action",
       dataIndex: "",
       key: "x",
-      render: () => <a>Edit</a>,
+      render: () => <a>Sửa</a>,
     },
   ];
   const tableProps = {

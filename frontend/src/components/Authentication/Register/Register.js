@@ -21,7 +21,7 @@ function Register() {
       });
     }
     if (email && password && displayName) {
-     await axios
+      await axios
         .post("https://qrcodeweb-api.vercel.app/api/auth/register", {
           account: email,
           password: password,
@@ -33,12 +33,16 @@ function Register() {
             content: "Đã tạo tài khoản thành công",
           });
           // Xử lý phản hồi từ server
-          console.log(response.data);
           navigate("/login");
         })
-        .catch((error) => {
+        .catch((err) => {
           // Xử lý lỗi nếu có
-          console.error(error);
+          navigate("/register");
+          error.open({
+            type: "error",
+            content: "Tài khoản đã tồn tại",
+          });
+          console.error(err);
         });
     }
   };

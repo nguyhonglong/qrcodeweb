@@ -74,46 +74,48 @@ $color-form-highlight: #eeeeee;
     border-radius: 12px;
   }
 
-  .table-header {
-    display: flex;
-    width: 100%;
-    background: #f8f8f8;
-    padding: ($half-spacing-unit * 1.5) 0;
-    border-radius: 12px 12px 0 0;
-    // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    @include respond(phone) {
-      margin-top: 70px;
-    }
-  }
-  .table-content {
-    max-height: 400px;
-    overflow-y: auto;
-    border-radius: 0 0 12px 12px;
-  }
+  // .table-header {
+  //   display: flex;
+  //   width: 100%;
+  //   background: #f8f8f8;
+  //   padding: ($half-spacing-unit * 1.5) 0;
+  //   border-radius: 12px 12px 0 0;
+  //   // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  //   @include respond(phone) {
+  //     margin-top: 70px;
+  //   }
+  // }
+  // .table-content {
+  //   max-height: 400px;
+  //   overflow-y: auto;
+  //   border-radius: 0 0 12px 12px;
+  // }
 
-  .table-row {
-    cursor: pointer;
-    display: flex;
-    width: 100%;
-    padding: ($half-spacing-unit * 1.5) 0;
-    // background-color: #ccc;
-    background: $color-form-highlight;
-    font-family: "MyTikTok3";
-  }
-  .table-row:hover {
-    background-color: #ccc;
-    color: #000;
-    font-weight: bold;
-  }
-  .table-row:last-child {
-    border-radius: 0 0 12px 12px;
-  }
-  .table-data,
-  .header__item {
-    flex: 1;
+  // .table-row {
+  //   cursor: pointer;
+  //   display: flex;
+  //   width: 100%;
+  //   padding: ($half-spacing-unit * 1.5) 0;
+  //   // background-color: #ccc;
+  //   background: $color-form-highlight;
+  //   font-family: "MyTikTok3";
+  // }
+  // .table-row:hover {
+  //   background-color: #ccc;
+  //   color: #000;
+  //   font-weight: bold;
+  // }
+  // .table-row:last-child {
+  //   border-radius: 0 0 12px 12px;
+  // }
+  // .table-data,
+  // .header__item {
+  //   flex: 1;
+  //   text-align: center;
+  // }
+  .ant-table-thead th.center-align-table {
     text-align: center;
   }
- 
    .DeleteTwoTone:hover {
     color: tomato !important;
   }

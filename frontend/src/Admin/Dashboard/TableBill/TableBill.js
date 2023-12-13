@@ -128,6 +128,7 @@ function TableBill(props) {
 
   const columns = [
     {
+      className: 'center-align-table',
       title: "NGƯỜI TẠO",
       dataIndex: "customerName",
       key: "customerName",
@@ -151,6 +152,7 @@ function TableBill(props) {
       align: "center",
     },
     {
+      className: 'center-align-table',
       title: "TÊN",
       dataIndex: "customerName",
       key: "customerName",
@@ -172,7 +174,7 @@ function TableBill(props) {
       key: "numCustomer",
       align: "center",
       ellipsis: true,
-      width: 115,
+      width: 90,
     },
     {
       title: "TỔNG",
@@ -320,6 +322,7 @@ function TableBill(props) {
               x: 1000,
               y: 400,
             }}
+            responsive="stack" 
             columns={columns}
             dataSource={data}
             onRow={(record) => ({

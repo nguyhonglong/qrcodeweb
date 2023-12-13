@@ -12,6 +12,8 @@ export const ContextProivider = ({ children }) => {
   const signInWithEmailPassword = (datalogin) => {
     // setIsAuthen(false);
     localStorage.setItem("datalogin", datalogin.token);
+    localStorage.setItem("dataAcount", datalogin.user._id);
+    console.log(datalogin);
     setUser(datalogin);
     switch (datalogin.user.role) {
       case "admin":
