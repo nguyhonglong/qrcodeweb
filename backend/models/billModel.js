@@ -34,13 +34,17 @@ const billSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    createdUser:{
+    createdUser: {
         type: String,
         required: true
     },
-    store:{
+    createdUserId: {
         type: String,
         required: true
+    },
+    isUsed:{
+        type: Boolean,
+        default: false
     },
     drinks: [{
         drink: {

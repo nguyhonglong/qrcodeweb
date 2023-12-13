@@ -3,6 +3,7 @@ import cors from 'cors';
 import { JWT_SECRET_KEY } from "./config.js";
 import mongoose from "mongoose";
 import { Bill, Drink } from "./models/billModel.js"
+import { Store } from "./models/storeModel.js"
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from './models/userModel.js'
@@ -33,7 +34,7 @@ app.listen(PORT, () => {
 
 app.post('/api/bills', async (req, res) => {
     try {
-        const { billID, numCustomer, customerName, storeName, drinks } = req.body;
+        const { billID, numCustomer, customerName, storeName, drinks, createdUser, createdUserId, isUsed } = req.body;
 
         if (!billID || !numCustomer || !customerName || !storeName) {
             return res.status(400).send({
@@ -53,7 +54,10 @@ app.post('/api/bills', async (req, res) => {
             numCustomer,
             customerName,
             storeName,
-            drinks
+            drinks,
+            createdUser,
+            createdUserId,
+            isUsed
         };
 
         const bill = await Bill.create(newBill);
@@ -96,19 +100,19 @@ app.get('/api/bills/:id', async (request, response) => {
 
 app.delete('/api/deletebill/:billID', (req, res) => {
     const billIDToDelete = req.params.billID;
-  
+
     Bill.deleteOne({ billID: billIDToDelete })
-      .then(result => {
-        if (result.deletedCount === 1) {
-          res.status(200).json({ message: `Đã xóa thành công hóa đơn có billID ${billIDToDelete}` });
-        } else {
-          res.status(404).json({ message: `Không tìm thấy hóa đơn có billID ${billIDToDelete}` });
-        }
-      })
-      .catch(err => {
-        res.status(500).json({ error: "Lỗi khi xóa hóa đơn", details: err });
-      });
-  });
+        .then(result => {
+            if (result.deletedCount === 1) {
+                res.status(200).json({ message: `Đã xóa thành công hóa đơn có billID ${billIDToDelete}` });
+            } else {
+                res.status(404).json({ message: `Không tìm thấy hóa đơn có billID ${billIDToDelete}` });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Lỗi khi xóa hóa đơn", details: err });
+        });
+});
 
 app.put('/api/bills/:id', async (request, response) => {
     try {
@@ -118,7 +122,8 @@ app.put('/api/bills/:id', async (request, response) => {
             !request.body.numCustomer ||
             !request.body.customerName ||
             !request.body.storeName ||
-            !request.body.updateAccount
+            !request.body.updateAccount ||
+            !request.body.isUsed
 
         ) {
             return response.status(400).send({
@@ -131,7 +136,8 @@ app.put('/api/bills/:id', async (request, response) => {
             customerName: request.body.customerName,
             storeName: request.body.storeName,
             drinks: request.body.drinks,
-            updateAccount: request.body.updateAccount
+            updateAccount: request.body.updateAccount,
+            isUsed: request.body.isUsed
         };
 
         const bill = await Bill.findOneAndUpdate({ billID: id }, updatedBill, { new: true });
@@ -381,6 +387,47 @@ app.delete('/api/users/:account', async (req, res) => {
         res.status(500).json({ message: 'Đã xảy ra lỗi' });
     }
 });
+
+app.post('/api/stores', async (req, res) => {
+    try {
+        const { store } = req.body;
+
+        // Kiểm tra xem store đã tồn tại hay chưa
+        const existingStore = await Store.findOne({ store });
+        if (existingStore) {
+            return res.status(409).json({ message: 'Store already exists' });
+        }
+
+        // Tạo store mới
+        const newStore = new Store({ store });
+        await newStore.save();
+
+        res.status(201).json(newStore);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
+
+// Route để xóa store theo tên
+app.delete('/api/stores/:storeName', async (req, res) => {
+    try {
+        const { storeName } = req.params;
+
+        // Tìm và xóa store theo tên
+        const deletedStore = await Store.findOneAndDelete({ store: storeName });
+
+        if (!deletedStore) {
+            return res.status(404).json({ message: 'Store not found' });
+        }
+
+        res.json({ message: 'Store deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
+
 
 
 mongoose
