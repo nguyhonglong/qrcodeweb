@@ -19,6 +19,7 @@ function SearchBill() {
           )}&endDate=${dateRange[1]?.format("YYYY-MM-DD")}`
         );
         setBillToDate(response.data);
+        
       } catch (error) {
         console.error("Error fetching drinks:", error);
       }
