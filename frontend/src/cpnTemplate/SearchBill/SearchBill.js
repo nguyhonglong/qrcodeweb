@@ -45,7 +45,7 @@ function SearchBill() {
           />
         </div>
         <div className="table_search_date">
-          <div>{<TableBill billToDate={billToDate}  />}</div>
+          <div>{<TableBill billToDate={billToDate} dateRange={dateRange} />}</div>
         </div>
       </div>
     </>

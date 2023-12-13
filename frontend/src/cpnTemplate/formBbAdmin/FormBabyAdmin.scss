@@ -47,6 +47,9 @@
       box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
         rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
         rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        @include respond(phone){
+          margin: 50px 0;
+        }
     }
   }
 
@@ -63,6 +66,9 @@
     padding: 23px 30px;
     border-radius: 30px;
     background-color: white;
+    @include respond(phone){
+      margin-bottom: 100px;
+    }
     .bgImg {
       // width: 40vw;
       margin: 0 auto;
