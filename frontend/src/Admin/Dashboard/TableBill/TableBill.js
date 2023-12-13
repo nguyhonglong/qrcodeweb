@@ -16,14 +16,6 @@ function TableBill(props) {
 
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
-  // const calculateTotal = (data) => {
-  //   let total = 0;
-  //   // Lặp qua danh sách đồ uống và tính tổng tiền
-  //   data.drinks.forEach((drink) => {
-  //     total += drink.quantity * drink.price;
-  //   });
-  //   return total;
-  // };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState([]);
@@ -32,9 +24,7 @@ function TableBill(props) {
     setDataOpen(data);
     setTotalSumInv(calculateTotalValue(data.drinks));
   };
-  // const handleOk = () => {
-  //   setIsModalOpen(false);
-  // };
+ 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -48,7 +38,7 @@ function TableBill(props) {
     setIsModalOpenDeleTeBill(true);
     setdataDeleTeBill(data);
   };
-  // Handle DeleTe Bill
+  
   const HandleDeleTeBill = async () => {
     console.log(dataDeleTeBill.billID);
     try {
@@ -58,10 +48,13 @@ function TableBill(props) {
         )
         .then(() => {
           setIsModalOpenDeleTeBill(false);
+          fetchDrinkPrices();
         })
         .catch((err) => {
           console.log("delete:", err);
         });
+        
+        fetchData();
     } catch (error) {
       console.error("Error deleting drink: ", error);
     }

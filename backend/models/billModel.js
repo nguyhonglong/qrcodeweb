@@ -34,6 +34,14 @@ const billSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    createdUser:{
+        type: String,
+        required: true
+    },
+    store:{
+        type: String,
+        required: true
+    },
     drinks: [{
         drink: {
             type: String,
