@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-
 const storeSchema = new mongoose.Schema({
-    store : {type : String, required: true, unique: true}
+    storeName : {type : String, required: true, unique: true}
 },{
     timestamps : true
 })

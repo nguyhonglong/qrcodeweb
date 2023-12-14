@@ -33,24 +33,26 @@ export const ContextProivider = ({ children }) => {
   };
 
   // xóa dữ liệu khi rời khỏi trang 
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      // Thêm thông điệp xác nhận trước khi người dùng rời khỏi trang
-      e.preventDefault();
-      e.returnValue = "";
-      localStorage.removeItem("myArrayData");
-      localStorage.removeItem('datalogin');
-      localStorage.removeItem('dataAcount');
-      localStorage.removeItem("dataRoleAcount");
-      localStorage.removeItem("billIDs");
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     // Thêm thông điệp xác nhận trước khi người dùng rời khỏi trang
+  //     e.preventDefault();
+  //     e.returnValue = "";
+  //     if (e.clientY < 0) {
+  //       localStorage.removeItem("myArrayData");
+  //       localStorage.removeItem('datalogin');
+  //       localStorage.removeItem('dataAcount');
+  //       localStorage.removeItem("dataRoleAcount");
+  //       localStorage.removeItem("billIDs");
+  //     }
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, []);
 
   const contextValue = {
     user,

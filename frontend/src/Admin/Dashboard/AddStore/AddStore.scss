@@ -1,0 +1,11 @@
+#AddStore {
+ .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+ .title{
+    text-align: center;
+    margin: 15px 0;
+ }
+}

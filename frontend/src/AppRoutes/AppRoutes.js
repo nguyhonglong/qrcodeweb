@@ -10,6 +10,7 @@ import AddVoucher from "../Admin/Dashboard/AddVoucher/AddVoucher";
 import SearchBillAdmin from "../Admin/Dashboard/SearchBill/SearchBill";
 import DrinkComponent from "../BabyAdmin/cpnBabyAdmin/MenuComponent/MenuComponent";
 import PrivateRoute from "./PrivateRoute";
+import AddStore from "../Admin/Dashboard/AddStore/AddStore";
 function AppRoutes() {
   return (
     <>
@@ -75,6 +76,14 @@ function AppRoutes() {
           element={
             <PrivateRoute>
               <DrinkComponent />
+            </PrivateRoute>
+          }
+        />
+         <Route
+          path="/addstore"
+          element={
+            <PrivateRoute>
+              <AddStore />
             </PrivateRoute>
           }
         />

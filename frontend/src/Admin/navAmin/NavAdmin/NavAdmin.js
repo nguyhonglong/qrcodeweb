@@ -5,6 +5,7 @@ import {
   SearchOutlined,
   ShoppingOutlined,
   HomeOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
@@ -35,7 +36,7 @@ function NavAdmin(props) {
                   className="link-name MyTikTok2"
                   style={{ lineHeight: "35px" }}
                 >
-               Bảng Điều Hành
+                  Bảng Điều Hành
                 </p>
               </Link>
             </span>
@@ -62,6 +63,19 @@ function NavAdmin(props) {
                   style={{ lineHeight: "35px" }}
                 >
                   Tìm kiếm hóa đơn
+                </p>
+              </Link>
+            </span>
+          </li>
+          <li>
+            <span>
+              <Link to="/addstore" style={{ display: "flex" }}>
+                <PlusCircleOutlined className="i" />
+                <p
+                  className="link-name MyTikTok2"
+                  style={{ lineHeight: "35px" }}
+                >
+                  Thêm cửa hàng
                 </p>
               </Link>
             </span>
