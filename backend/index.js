@@ -387,14 +387,12 @@ app.delete('/api/users/:account', async (req, res) => {
 app.post('/api/stores', async (req, res) => {
     try {
         const { storeName } = req.body;
-
-        // Kiểm tra xem store đã tồn tại hay chưa
         const existingStore = await Store.findOne({ storeName });
+        
         if (existingStore) {
             return res.status(409).json({ message: 'Store already exists' });
         }
 
-        // Tạo store mới
         const newStore = new Store({ storeName });
         await newStore.save();
 
