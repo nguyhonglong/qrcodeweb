@@ -68,10 +68,6 @@ app.post('/api/bills', async (req, res) => {
     }
 });
 
-
-
-
-
 app.get('/api/bills', async (request, response) => {
     try {
         const bills = await Bill.find({});
@@ -409,7 +405,6 @@ app.post('/api/stores', async (req, res) => {
     }
 });
 
-// Route để xóa store theo tên
 app.delete('/api/stores/:storeName', async (req, res) => {
     try {
         const { storeName } = req.params;
@@ -428,7 +423,14 @@ app.delete('/api/stores/:storeName', async (req, res) => {
     }
 });
 
-
+app.get('/api/stores', async (req, res) => {
+    try {
+        const stores = await Store.find();
+        res.json(stores);
+    } catch (error) {
+        res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy các cửa hàng.' });
+    }
+});
 
 mongoose
     .connect(mongoDBURL)
