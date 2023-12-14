@@ -35,9 +35,11 @@ function Dashboard() {
     setIsModalOpenSignOut_admin(true);
   };
   const admin_handleOkSignOut = () => {
-    localStorage.removeItem("datalogin");
-    localStorage.removeItem("dataAcount");
+    localStorage.removeItem("myArrayData");
+    localStorage.removeItem('datalogin');
+    localStorage.removeItem('dataAcount');
     localStorage.removeItem("dataRoleAcount");
+    localStorage.removeItem("billIDs");
     navigateSignout("/login");
   };
   const admin_handleCancelSignOut = () => {

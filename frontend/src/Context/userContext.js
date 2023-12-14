@@ -39,6 +39,9 @@ export const ContextProivider = ({ children }) => {
       e.preventDefault();
       e.returnValue = "";
       localStorage.removeItem("myArrayData");
+      localStorage.removeItem('datalogin');
+      localStorage.removeItem('dataAcount');
+      localStorage.removeItem("dataRoleAcount");
       localStorage.removeItem("billIDs");
     };
 
