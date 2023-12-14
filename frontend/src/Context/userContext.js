@@ -39,6 +39,7 @@ export const ContextProivider = ({ children }) => {
       e.preventDefault();
       e.returnValue = "";
       localStorage.removeItem("myArrayData");
+      localStorage.removeItem("billIDs");
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);

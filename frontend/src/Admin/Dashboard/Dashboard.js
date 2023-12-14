@@ -190,7 +190,6 @@ function Dashboard() {
       },
     }),
   };
-  console.log(dataUser);
   return (
     <>
       {setError}

@@ -50,6 +50,8 @@ function NavBar() {
     localStorage.removeItem('datalogin');
     localStorage.removeItem('dataAcount');
     localStorage.removeItem("dataRoleAcount");
+    localStorage.removeItem("billIDs");
+
     navigateSignout("/login");
   };
   const handleCancelSignOut = () => {

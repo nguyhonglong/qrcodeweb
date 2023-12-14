@@ -10,38 +10,22 @@ function InsertCode() {
   const [successMess, setSuccessMess] = message.useMessage();
   const [valueSearchCode, setValueSearchCode] = useState("");
   const [billData, setBillData] = useState([]);
-  let myArray = JSON.parse(localStorage.getItem("myArrayData")) || [];
   const handleSearchCode = async () => {
     if (valueSearchCode !== "") {
-      console.log(valueSearchCode);
+      // console.log(valueSearchCode);
       try {
         const response = await axios.get(
           `https://qrcodeweb-api.vercel.app/api/bills/${valueSearchCode}`
         );
-        // setBillData(response.data);
-        if (myArray.length === 0) {
-          myArray.push(response.data);
-          localStorage.setItem("myArrayData", JSON.stringify(myArray));
-          const retrievedArrayJSON = localStorage.getItem("myArrayData");
-          const retrievedArray = JSON.parse(retrievedArrayJSON);
-          setBillData(retrievedArray);
-          successMess.open({
-            type: "success",
-            content: "Tra cứu hóa đơn thành công",
-          });
-          setValueSearchCode("");
-        } else {
-          const retrievedArrayJSON = localStorage.getItem("myArrayData");
-          const retrievedArray = JSON.parse(retrievedArrayJSON);
-          const isElementExists = retrievedArray.some(
+        // console.log(response.data);
+        if (response.data) {
+          const isElementExists = billData?.find(
             (item) => item.billID === valueSearchCode
           );
           if (!isElementExists) {
-            myArray.push(response.data);
-            localStorage.setItem("myArrayData", JSON.stringify(myArray));
-            const retrievedArrayJSON = localStorage.getItem("myArrayData");
-            const retrievedArray = JSON.parse(retrievedArrayJSON);
-            setBillData(retrievedArray);
+            const updatedBillData = [...billData, response.data];
+            setBillData(updatedBillData);
+            localStorage.setItem('billIDs', JSON.stringify(updatedBillData.map(item => item.billID)));
             // message
             successMess.open({
               type: "success",
@@ -49,13 +33,18 @@ function InsertCode() {
             });
             setValueSearchCode("");
           } else {
-            console.log("Mã bạn nhập đã được tìm kiếm");
             successMess.open({
               type: "error",
               content: "Mã tra cứu đã tồn tại",
             });
             setValueSearchCode("");
           }
+        } else {
+          successMess.open({
+            type: "error",
+            content: "Không có dữ liệu hóa đơn này",
+          });
+          setValueSearchCode("");
         }
       } catch (error) {
         console.error("Error fetching drinks:", error);
@@ -72,8 +61,8 @@ function InsertCode() {
     }
   };
   const handleClearData = () => {
-    // Xóa mảng khỏi localStorage
-    localStorage.removeItem("myArrayData");
+    // xóa dữ liệu trên localStorage
+    localStorage.removeItem('billIDs');
     // Xóa mảng trong state
     setBillData([]);
 
@@ -83,7 +72,7 @@ function InsertCode() {
       content: "Xóa hóa đơn thành công",
     });
   };
-  
+
   return (
     <>
       {setSuccessMess}
