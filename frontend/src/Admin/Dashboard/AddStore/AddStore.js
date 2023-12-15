@@ -7,19 +7,10 @@ import {
   Form,
   Input,
   InputNumber,
-  Popconfirm,
   Table,
   Typography,
+  message,
 } from "antd";
-// const originData = [];
-// for (let i = 0; i < 10; i++) {
-//   originData.push({
-//     key: i.toString(),
-//     name: `Edward ${i}`,
-//     age: 32,
-//     address: `London Park no. ${i}`,
-//   });
-// }
 const EditableCell = ({
   editing,
   dataIndex,
@@ -55,6 +46,17 @@ const EditableCell = ({
   );
 };
 function AddStore() {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
+  const [successMess, setSuccessMess] = message.useMessage();
   // get data Store
   const [getStores, setGetStores] = useState([]);
   useEffect(() => {
@@ -76,53 +78,87 @@ function AddStore() {
   const handleAddStore = async () => {
     try {
       const data = {
-        store: inputStoreValue,
+        storeName: inputStoreValue,
         // Thêm các trường dữ liệu khác tùy ý
       };
 
-      const response = await axios.post(
-        "https://qrcodeweb-api.vercel.app/api/stores",
-        data
-      );
-      setGetStores(response.data);
-      console.log(response.data);
+      await axios
+        .post("https://qrcodeweb-api.vercel.app/api/stores", data)
+        .then(async () => {
+          successMess.open({
+            type: "success",
+            content: "Thêm cửa hàng thành công",
+          });
+          await axios
+            .get("https://qrcodeweb-api.vercel.app/api/stores")
+            .then((response) => {
+              setGetStores(response.data);
+              console.log(response.data);
+              setInputStoreValue("");
+            });
+        })
+        .catch((err) => {
+          successMess.open({
+            type: "error",
+            content: "Thêm cửa hàng thất bại",
+          });
+        });
     } catch (error) {
       console.error("Error fetching drinks:", error);
     }
   };
 
   const [form] = Form.useForm();
-  const [data, setData] = useState(getStores);
   const [editingKey, setEditingKey] = useState("");
-  const isEditing = (record) => record.key === editingKey;
+  const isEditing = (record) => record._id === editingKey;
   const edit = (record) => {
     form.setFieldsValue({
-      name: "",
-      age: "",
-      address: "",
+      storeName: "",
       ...record,
     });
-    setEditingKey(record.key);
+    setEditingKey(record._id);
   };
   const cancel = () => {
     setEditingKey("");
   };
+  const deleteStore = async (record) => {
+    console.log(record.storeName);
+    await axios
+      .delete(`https://qrcodeweb-api.vercel.app/api/stores/${record.storeName}`)
+      .then(() => {
+        successMess.open({
+          type: "success",
+          content: "Xóa cửa hàng thành công",
+        });
+        setEditingKey("");
+      })
+      .catch((err) => console.log(err));
+  };
   const save = async (key) => {
+    console.log(key);
     try {
+      // giá trị của row hiện tại
       const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
+      const oldValueRow = row;
+      console.log(oldValueRow);
+      const newData = [...getStores];
+      // tìm vị trí của row được nhấn nút save
+      const index = newData.findIndex((item) => key === item._id);
       if (index > -1) {
+        // if (row === "") {
+        //   await axios.delete(`https://qrcodeweb-api.vercel.app/api/stores/${}`);
+        // }
+
         const item = newData[index];
         newData.splice(index, 1, {
           ...item,
           ...row,
         });
-        setData(newData);
+        // setGetStores(newData);
         setEditingKey("");
       } else {
         newData.push(row);
-        setData(newData);
+        setGetStores(newData);
         setEditingKey("");
       }
     } catch (errInfo) {
@@ -133,29 +169,43 @@ function AddStore() {
   const columns = [
     {
       title: "TÊN CỬA HÀNG",
-      dataIndex: "name",
+      dataIndex: "storeName",
+      key: "storeName",
       editable: true,
     },
     {
+      title: "THỜI GIAN TẠO",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (text) => formatDate(text),
+      width: "20%",
+    },
+    {
       title: "HOẠT ĐỘNG",
-      width: "30%",
+      width: "20%",
       dataIndex: "operation",
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
-          <span>
-            <Typography.Link
-              onClick={() => save(record.key)}
-              style={{
-                marginRight: 8,
-              }}
-            >
-              Save
-            </Typography.Link>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
-            </Popconfirm>
-          </span>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div>
+              <Typography.Link onClick={() => save(record._id)}>
+                Save
+              </Typography.Link>
+              <br></br>
+              <Typography.Text
+                type="danger"
+                onClick={() => deleteStore(record)}
+              >
+                Delete
+              </Typography.Text>
+            </div>
+            <div>
+              <Typography.Text type="warning" onClick={cancel}>
+                Cancel
+              </Typography.Text>
+            </div>
+          </div>
         ) : (
           <Typography.Link
             disabled={editingKey !== ""}
@@ -175,7 +225,7 @@ function AddStore() {
       ...col,
       onCell: (record) => ({
         record,
-        inputType: col.dataIndex === "age" ? "number" : "text",
+        inputType: "text",
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
@@ -185,6 +235,9 @@ function AddStore() {
 
   return (
     <>
+      {/* success */}
+      {setSuccessMess}
+      {/* success */}
       <div id="AddStore">
         <NavChildAdmin />
         <h3 className="title">Quản lý cửa hàng</h3>
@@ -216,13 +269,17 @@ function AddStore() {
           <Table
             style={{ maxWidth: "800px", margin: "0 auto" }}
             className="table"
+            scroll={{
+              x: 600,
+              y: 400,
+            }}
             components={{
               body: {
                 cell: EditableCell,
               },
             }}
             bordered
-            dataSource={data}
+            dataSource={getStores}
             columns={mergedColumns}
             rowClassName="editable-row"
             pagination={{
