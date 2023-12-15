@@ -106,7 +106,8 @@ function FormBabyAdmin() {
   };
 
   const [drinks, setDrinks] = useState([]);
-
+  const [stores, setStores] = useState([]);
+// data đồ uống
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -120,7 +121,20 @@ function FormBabyAdmin() {
     };
     fetchData();
   }, [user]);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://qrcodeweb-api.vercel.app/api/stores"
+        );
+        setStores(response.data);
+      } catch (error) {
+        console.error("Error fetching drinks:", error);
+      }
+    };
+    fetchData();
+  }, [user]);
+// render data đồ uống
   const renderDrinkOptions = () => {
     return drinks.map((drink) => (
       <Option key={drink._id} value={drink.name}>
@@ -129,6 +143,14 @@ function FormBabyAdmin() {
     ));
   };
 
+// render data cửa hàng
+  const renderStoreOptions = () => {
+    return stores.map((drink) => (
+      <Option key={drink._id} value={drink.storeName}>
+        {drink.storeName}
+      </Option>
+    ));
+  };
   const captureAndSaveImage = () => {
     const element = document.getElementById("myDiv");
     html2canvas(element).then(function (canvas) {
@@ -239,17 +261,9 @@ function FormBabyAdmin() {
                   onChange={onChangeSelectStore}
                   onSearch={onSearchStore}
                   filterOption={filterOption}
-                  options={[
-                    {
-                      value: "Đỉnh Gió Coffee",
-                      label: "Đỉnh Gió Coffee",
-                    },
-                    {
-                      value: "Cloud Forest",
-                      label: "Cloud Forest",
-                    },
-                  ]}
-                />
+                >
+                  {renderStoreOptions()}
+                </Select>
               </Form.Item>
               {/* đồ uống */}
               <Form.Item
