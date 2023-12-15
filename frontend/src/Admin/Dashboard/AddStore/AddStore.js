@@ -125,30 +125,32 @@ function AddStore() {
     console.log(record.storeName);
     await axios
       .delete(`https://qrcodeweb-api.vercel.app/api/stores/${record.storeName}`)
-      .then(() => {
+      .then(async() => {
         successMess.open({
           type: "success",
           content: "Xóa cửa hàng thành công",
         });
+        await axios
+            .get("https://qrcodeweb-api.vercel.app/api/stores")
+            .then((response) => {
+              setGetStores(response.data);
+            });
         setEditingKey("");
       })
       .catch((err) => console.log(err));
   };
+
+  // tạm thời chưa dùng
+  /////////////////////
   const save = async (key) => {
     console.log(key);
     try {
       // giá trị của row hiện tại
       const row = await form.validateFields();
-      const oldValueRow = row;
-      console.log(oldValueRow);
       const newData = [...getStores];
       // tìm vị trí của row được nhấn nút save
       const index = newData.findIndex((item) => key === item._id);
       if (index > -1) {
-        // if (row === "") {
-        //   await axios.delete(`https://qrcodeweb-api.vercel.app/api/stores/${}`);
-        // }
-
         const item = newData[index];
         newData.splice(index, 1, {
           ...item,
@@ -158,20 +160,21 @@ function AddStore() {
         setEditingKey("");
       } else {
         newData.push(row);
-        setGetStores(newData);
+        // setGetStores(newData);
         setEditingKey("");
       }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
   };
+  /////////////////////
 
   const columns = [
     {
       title: "TÊN CỬA HÀNG",
       dataIndex: "storeName",
       key: "storeName",
-      editable: true,
+      // editable: true,
     },
     {
       title: "THỜI GIAN TẠO",
@@ -189,11 +192,12 @@ function AddStore() {
         return editable ? (
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div>
-              <Typography.Link onClick={() => save(record._id)}>
+              {/* <Typography.Link onClick={() => save(record._id)}>
                 Save
               </Typography.Link>
-              <br></br>
+              <br></br> */}
               <Typography.Text
+                style={{ cursor: "pointer" }}
                 type="danger"
                 onClick={() => deleteStore(record)}
               >
@@ -201,7 +205,11 @@ function AddStore() {
               </Typography.Text>
             </div>
             <div>
-              <Typography.Text type="warning" onClick={cancel}>
+              <Typography.Text
+                style={{ cursor: "pointer" }}
+                type="warning"
+                onClick={cancel}
+              >
                 Cancel
               </Typography.Text>
             </div>
