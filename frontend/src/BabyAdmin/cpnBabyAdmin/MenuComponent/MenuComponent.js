@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from '../../../components/NavBar/NavBar'
 import "./MenuComponent.scss"
+import { Row, Col, List, Button, Input } from 'antd';
+
 function DrinkComponent() {
   const [drinks, setDrinks] = useState([]);
   const [formData, setFormData] = useState({ name: '', price: '' });
@@ -63,7 +65,66 @@ function DrinkComponent() {
   return (
     <div>
       <NavBar />
+
+
       <div className='drinks'>
+        <h2>Quản lý đồ uống</h2>
+        <Row gutter={[16, 16]}>
+          <Col span={12}>
+            <List
+              bordered
+              dataSource={drinks.slice(0, Math.ceil(drinks.length / 2))}
+              renderItem={(drink) => (
+                <List.Item className="border-bottom text-primary">
+                  {drink.name} - {drink.price}
+                  <Button onClick={() => selectDrink(drink._id, drink.name, drink.price)}>Edit</Button>
+                  <Button onClick={() => deleteDrink(drink._id)}>Delete</Button>
+                </List.Item>
+              )}
+            />
+          </Col>
+          <Col span={12}>
+            <List
+              bordered
+              dataSource={drinks.slice(Math.ceil(drinks.length / 2))}
+              renderItem={(drink) => (
+                <List.Item className="border-bottom text-primary">
+                  {drink.name} - {drink.price}
+                  <Button onClick={() => selectDrink(drink._id, drink.name, drink.price)}>Edit</Button>
+                  <Button onClick={() => deleteDrink(drink._id)}>Delete</Button>
+                </List.Item>
+              )}
+            />
+          </Col>
+        </Row>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (selectedDrinkId) {
+            updateDrink();
+          } else {
+            addDrink();
+          }
+        }}>
+          <Input
+            type="text"
+            placeholder="Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
+          <Input
+            type="number"
+            placeholder="Price"
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+          />
+          {selectedDrinkId ? (
+            <Button type="primary" htmlType="submit">Update</Button>
+          ) : (
+            <Button type="primary" htmlType="submit">Add Drink</Button>
+          )}
+        </form>
+      </div>
+      {/* <div className='drinks'>
         <h2>Quản lý đồ uống</h2>
         <ul>
           {drinks.map((drink) => (
@@ -100,7 +161,7 @@ function DrinkComponent() {
             <button type="submit">Add Drink</button>
           )}
         </form>
-      </div>
+      </div> */}
     </div>
 
   );
