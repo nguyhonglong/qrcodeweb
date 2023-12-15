@@ -406,15 +406,29 @@ app.post('/api/stores', async (req, res) => {
 app.delete('/api/stores/:storeName', async (req, res) => {
     try {
         const { storeName } = req.params;
+        const deletedStore = await Store.findOneAndDelete({ storeName: storeName });
+        
+        if (!deletedStore) {
+            return res.status(404).json({ message: `Store not found ${storeName} kk` });
+        }
 
-        // Tìm và xóa store theo tên
-        const deletedStore = await Store.findOneAndDelete({ store: storeName });
+        res.json({ message: 'Store deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+});
+
+app.delete('/api/deleteStoresById/:storeId', async (req, res) => {
+    try {
+        const { storeId } = req.params;
+        const deletedStore = await Store.findByIdAndDelete(storeId);
 
         if (!deletedStore) {
             return res.status(404).json({ message: 'Store not found' });
         }
 
-        res.json({ message: 'Store deleted successfully' });
+        res.json({ message: 'Store deleted successfully', deletedStore });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });
