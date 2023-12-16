@@ -63,12 +63,12 @@ function DrinkComponent() {
 
 
   return (
-    <div>
+    <div id='MenuCpn'>
       <NavBar />
 
 
       <div className='drinks'>
-        <h2>Quản lý đồ uống</h2>
+        <h2 style={{margin:'30px 0 20px 20px'}}>Quản lý đồ uống</h2>
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <List

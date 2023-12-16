@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./TableBillUser.scss";
 import axios from "axios";
-import { Modal, Spin, Table, Button, Radio } from "antd";
+import { Modal, Table, Button } from "antd";
 // import { Filled, QuestionCircleOutlined } from "@ant-design/icons";
 import InvoiceBill from "../../cpnTemplate/InvoiceBill/InvoiceBill";
 import { message } from "antd";
@@ -128,15 +128,6 @@ function TableBillUser(props) {
   };
   const columns = [
     {
-      className: "center-align-table",
-      title: "NGƯỜI TẠO",
-      dataIndex: "createdUser",
-      key: "createdUser",
-      width: 150,
-      ellipsis: true,
-      fixed: "left",
-    },
-    {
       title: "MÃ ĐƠN",
       dataIndex: "billID",
       key: "billID",
@@ -194,7 +185,7 @@ function TableBillUser(props) {
       width: 120,
       render: (_, record) => (
         <div>
-          {record.isUsed == true ? (
+          {record.isUsed === true ? (
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button type="primary" size="small" danger>
                 Đã Dùng
