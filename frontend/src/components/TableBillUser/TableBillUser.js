@@ -147,6 +147,7 @@ function TableBillUser(props) {
       title: "TÊN",
       dataIndex: "customerName",
       key: "customerName",
+      align: "center",
       width: 150,
       ellipsis: true,
     },
@@ -182,7 +183,7 @@ function TableBillUser(props) {
       key: "isUsed",
       align: "center",
       fixed: "right",
-      width: 120,
+      width: 100,
       render: (_, record) => (
         <div>
           {record.isUsed === true ? (

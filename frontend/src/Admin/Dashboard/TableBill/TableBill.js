@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./TableBill.scss";
 import axios from "axios";
-import { Modal, Spin, Table } from "antd";
+import { Modal, Spin, Table, Typography, Button, Tooltip } from "antd";
 import { DeleteFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import InvoiceBill from "../../../cpnTemplate/InvoiceBill/InvoiceBill";
 import { message } from "antd";
@@ -158,9 +158,10 @@ function TableBill(props) {
       title: "NGƯỜI TẠO",
       dataIndex: "createdUser",
       key: "createdUser",
-      width: 150,
+      width: 120,
       ellipsis: true,
       fixed: "left",
+      render: (text) => <Tooltip title={text}>{text}</Tooltip>,
     },
     {
       title: "MÃ ĐƠN",
@@ -169,6 +170,7 @@ function TableBill(props) {
       ellipsis: true,
       width: 120,
       align: "center",
+      render: (text) => <Tooltip title={text}>{text}</Tooltip>,
     },
     {
       title: "CỬA HÀNG",
@@ -176,6 +178,9 @@ function TableBill(props) {
       key: "storeName",
       width: 150,
       align: "center",
+      render: (text) => (
+        <Tooltip title={"Tên cửa hàng: "+text}>{text}</Tooltip>
+      ),
     },
     {
       className: "center-align-table",
@@ -184,6 +189,7 @@ function TableBill(props) {
       key: "customerName",
       width: 150,
       ellipsis: true,
+      render: (text) => <Tooltip title={"Tên KH: "+text}>{text}</Tooltip>,
     },
     {
       title: "NGÀY",
@@ -192,15 +198,18 @@ function TableBill(props) {
       ellipsis: true,
       width: 150,
       align: "center",
-      render: (text) => formatDate(text),
+      render: (text) => (
+        <Tooltip title={formatDate(text)}>{formatDate(text)}</Tooltip>
+      ),
     },
     {
-      title: "SỐ NGƯỜI",
+      title: <Tooltip title="SỐ NGƯỜI">SỐ NGƯỜI</Tooltip>,
       dataIndex: "numCustomer",
       key: "numCustomer",
       align: "center",
       ellipsis: true,
       width: 90,
+      render: (text) => <Tooltip title={"Số người: "+text}>{text}</Tooltip>,
     },
     {
       title: "TỔNG",
@@ -209,7 +218,33 @@ function TableBill(props) {
       ellipsis: true,
       align: "center",
       width: 130,
-      render: (text) => calculateTotalValue(text) + ".000VNĐ",
+      render: (text) => (
+        <Tooltip title={"Tổng tiền: "+calculateTotalValue(text) + ".000VNĐ"}>
+          {calculateTotalValue(text) + ".000VNĐ"}
+        </Tooltip>
+      ),
+    },
+    {
+      title: "TRẠNG THÁI",
+      dataIndex: "isUsed",
+      key: "isUsed",
+      ellipsis: true,
+      align: "center",
+      width: 110,
+      render: (text) =>
+        text ? (
+          <div>
+            <Button type="primary" size="small" danger>
+              Đã Dùng
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Button type="primary" size="small">
+              Chưa SD
+            </Button>
+          </div>
+        ),
     },
     {
       title: "XÓA",
@@ -225,13 +260,14 @@ function TableBill(props) {
           }}
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <DeleteFilled className="DeleteTwoTone" />
+          <Tooltip title="Xóa">
+            <DeleteFilled className="DeleteTwoTone" />
+          </Tooltip>
         </div>
       ),
     },
   ];
   const data = billToDateData;
-  // console.log(data);
   const rowProps = (record) => {
     return {
       onClick: () => {
