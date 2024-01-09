@@ -26,22 +26,11 @@ function TableBillUser(props) {
     setDataOpen(data);
     setTotalSumInv(calculateTotalValue(data.drinks));
   };
-  // const handleOk = () => {
-  //   setIsModalOpen(false);
-  // };
+ 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  // const [isModalOpenBill, setIsModalOpenBill] = useState(false);
-  // const [dataBill, setdataBill] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const handleCancelUseBill = () => {
-  //   setIsModalOpenBill(false);
-  // };
-  // const showBill = () => {
-  //   setIsModalOpenBill(true);
-  // };
   const [billToDateData, setBillToDateData] = useState([]);
   useEffect(() => {
     setBillToDateData(props.billToDate);

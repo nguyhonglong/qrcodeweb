@@ -6,6 +6,7 @@ import {
   SearchOutlined,
   HomeOutlined,
   PlusCircleOutlined,
+  FileDoneOutlined,
 } from "@ant-design/icons";
 function NavChildAdmin() {
   return (
@@ -39,6 +40,15 @@ function NavChildAdmin() {
           <Link to="/addstore" style={{ display: "flex", lineHeight: "40px" }}>
             <PlusCircleOutlined className="i" />
             <p className="link-name MyTikTok2"> Thêm cửa hàng</p>
+          </Link>
+        </div>
+        <div className="nav_link">
+          <Link
+            to="/usedinvoice"
+            style={{ display: "flex", lineHeight: "40px" }}
+          >
+            <FileDoneOutlined className="i" />
+            <p className="link-name MyTikTok2">Hóa đơn đã SD</p>
           </Link>
         </div>
       </nav>

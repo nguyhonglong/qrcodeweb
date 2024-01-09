@@ -11,6 +11,7 @@ import SearchBillAdmin from "../Admin/Dashboard/SearchBill/SearchBill";
 import DrinkComponent from "../BabyAdmin/cpnBabyAdmin/MenuComponent/MenuComponent";
 import PrivateRoute from "./PrivateRoute";
 import AddStore from "../Admin/Dashboard/AddStore/AddStore";
+import UsedInvoice from "../Admin/Dashboard/UsedInvoice/UsedInvoice";
 function AppRoutes() {
   return (
     <>
@@ -84,6 +85,14 @@ function AppRoutes() {
           element={
             <PrivateRoute>
               <AddStore />
+            </PrivateRoute>
+          }
+        />
+          <Route
+          path="/usedinvoice"
+          element={
+            <PrivateRoute>
+              <UsedInvoice />
             </PrivateRoute>
           }
         />

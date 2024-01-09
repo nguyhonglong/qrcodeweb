@@ -6,6 +6,7 @@ import {
   ShoppingOutlined,
   HomeOutlined,
   PlusCircleOutlined,
+  FileDoneOutlined,
 } from "@ant-design/icons";
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
@@ -76,6 +77,19 @@ function NavAdmin(props) {
                   style={{ lineHeight: "35px" }}
                 >
                   Thêm cửa hàng
+                </p>
+              </Link>
+            </span>
+          </li>
+          <li>
+            <span>
+              <Link to="/usedinvoice" style={{ display: "flex" }}>
+                <FileDoneOutlined className="i" />
+                <p
+                  className="link-name MyTikTok2"
+                  style={{ lineHeight: "35px" }}
+                >
+                  Hóa đơn đã SD
                 </p>
               </Link>
             </span>

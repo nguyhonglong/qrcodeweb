@@ -1,0 +1,184 @@
+@mixin respond($breakpoint) {
+    @if $breakpoint == phoneSmall {
+      @media (max-width: 400px) {
+        @content;
+      }
+    }
+    @if $breakpoint == phone {
+      @media (max-width: 550px) {
+        @content;
+      }
+    }
+    @if $breakpoint == tablet {
+      @media (max-width: 900px) {
+        @content;
+      }
+    }
+    @if $breakpoint == desktop {
+      @media (min-width: 1025px) {
+        @content;
+      }
+    }
+  }
+  @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
+  
+  $base-spacing-unit: 24px;
+  $half-spacing-unit: $base-spacing-unit / 2;
+  
+  $color-alpha: #1772ff;
+  $color-form-highlight: #eeeeee;
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  
+  #UsedInvoice {
+    margin-top: -50px;
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
+    .title{
+        text-align: center;
+        display: block;
+        margin-top: 70px;
+     }
+    .container {
+      max-width: 1200px;
+      min-width: 700px;
+  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // min-height: 100vh;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      @include respond(tablet) {
+        min-width: unset;
+        margin-top: 80px;
+      }
+      @include respond(phone) {
+        min-width: unset;
+        margin-top: 50px;
+      }
+    }
+  
+    .table {
+      width: 100%;
+      // border: 1px solid $color-form-highlight;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 12px;
+    }
+  
+    // .table-header {
+    //   display: flex;
+    //   width: 100%;
+    //   background: #f8f8f8;
+    //   padding: ($half-spacing-unit * 1.5) 0;
+    //   border-radius: 12px 12px 0 0;
+    //   // box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    //   @include respond(phone) {
+    //     margin-top: 70px;
+    //   }
+    // }
+    // .table-content {
+    //   max-height: 400px;
+    //   overflow-y: auto;
+    //   border-radius: 0 0 12px 12px;
+    // }
+  
+    // .table-row {
+    //   cursor: pointer;
+    //   display: flex;
+    //   width: 100%;
+    //   padding: ($half-spacing-unit * 1.5) 0;
+    //   // background-color: #ccc;
+    //   background: $color-form-highlight;
+    //   font-family: "MyTikTok3";
+    // }
+    // .table-row:hover {
+    //   background-color: #ccc;
+    //   color: #000;
+    //   font-weight: bold;
+    // }
+    // .table-row:last-child {
+    //   border-radius: 0 0 12px 12px;
+    // }
+    // .table-data,
+    // .header__item {
+    //   flex: 1;
+    //   text-align: center;
+    // }
+    .ant-table-thead th.center-align-table {
+      text-align: center;
+    }
+     .DeleteTwoTone:hover {
+      color: tomato !important;
+    }
+    .table-data {
+      font-size: 12px;
+      @include respond(phone) {
+        font-size: 5px !important;
+      }
+    }
+    .header__item {
+      text-transform: uppercase;
+      font-size: 12px;
+      @include respond(phone) {
+        font-size: 5px;
+      }
+    }
+  
+    .filter__link {
+      color: #000;
+      font-family: "MyTikTok2";
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      padding-left: $base-spacing-unit;
+      padding-right: $base-spacing-unit;
+      @include respond(phone) {
+        font-size: 7px;
+      }
+      @include respond(phoneSmall) {
+        font-size: 6px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        right: -($half-spacing-unit * 1.5);
+        color: white;
+        font-size: $half-spacing-unit;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+  
+      &.desc::after {
+        content: "(desc)";
+      }
+  
+      &.asc::after {
+        content: "(asc)";
+      }
+    }
+  }
+  .myModal {
+    // background-color: #000;
+  }
+  .ant-modal-content {
+    @include respond(phone) {
+      width: 380px;
+    }
+    @include respond(phoneSmall) {
+      width: 300px;
+    }
+  }
+  
