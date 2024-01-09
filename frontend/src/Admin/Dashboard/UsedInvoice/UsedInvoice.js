@@ -481,15 +481,16 @@ function UsedInvoice(props) {
         const dataIsUsed = response.data.filter(
           (item) => item.isUsed === false
         );
-        setBills(dataIsUsed);
+        const reversedData = [...dataIsUsed].reverse();
+        setBills(reversedData);
       } catch (error) {
         console.error("Error fetching drinks:", error);
       }
     };
     fetchData();
   }, []);
-  const data = bills;
-  console.log(data);
+  const data = bills
+//   console.log(data);
   const rowProps = (record) => {
     return {
       onClick: () => {
