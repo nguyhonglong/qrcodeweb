@@ -479,7 +479,7 @@ function UsedInvoice(props) {
           "https://qrcodeweb-api.vercel.app/api/bills"
         );
         const dataIsUsed = response.data.filter(
-          (item) => item.isUsed === false
+          (item) => item.isUsed === true
         );
         const reversedData = [...dataIsUsed].reverse();
         setBills(reversedData);

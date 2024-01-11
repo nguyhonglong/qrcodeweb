@@ -1,7 +1,6 @@
 import React, { memo, useState, useEffect } from "react";
 import "./InvoiceBill.scss";
 import axios from "axios";
-import { Table } from "antd";
 import imgCoffe from "../../asset/image/invoice.jpg";
 function InvoiceBill(props) {
   // format date
