@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { message, Table } from "antd";
+import { SolutionOutlined, UserOutlined } from "@ant-design/icons";
 import axios from "axios";
 import "./Dashboard.scss";
 import {
@@ -7,11 +8,13 @@ import {
   UilTachometerFastAlt,
   UilClockThree,
 } from "@iconscout/react-unicons";
-import { SolutionOutlined, UserOutlined } from "@ant-design/icons";
-import { Modal, Tooltip } from "antd";
+import { Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../Context/userContext";
 import NavAdmin from "../navAmin/NavAdmin/NavAdmin";
+
+
+
 function Dashboard() {
   const { user } = useUserContext();
   const navigateSignout = useNavigate();
@@ -36,8 +39,8 @@ function Dashboard() {
   };
   const admin_handleOkSignOut = () => {
     localStorage.removeItem("myArrayData");
-    localStorage.removeItem('datalogin');
-    localStorage.removeItem('dataAcount');
+    localStorage.removeItem("datalogin");
+    localStorage.removeItem("dataAcount");
     localStorage.removeItem("dataRoleAcount");
     localStorage.removeItem("billIDs");
     navigateSignout("/login");
@@ -192,6 +195,9 @@ function Dashboard() {
       },
     }),
   };
+
+  // exportUser to excel
+
   return (
     <>
       {setError}
@@ -241,35 +247,9 @@ function Dashboard() {
                 <UilClockThree className="i" />
                 <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
-              {/* <div className="management-panel-user">
-                <table>
-                  <thead>
-                    <tr>
-                      <th >Name</th>
-                      <th>Email</th>
-                      <th>Type</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <br></br>
-                    {dataUser.map((data) => (
-                      <tr
-                        key={data.id}
-                        onClick={() => showModalEditUser(data.account)}
-                      >
-                        <td className="MyTikTok2" style={{ cursor: "pointer"}}>
-                          <Tooltip title={data.name}>{data.name}</Tooltip>
-                        </td>
-                        <td className="MyTikTok2" style={{ cursor: "pointer"}}>
-                          <Tooltip title={data.account}>{data.account}</Tooltip>
-                        </td>
-                        <td className="MyTikTok2" style={{ cursor: "pointer" }}>{data.role}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div> */}
-               <Table {...tableProps} />;
+              <Table {...tableProps}/>
+             
+           
             </div>
           </div>
         </section>

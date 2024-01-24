@@ -1,310 +1,16 @@
-// import React, { useRef, useState, useEffect } from "react";
-// import "./UsedInvoice.scss";
-// import axios from "axios";
-// import { SearchOutlined } from "@ant-design/icons";
-// import Highlighter from "react-highlight-words";
-// import { Button, Input, Space, Table } from "antd";
-// import NavChildAdmin from "../../navAmin/NavChildAdmin/NavChildAdmin";
-
-// const data = [
-//   {
-//     key: "1",
-//     name: "John Brown",
-//     age: 32,
-//     address: "New York No. 1 Lake Park",
-//   },
-//   {
-//     key: "2",
-//     name: "Joe Black",
-//     age: 42,
-//     address: "London No. 1 Lake Park",
-//   },
-//   {
-//     key: "3",
-//     name: "Jim Green",
-//     age: 32,
-//     address: "Sydney No. 1 Lake Park",
-//   },
-//   {
-//     key: "4",
-//     name: "Jim Red",
-//     age: 32,
-//     address: "London No. 2 Lake Park",
-//   },
-// ];
-// function UsedInvoice() {
-//   const [searchText, setSearchText] = useState("");
-//   const [searchedColumn, setSearchedColumn] = useState("");
-//   const searchInput = useRef(null);
-//   const handleSearch = (selectedKeys, confirm, dataIndex) => {
-//     confirm();
-//     setSearchText(selectedKeys[0]);
-//     setSearchedColumn(dataIndex);
-//   };
-//   const handleReset = (clearFilters) => {
-//     clearFilters();
-//     setSearchText("");
-//   };
-//   const getColumnSearchProps = (dataIndex) => ({
-//     filterDropdown: ({
-//       setSelectedKeys,
-//       selectedKeys,
-//       confirm,
-//       clearFilters,
-//       close,
-//     }) => (
-//       <div
-//         style={{
-//           padding: 8,
-//         }}
-//         onKeyDown={(e) => e.stopPropagation()}
-//       >
-//         <Input
-//           ref={searchInput}
-//           placeholder={`Search ${dataIndex}`}
-//           value={selectedKeys[0]}
-//           onChange={(e) =>
-//             setSelectedKeys(e.target.value ? [e.target.value] : [])
-//           }
-//           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-//           style={{
-//             marginBottom: 8,
-//             display: "block",
-//           }}
-//         />
-//         <Space>
-//           <Button
-//             type="primary"
-//             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-//             icon={<SearchOutlined />}
-//             size="small"
-//             style={{
-//               width: 90,
-//             }}
-//           >
-//             Search
-//           </Button>
-//           <Button
-//             onClick={() => clearFilters && handleReset(clearFilters)}
-//             size="small"
-//             style={{
-//               width: 90,
-//             }}
-//           >
-//             Reset
-//           </Button>
-//           <Button
-//             type="link"
-//             size="small"
-//             onClick={() => {
-//               confirm({
-//                 closeDropdown: false,
-//               });
-//               setSearchText(selectedKeys[0]);
-//               setSearchedColumn(dataIndex);
-//             }}
-//           >
-//             Filter
-//           </Button>
-//           <Button
-//             type="link"
-//             size="small"
-//             onClick={() => {
-//               close();
-//             }}
-//           >
-//             close
-//           </Button>
-//         </Space>
-//       </div>
-//     ),
-//     filterIcon: (filtered) => (
-//       <SearchOutlined
-//         style={{
-//           color: filtered ? "#1677ff" : undefined,
-//         }}
-//       />
-//     ),
-//     onFilter: (value, record) =>
-//       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-//     onFilterDropdownOpenChange: (visible) => {
-//       if (visible) {
-//         setTimeout(() => searchInput.current?.select(), 100);
-//       }
-//     },
-//     render: (text) =>
-//       searchedColumn === dataIndex ? (
-//         <Highlighter
-//           highlightStyle={{
-//             backgroundColor: "#ffc069",
-//             padding: 0,
-//           }}
-//           searchWords={[searchText]}
-//           autoEscape
-//           textToHighlight={text ? text.toString() : ""}
-//         />
-//       ) : (
-//         text
-//       ),
-//   });
-//   //   ...getColumnSearchProps("address"),
-//   //   sorter: (a, b) => a.address.length - b.address.length,
-//   //   sortDirections: ["descend", "ascend"],
-
-//   const formatDate = (dateString) => {
-//     const date = new Date(dateString);
-//     const year = date.getFullYear();
-//     const month = String(date.getMonth() + 1).padStart(2, "0");
-//     const day = String(date.getDate()).padStart(2, "0");
-//     const hours = String(date.getHours()).padStart(2, "0");
-//     const minutes = String(date.getMinutes()).padStart(2, "0");
-
-//     return `${year}-${month}-${day} ${hours}:${minutes}`;
-//   };
-//   const [drinkPrices, setDrinkPrices] = useState({});
-//   useEffect(() => {
-//     fetchDrinkPrices();
-//   }, []);
-
-//   const fetchDrinkPrices = async () => {
-//     try {
-//       const response = await axios.get(
-//         "https://qrcodeweb-api.vercel.app/api/drinks"
-//       );
-//       const drinks = response.data;
-//       const prices = {};
-
-//       for (const drink of drinks) {
-//         prices[drink.name] = drink.price;
-//       }
-
-//       setDrinkPrices(prices);
-//     } catch (error) {
-//       console.error("Error fetching drink prices:", error);
-//     }
-//   };
-//   const calculateTotalValue = (drinks) => {
-//     let total = 0;
-//     for (const drink of drinks) {
-//       const price = drinkPrices[drink.drink];
-//       total += drink.quantity * price;
-//     }
-//     return total;
-//   };
-//   const columns = [
-//     {
-//       title: "MÃ ĐƠN",
-//       dataIndex: "billID",
-//       key: "billID",
-//       ellipsis: true,
-//       width: 120,
-//       align: "center",
-//     },
-//     {
-//       title: "CỬA HÀNG",
-//       dataIndex: "storeName",
-//       key: "storeName",
-//       width: 150,
-//       align: "center",
-//     },
-//     {
-//       className: "center-align-table",
-//       title: "TÊN",
-//       dataIndex: "customerName",
-//       key: "customerName",
-//       align: "center",
-//       width: 150,
-//       ellipsis: true,
-//       ...getColumnSearchProps("customerName"),
-//     },
-//     {
-//       title: "NGÀY",
-//       dataIndex: "createdAt",
-//       key: "createdAt",
-//       ellipsis: true,
-//       width: 150,
-//       align: "center",
-//       render: (text) => formatDate(text),
-//     },
-//     {
-//       title: "SỐ NGƯỜI",
-//       dataIndex: "numCustomer",
-//       key: "numCustomer",
-//       align: "center",
-//       ellipsis: true,
-//       width: 100,
-//     },
-//     {
-//       title: "TỔNG",
-//       dataIndex: "drinks",
-//       key: "_id",
-//       ellipsis: true,
-//       align: "center",
-//       width: 130,
-//       render: (text) => calculateTotalValue(text) + ".000VNĐ",
-//     },
-//     {
-//       title: "SD",
-//       dataIndex: "isUsed",
-//       key: "isUsed",
-//       align: "center",
-//       fixed: "right",
-//       width: 100,
-//     },
-//   ];
-
-//   // lấy hóa đơn
-//   const [bills, setBills] = useState([]);
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get(
-//           "https://qrcodeweb-api.vercel.app/api/bills"
-//         );
-//         const dataIsUsed = response.data.filter(
-//           (item) => item.isUsed === false
-//         );
-//         setBills(dataIsUsed);
-//       } catch (error) {
-//         console.error("Error fetching drinks:", error);
-//       }
-//     };
-//     fetchData();
-//   }, []);
-
-//   console.log(bills);
-//   return (
-//     <>
-//       <div id="UsedInvoice">
-//         <NavChildAdmin />
-//         {/* <Table columns={columns} dataSource={data} /> */}
-//       </div>
-//     </>
-//   );
-// }
-
-// export default UsedInvoice;
-
 import React, { useState, useEffect } from "react";
 import "./UsedInvoice.scss";
 import axios from "axios";
 import { Modal, Table, Button } from "antd";
 // import { Filled, QuestionCircleOutlined } from "@ant-design/icons";
-import { message } from "antd";
 import InvoiceBill from "../../../cpnTemplate/InvoiceBill/InvoiceBill";
 import NavChildAdmin from "../../navAmin/NavChildAdmin/NavChildAdmin";
+import { message } from "antd";
+import { CSVLink } from "react-csv";
+import { FileExcelOutlined } from "@ant-design/icons";
 function UsedInvoice(props) {
   const [successMess, setSuccessMess] = message.useMessage();
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
-  };
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState([]);
@@ -319,6 +25,16 @@ function UsedInvoice(props) {
     setIsModalOpen(false);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
   const [billToDateData, setBillToDateData] = useState([]);
   useEffect(() => {
     setBillToDateData(props.billToDate);
@@ -478,9 +194,7 @@ function UsedInvoice(props) {
         const response = await axios.get(
           "https://qrcodeweb-api.vercel.app/api/bills"
         );
-        const dataIsUsed = response.data.filter(
-          (item) => item.isUsed === true
-        );
+        const dataIsUsed = response.data.filter((item) => item.isUsed === true);
         const reversedData = [...dataIsUsed].reverse();
         setBills(reversedData);
       } catch (error) {
@@ -489,8 +203,8 @@ function UsedInvoice(props) {
     };
     fetchData();
   }, []);
-  const data = bills
-//   console.log(data);
+  const data = bills;
+  //   console.log(data);
   const rowProps = (record) => {
     return {
       onClick: () => {
@@ -498,12 +212,42 @@ function UsedInvoice(props) {
       },
     };
   };
+
+
+// conver data
+const [datacv, setDataCV] = useState([]);
+
+useEffect( () => {
+  const updatedData = [...data];
+  for (const item of updatedData) {
+    const totalValue = calculateTotalValue(item.drinks);
+    item.totalcv = totalValue + "000";
+  }
+  for (const item of updatedData) {
+    const dateValue = formatDate(item.createdAt);
+    item.datecv = dateValue;
+  }
+  setDataCV(updatedData)
+}, [calculateTotalValue, data]);
+
+
+ const headers = [
+    { label: "Mã hóa đơn", key: "billID" },
+    { label: "Cửa hàng", key: "storeName" },
+    { label: "Tên", key: "customerName" },
+    { label: "Ngày tạo", key: "datecv" },
+    { label: "Số người", key: "numCustomer" },
+    { label: "Tổng tiền", key: "totalcv" },
+    { label: "Trạng thái sử dụng", key: "isUsed" },
+  ];
+  
+
   return (
     <>
       {setSuccessMess}
       <NavChildAdmin />
       <div id="UsedInvoice">
-          <h3 className="title">Hóa đơn đã sử dụng</h3>
+        <h3 className="title">Hóa đơn đã sử dụng</h3>
         <div className="container">
           <Table
             scroll={{
@@ -517,6 +261,14 @@ function UsedInvoice(props) {
               ...rowProps(record),
             })}
           />
+          <Button
+            style={{ backgroundColor: "#217346", marginTop: "-16px" }}
+            icon={<FileExcelOutlined style={{ color: "#fff" }} />}
+          >
+            <CSVLink data={datacv} headers={headers} style={{ color: "#fff" }}>
+              {" " + "Xuất Excel"}
+            </CSVLink>
+          </Button>
         </div>
         <Modal
           title="Chi tiết hóa đơn"

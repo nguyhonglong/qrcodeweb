@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import "./TableBill.scss";
 import axios from "axios";
-import { Modal, Spin, Table, Typography, Button, Tooltip } from "antd";
-import { DeleteFilled, QuestionCircleOutlined } from "@ant-design/icons";
+import { Modal, Spin, Table, Button, Tooltip } from "antd";
+import { DeleteFilled, FileExcelOutlined } from "@ant-design/icons";
 import InvoiceBill from "../../../cpnTemplate/InvoiceBill/InvoiceBill";
 import { message } from "antd";
+import { CSVLink } from "react-csv";
 function TableBill(props) {
   const [successMess, setSuccessMess] = message.useMessage();
   const formatDate = (dateString) => {
@@ -85,6 +86,7 @@ function TableBill(props) {
                 "YYYY-MM-DD"
               )}&endDate=${props.dateRange[1]?.format("YYYY-MM-DD")}`
             );
+            console.log(response);
             const dataIdAcount = localStorage.getItem("dataAcount");
             const dataRoleAcount = localStorage.getItem("dataRoleAcount");
             if (dataRoleAcount === "admin") {
@@ -142,14 +144,15 @@ function TableBill(props) {
     }
   };
 
-  const calculateTotalValue = (drinks) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const calculateTotalValue = useCallback((drinks) => {
     let total = 0;
     for (const drink of drinks) {
       const price = drinkPrices[drink.drink];
       total += drink.quantity * price;
     }
     return total;
-  };
+  });
   const [totalSumInv, setTotalSumInv] = useState("");
 
   const columns = [
@@ -179,7 +182,7 @@ function TableBill(props) {
       width: 150,
       align: "center",
       render: (text) => (
-        <Tooltip title={"Tên cửa hàng: "+text}>{text}</Tooltip>
+        <Tooltip title={"Tên cửa hàng: " + text}>{text}</Tooltip>
       ),
     },
     {
@@ -189,7 +192,7 @@ function TableBill(props) {
       key: "customerName",
       width: 150,
       ellipsis: true,
-      render: (text) => <Tooltip title={"Tên KH: "+text}>{text}</Tooltip>,
+      render: (text) => <Tooltip title={"Tên KH: " + text}>{text}</Tooltip>,
     },
     {
       title: "NGÀY",
@@ -209,7 +212,7 @@ function TableBill(props) {
       align: "center",
       ellipsis: true,
       width: 90,
-      render: (text) => <Tooltip title={"Số người: "+text}>{text}</Tooltip>,
+      render: (text) => <Tooltip title={"Số người: " + text}>{text}</Tooltip>,
     },
     {
       title: "TỔNG",
@@ -219,7 +222,7 @@ function TableBill(props) {
       align: "center",
       width: 130,
       render: (text) => (
-        <Tooltip title={"Tổng tiền: "+calculateTotalValue(text) + ".000VNĐ"}>
+        <Tooltip title={"Tổng tiền: " + calculateTotalValue(text) + ".000VNĐ"}>
           {calculateTotalValue(text) + ".000VNĐ"}
         </Tooltip>
       ),
@@ -275,6 +278,33 @@ function TableBill(props) {
       },
     };
   };
+
+  // conver data
+  const [datacv, setDataCV] = useState([]);
+  useEffect(() => {
+    const updatedData = [...data];
+    for (const item of updatedData) {
+      const totalValue = calculateTotalValue(item.drinks);
+      item.totalcv = totalValue + "000";
+    }
+    for (const item of updatedData) {
+      const dateValue = formatDate(item.createdAt);
+      item.datecv = dateValue;
+    }
+    setDataCV(updatedData);
+  }, [calculateTotalValue, data]);
+
+  const headers = [
+    { label: "Người tạo đơn", key: "createdUser" },
+    { label: "Mã hóa đơn", key: "billID" },
+    { label: "Cửa hàng", key: "storeName" },
+    { label: "Tên", key: "customerName" },
+    { label: "Ngày tạo", key: "datecv" },
+    { label: "Số người", key: "numCustomer" },
+    { label: "Tổng tiền", key: "totalcv" },
+    { label: "Trạng thái sử dụng", key: "isUsed" },
+  ];
+
   return (
     <>
       {setSuccessMess}
@@ -391,6 +421,14 @@ function TableBill(props) {
               ...rowProps(record),
             })}
           />
+          <Button
+            style={{ backgroundColor: "#217346", marginTop: "-16px" }}
+            icon={<FileExcelOutlined style={{ color: "#fff" }} />}
+          >
+            <CSVLink data={datacv} headers={headers} style={{ color: "#fff" }}>
+              {" " + "Xuất Excel"}
+            </CSVLink>
+          </Button>
         </div>
         <Modal
           title="Chi tiết hóa đơn"
