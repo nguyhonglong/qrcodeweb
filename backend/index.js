@@ -9,11 +9,12 @@ import jwt from 'jsonwebtoken';
 import { User } from './models/userModel.js'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
+import { Hotel } from "./models/hotelModel.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5555
-const mongoDBURL = "mongodb+srv://nguyhonglong2002:3dUw8ja9980dHmxu@cluster0.zokt7pa.mongodb.net/bill?retryWrites=true&w=majority"
+const mongoDBURL = "mongodb+srv://nguyhonglong2002:VoCm3fdhVCDf9vwK@cluster0.zokt7pa.mongodb.net/bill?retryWrites=true&w=majority"
 
 const app = express();
 app.use(bodyParser.json());
@@ -26,7 +27,7 @@ app.use(express.json());
 app.get('/', (request, response) => {
     console.log(request)
     return response.status(234).send("hehe")
-})
+});
 
 app.listen(PORT, () => {
     console.log(`App is listening to port ${PORT} `)
@@ -186,7 +187,7 @@ app.get('/api/drinks', async (request, response) => {
     } catch (error) {
         console.log(error.message);
     }
-})
+});
 
 app.post('/api/drinks', async (request, response) => {
     try {
@@ -215,7 +216,7 @@ app.post('/api/drinks', async (request, response) => {
         console.log(error.message);
         return response.status(500).send({ message: error.message });
     }
-})
+});
 
 app.delete('/api/drinks/:id', async (request, response) => {
     try {
@@ -388,7 +389,7 @@ app.post('/api/stores', async (req, res) => {
     try {
         const { storeName } = req.body;
         const existingStore = await Store.findOne({ storeName });
-        
+
         if (existingStore) {
             return res.status(409).json({ message: 'Store already exists' });
         }
@@ -407,7 +408,7 @@ app.delete('/api/stores/:storeName', async (req, res) => {
     try {
         const { storeName } = req.params;
         const deletedStore = await Store.findOneAndDelete({ storeName: storeName });
-        
+
         if (!deletedStore) {
             return res.status(404).json({ message: `Store not found ${storeName} kk` });
         }
@@ -444,12 +445,42 @@ app.get('/api/stores', async (req, res) => {
     }
 });
 
+//quan ly phong
+
+app.get('/api/hotels', async (req, res) => {
+    try {
+        const hotels = await Hotel.find();
+        res.json(hotels)
+    } catch (error) {
+        res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy số phòng.' });
+    }
+})
+
+app.post('/api/hotel', async (req, res) => {
+    try {
+        const { homeStay, roomID, status, price } = req.body;
+        const existingRoom = await Hotel.findOne({roomID});
+        const existingHotel = await Hotel.findOne({homeStay});
+        if (existingRoom && existingHotel)
+            return res.status(409).json({ message: "Room aready exist!" });
+
+        const newRoom = new Hotel({ homeStay, roomID, status, price });
+        await newRoom.save();
+        res.status(201).json(newRoom);
+        return;
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+})
+
+
 mongoose
     .connect(mongoDBURL)
     .then(() => {
         console.log("connect to db success")
     })
     .catch((error) => {
-
+        console.log(error)
     });
 
