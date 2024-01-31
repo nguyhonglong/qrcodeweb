@@ -111,6 +111,7 @@ const RoomTable = () => {
         <Col>
           <Form.Group controlId="searchForm">
             <Form.Control
+              autoFocus
               type="text"
               placeholder="Tìm kiếm theo tên homestay, mã phòng, hoặc người thuê,.."
               value={searchTerm}
@@ -119,6 +120,7 @@ const RoomTable = () => {
           </Form.Group>
         </Col>
       </Row>
+      <div><br /></div>
       <Row>
         <Col>
           <Table striped bordered hover>
@@ -136,7 +138,7 @@ const RoomTable = () => {
                     <span className={`ml-2 ${sortDirection === 'asc' ? 'arrow-up' : 'arrow-down'}`} />
                   )}
                 </th>
-                
+
                 <th onClick={() => handleSort('checkInDate')}>
                   Ngày Check-in
                   {sortColumn === 'checkInDate' && (
