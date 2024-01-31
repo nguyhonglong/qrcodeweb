@@ -1,6 +1,32 @@
 /* ===== Google Font Import - Poppins ===== */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,300;1,500;1,600;1,700&display=swap");
-
+@mixin respond($breakpoint) {
+  @if $breakpoint == phoneSmall {
+    @media (max-width: 330px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (max-width: 1025px) {
+      @content;
+    }
+  }
+  @if $breakpoint == bigDesktop {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
 * {
   margin: 0;
   padding: 0;
@@ -155,12 +181,13 @@
     display: flex;
     align-items: center;
     margin: 20px 0 30px 25px;
+    height: 15vh;
   }
 
   .dash-content .title .i {
     position: relative;
-    height: 30px;
-    width: 30px;
+    height: 35px !important;
+    width: 35px !important;
     // background-color: var(--primary-color);
     border-radius: 6px;
     color: var(--text-color);
@@ -173,26 +200,33 @@
   }
 
   .dash-content .title .text {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 28px;
+    font-weight: bold;
     color: var(--text-color);
     margin-left: 10px;
     margin-top: 25px;
+
   }
 
   .dash-content .boxes {
+    @include respond(bigDesktop) {
+      height: 20vh;
+    }
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
   }
   .boxes .number {
-    font-size: 22px !important;
+    @include respond(bigDesktop) {
+      font-size: 22px !important;
+    }
     font-weight: bold;
   }
   .boxes .fs14 {
-    font-weight: bold;
+    font-weight: bold !important;
     margin: 5px;
+    font-size: 22px !important;
   }
   .dash-content .boxes .box {
     display: flex;
@@ -206,26 +240,33 @@
   }
 
   .dash-content .boxes .box_50 {
+    height: 100%;
     width: calc(50% - 50px);
     background-color: var(--black-light-color-box);
     margin: 0 25px;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .dash-content .boxes .box_50:hover{
+    background-color: #ECECEE;
   }
 
   .boxes .box .i {
-    width: 35px;
-    height: 100%;
+    width: 55px;
     color: var(--text-color);
+    font-size: 50px;
   }
 
   .boxes .box .text {
     white-space: nowrap;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 500;
     color: var(--text-color);
   }
 
   .boxes .box .number {
-    font-size: 40px;
+    font-size: 22px !important;
     font-weight: 500;
     color: var(--text-color);
   }
@@ -261,7 +302,7 @@
         color: #120b07;
         font-size: 20px !important;
         font-weight: 600;
-        text-align: start;  
+        text-align: start;
         width: 40%;
         margin: 20px;
       }
@@ -283,6 +324,31 @@
     }
   }
 
+  .ant-table-body .ant-table-cell, .ant-table-thead th{
+     font-size: large !important;
+   }
+  @media (max-width: 1370px) {
+    .ant-table-body .ant-table-cell, .ant-table-thead th{
+      font-size: unset !important;
+    }
+    .dash-content .title .i{
+      width: 30px !important;
+      height: 30px !important;
+    }
+    .dash-content .title .text {
+      font-size: 20px !important;
+    }
+    .boxes .box .i {
+      font-size: 35px !important;
+    }
+    .boxes .box .text {
+      font-size: 14px !important;
+    }
+
+    .boxes .box .number {
+      font-size: 14px !important;
+    }
+  }
   @media (max-width: 1000px) {
     nav {
       width: 73px;

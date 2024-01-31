@@ -228,14 +228,14 @@ function Dashboard() {
               <div className="boxes">
                 <div className="box box_50 ">
                   <SolutionOutlined
-                    style={{ fontSize: "35px" }}
+                    style={{  }}
                     className="i"
                   />
                   <span className="text MyTikTok2 fs14">Số hóa đơn</span>
                   <span className="number">{sumBill.length}</span>
                 </div>
                 <div className="box box_50 ">
-                  <UserOutlined style={{ fontSize: "35px" }} className="i" />
+                  <UserOutlined style={{  }} className="i" />
                   <span className="text MyTikTok2 fs14">Số người dùng</span>
                   <span className="number">{dataUser.length}</span>
                 </div>
@@ -247,7 +247,7 @@ function Dashboard() {
                 <UilClockThree className="i" />
                 <span className="text MyTikTok2">Quản lý tài khoản</span>
               </div>
-              <Table {...tableProps}/>
+              <Table className="tableDashboard" {...tableProps}/>
              
            
             </div>
