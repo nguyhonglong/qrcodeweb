@@ -5,6 +5,10 @@ import AddRoomForm from './components/AddRoom';
 import Header from './components/Header';
 import General from './components/General'
 import Noti from './components/Noti'
+import Footer from './components/Footer';
+import People from './components/People';
+import Income from './components/Income';
+
 
 function App() {
   return (
@@ -16,7 +20,10 @@ function App() {
           <Route path="/room-management" element={<Rooms />} />
           <Route path="/add-room" element={<AddRoomForm />} />
           <Route path="/noti" element={<Noti/>} />
+          <Route path="/people" element={<Income/>} />
+          <Route path="/income" element={<People/>} />
         </Routes>
+        <Footer/>
       </Router>
     </div>
   );
