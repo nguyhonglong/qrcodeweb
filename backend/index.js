@@ -457,22 +457,29 @@ app.get('/api/hotels', async (req, res) => {
 })
 
 app.post('/api/hotel', async (req, res) => {
+    const newRoom = req.body;
+  
     try {
-        const { homeStay, roomID, status, price } = req.body;
-        const existingRoom = await Hotel.findOne({roomID});
-        const existingHotel = await Hotel.findOne({homeStay});
-        if (existingRoom && existingHotel)
-            return res.status(409).json({ message: "Room aready exist!" });
-
-        const newRoom = new Hotel({ homeStay, roomID, status, price });
-        await newRoom.save();
-        res.status(201).json(newRoom);
-        return;
+      // Kiểm tra tính duy nhất của roomCode
+      const existingRoom = await Hotel.findOne({ roomCode: newRoom.roomCode });
+  
+      if (existingRoom) {
+        return res.status(400).json({ error: 'Room code must be unique.' });
+      }
+  
+      // Tạo một bản ghi mới cho phòng
+      const createdRoom = await Hotel.create(newRoom);
+  
+      // Trả về phản hồi thành công
+      res.status(201).json({ message: 'Room added successfully.', room: createdRoom });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server Error' });
+      // Xử lý lỗi nếu có
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while adding the room.' });
     }
-})
+  });
+
+
 
 
 mongoose
