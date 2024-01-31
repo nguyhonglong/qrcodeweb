@@ -163,7 +163,7 @@ const AddRoomForm = () => {
     e.preventDefault();
     console.log(roomData);
     try {
-      const response = await axios.post('http://localhost:5555/api/hotel', roomData);
+      const response = await axios.post('https://qrcodeweb-api.vercel.app/api/hotel', roomData);
       console.log(response.data);
       setNotification('Thêm phòng thành công!');
       // Xử lý phản hồi thành công theo nhu cầu của bạn

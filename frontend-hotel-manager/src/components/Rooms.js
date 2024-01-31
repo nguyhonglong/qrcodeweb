@@ -34,7 +34,7 @@ const RoomTable = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5555/api/hotels');
+        const response = await axios.get('https://qrcodeweb-api.vercel.app/hotels');
         setRooms(response.data);
       } catch (error) {
         console.error(error);

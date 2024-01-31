@@ -7,7 +7,7 @@ const LatestRoomsList = () => {
   useEffect(() => {
     const fetchLatestRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5555/api/hotels');
+        const response = await axios.get('https://qrcodeweb-api.vercel.app/api/hotels');
         const roomsData = response.data;
         setLatestRooms(roomsData.reverse());
       } catch (error) {
